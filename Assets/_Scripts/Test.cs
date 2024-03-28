@@ -7,5 +7,7 @@ public class Test : MonoBehaviour
     private void Awake()
     {
         Debug.Log("This Script for Git Test");
+        Destroy(gameObject);
     }
+
 }
