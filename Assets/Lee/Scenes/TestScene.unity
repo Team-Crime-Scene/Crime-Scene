@@ -1384,11 +1384,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39a6f7c675339344a94a0fc62aa74dab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  control: {fileID: 119775801}
   playerCamera: {fileID: 52928280}
-  layerMask:
+  interactableLayer:
     serializedVersion: 2
     m_Bits: 64
-  zoomPos: {fileID: 1207599656}
+  zoomPosition: {fileID: 1207599656}
 --- !u!1 &1931811951
 GameObject:
   m_ObjectHideFlags: 0
