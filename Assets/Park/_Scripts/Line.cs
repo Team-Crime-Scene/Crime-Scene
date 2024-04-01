@@ -1,0 +1,34 @@
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+
+public class Line : MonoBehaviour
+{
+    [SerializeField] LineRenderer lineRenderer;
+    [SerializeField] float minDistance;
+
+    [SerializeField] List<Vector2> points;
+
+    public void UpdateLine( Vector2 position )
+    {
+        if ( points != null )
+        {
+            points = new List<Vector2>();
+            SetPoint(position);
+            return;
+        }
+
+        if ( Vector2.Distance(points.Last(), position) > minDistance )
+        {
+            SetPoint(position);
+        }
+    }
+
+    public void SetPoint( Vector2 point )
+    {
+        points.Add(point);
+
+        lineRenderer.positionCount = points.Count;
+        lineRenderer.SetPosition(points.Count - 1, point);
+    }
+}
