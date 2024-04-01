@@ -1,38 +1,26 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
-public class WhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
+public class WhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler ,IPointerExitHandler
 {
-    public LineRenderer lineRenderer;
+    [SerializeField] LineRenderer lineRendererBlack;
+    [SerializeField] LineRenderer lineRendererRed;
+    [SerializeField] LineRenderer lineRendererBlue;
 
-    private List<List<Vector3>> allLines = new List<List<Vector3>>(); // 모든 선 
-    private List<Color> colors = new List<Color>(); //선 색깔 정보
-    private List<Vector3> currentLine = new List<Vector3>(); //현재 그리는 선 
+    [SerializeField] float brushSize = 0.03f;
+
+    private List<List<PointData>> allLines = new List<List<PointData>>(); // 모든 선 
+    private List<PointData> currentLine = new List<PointData>(); //현재 그리는 선 
 
     private bool isDrawing = false;
+    [SerializeField] Color currentColor = Color.black;
     private int positionCount = 2;
-
-    public Color brushColor = Color.black;
-    public float brushSize = 5f;
-
 
     void Start()
     {
-        lineRenderer.startWidth = brushSize;
-        lineRenderer.endWidth = brushSize;
-
-        lineRenderer.positionCount = positionCount;
-        lineRenderer.startColor = brushColor;
-        lineRenderer.endColor = brushColor;
+        InitLineRenderer();
     }
-
-
-
     /******************************************************
      *          Pointer Down/Up & Drag Interface
      ******************************************************/
@@ -42,8 +30,11 @@ public class WhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
     {
         isDrawing = true;
         currentLine.Clear();
-        AddPoint(eventData.pointerCurrentRaycast.worldPosition);
-        AddColor(lineRenderer.startColor);
+
+
+        // AddPoint(eventData.pointerCurrentRaycast.worldPosition); // LineRender 초기 위치 부터 시작해서 삐죽삐죽함
+        Vector3 downPos = GetLocalPosition(eventData);
+        AddPoint(new Vector3(downPos.x, downPos.y, 0)); // 모든 선이 다 그려짐
         RenderAllLines();
     }
 
@@ -52,10 +43,15 @@ public class WhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
         isDrawing = false;
         if ( currentLine.Count > 0 )
         {
-            allLines.Add(new List<Vector3>(currentLine));
+            allLines.Add(new List<PointData>(currentLine));
             currentLine.Clear();
         }
         RenderAllLines();
+    }
+
+    public void OnPointerExit( PointerEventData eventData )
+    {
+        isDrawing=false;
     }
 
     public void OnDrag( PointerEventData eventData )
@@ -63,7 +59,7 @@ public class WhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
 
         if ( isDrawing )
         {
-            AddPoint(GetLocalPosition(eventData));
+            AddPoint(GetLocalPosition(eventData)); // 범위 안에 있을 때만 추가하도록 수정해야함
             RenderAllLines();
         }
     }
@@ -74,53 +70,93 @@ public class WhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
      *                  Draw Methods & ETC
      ******************************************************/
     #region Draw Methods & ETC
+
+    private void InitLineRenderer()
+    {
+        lineRendererBlack.startWidth = brushSize;
+        lineRendererBlack.endWidth = brushSize;
+
+        lineRendererRed.startWidth = brushSize;
+        lineRendererRed.endWidth = brushSize;
+
+        lineRendererBlue.startWidth = brushSize;
+        lineRendererBlue.endWidth = brushSize;
+    }
+
     private Vector3 GetLocalPosition( PointerEventData eventData )
     {
         Vector3 worldPosition = eventData.pointerCurrentRaycast.worldPosition;
         return transform.InverseTransformPoint(worldPosition);
     }
+
     private void AddPoint( Vector3 position )
     {
-        currentLine.Add(position);
+        PointData pointData = new PointData
+        {
+            position = position,
+            color = currentColor
+        };
+        currentLine.Add(pointData);
     }
 
-    private void AddColor( Color color )
+    public void SetColor( Color color )
     {
-        colors.Add(color); 
+        currentColor = color;
     }
-
-    private void SetColor(Color color)
-    {
-        lineRenderer.startColor = color;
-        lineRenderer.endColor = color;
-    }
-
     private void RenderCurrentLine() //RenderAllLines에 병합됨
     {
-        lineRenderer.positionCount = currentLine.Count;
-        lineRenderer.SetPositions(currentLine.ToArray());
+        // lineRenderer.positionCount = currentLine.Count;
+        // lineRenderer.SetPositions(currentLine.ToArray());
     }
 
     private void RenderAllLines()
     {
         int totalPoints = currentLine.Count;
-        foreach ( List<Vector3> line in allLines )
+        foreach ( List<PointData> line in allLines )
         {
             totalPoints += line.Count;
         }
 
-        Vector3 [] allPositions = new Vector3 [totalPoints];
+        Vector3 [] redPositions = new Vector3 [totalPoints];
+        Vector3 [] bluePositions = new Vector3 [totalPoints];
+        Vector3 [] blackPositions = new Vector3 [totalPoints];
+
         int index = 0;
-        currentLine.CopyTo(allPositions, index);
-        index += currentLine.Count;
-        foreach ( List<Vector3> line in allLines )
+        foreach ( PointData pointData in currentLine )
         {
-            line.CopyTo(allPositions, index);
-            index += line.Count;
+            AddPointToLineRenderer(pointData, redPositions, bluePositions, blackPositions, ref index);
+        }
+        foreach ( List<PointData> line in allLines )
+        {
+            foreach ( PointData pointData in line )
+            {
+                AddPointToLineRenderer(pointData, redPositions, bluePositions, blackPositions, ref index);
+            }
         }
 
-        lineRenderer.positionCount = totalPoints;
-        lineRenderer.SetPositions(allPositions);
+        lineRendererRed.positionCount = index;
+        lineRendererRed.SetPositions(redPositions);
+        lineRendererBlue.positionCount = index;
+        lineRendererBlue.SetPositions(bluePositions);
+        lineRendererBlack.positionCount = index;
+        lineRendererBlack.SetPositions(blackPositions);
+    }
+
+    private void AddPointToLineRenderer( PointData pointData, Vector3 [] redPositions, Vector3 [] bluePositions, Vector3 [] blackPositions, ref int index )
+    {
+        if ( pointData.color == Color.red )
+        {
+            redPositions [index] = pointData.position;
+        }
+        else if ( pointData.color == Color.blue )
+        {
+            bluePositions [index] = pointData.position;
+        }
+        else
+        {
+            blackPositions [index] = pointData.position;
+        }
+        index++;
     }
     #endregion
 
@@ -129,8 +165,9 @@ public class WhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
      *                  UI OnClick Events
      ******************************************************/
     #region OnClick
-    public void SetColorButton(int color) //매개변수가 Enum이라 OnClick에 등록 불가
+    public void SetColorButton( int color )
     {
+        //매개변수가 Enum이라 OnClick에 등록 불가
         Color newColor = new Color();
         // 0 = black, 1 = red, 2 = blue
         switch ( color )
@@ -145,8 +182,7 @@ public class WhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
                 newColor = Color.blue;
                 break;
         }
-        lineRenderer.startColor = newColor;
-        lineRenderer.endColor = newColor;
+        SetColor(newColor);
     }
 
     public void EraseAll()
@@ -157,8 +193,14 @@ public class WhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
 
     public void Undo()
     {
-        // 현재 레이어의 선을 다 지움
-        // 레이어 --
+        if ( allLines.Count > 0 )
+        {
+            List<PointData> lastLine = allLines [allLines.Count - 1];
+            allLines.RemoveAt(allLines.Count - 1);
+        }
+        RenderAllLines();
     }
+
+   
     #endregion
 }
