@@ -6,9 +6,189 @@
             "id": "1830f6d1-f8f7-4bfd-8325-c7c02813af95",
             "actions": [
                 {
-                    "name": "Jump",
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "dc3e537c-e5b9-498d-8be7-ff085eb2e04b",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Run",
+                    "type": "PassThrough",
+                    "id": "4d199aa5-9d45-4338-932d-50b326f3dbcd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "2D Vector",
+                    "id": "6a2f8ab1-3cc3-4cfa-afed-f61f5121c15d",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "7755842c-f05b-4000-979f-1a1eb2e974fd",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "2e4f723a-7f62-4de4-a06d-e7874945b442",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "9ac1c694-d265-45da-8673-c4c013c59ccd",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "7811c75b-870f-480d-8499-216cba9762b8",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "2751410d-e8f9-49a9-8a32-4e7fd361ae4e",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Run",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Camera",
+            "id": "55494f46-a814-4a7a-b731-1bea65b339f5",
+            "actions": [
+                {
+                    "name": "SitDown",
                     "type": "Button",
-                    "id": "1b9e0ab4-4032-4898-b6df-61a774cea3f6",
+                    "id": "e649ac6e-25a0-402d-951d-b713b213a916",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Zoom",
+                    "type": "Button",
+                    "id": "20d87f8b-f72f-432e-93df-7aa97a775ecd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Interaction",
+                    "type": "Button",
+                    "id": "cfd6767b-b1c6-4e7b-a721-05a0a7ced387",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Look",
+                    "type": "Value",
+                    "id": "af450856-4c69-4dcc-a91b-01702c0952ab",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "e53f02d5-e80b-4d97-a632-dba1f0815c27",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SitDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bb9e95bb-ad79-4a33-8f52-1cccaa7a9326",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d58f0050-37be-4d30-b4b9-b61033629bc1",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interaction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a2081d27-38f0-472e-97ab-43a1a81d7610",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Setting",
+            "id": "1533cf5f-03da-4e65-b27b-04df306c9e2b",
+            "actions": [
+                {
+                    "name": "Stop",
+                    "type": "Button",
+                    "id": "c89cb106-5e67-4350-b8c9-a457e1917e7b",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -18,12 +198,12 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "f25b45b6-9542-43c6-92c7-ea54e82b3a75",
-                    "path": "<Keyboard>/space",
+                    "id": "d4d12fcc-d106-4405-9882-4134abaad6a2",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Jump",
+                    "action": "Stop",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
