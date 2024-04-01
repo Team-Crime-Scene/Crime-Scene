@@ -1,52 +1,81 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
 public class ObjectInteraction : MonoBehaviour
 {
-    [SerializeField] Transform playerCamera;
-    [SerializeField] LayerMask layerMask;
-    [SerializeField] Transform zoomPos;
-    private Vector3 curObject;
-    private Quaternion rotate;
-    // 실험용
-    bool zoomObject = false;
+    [SerializeField] PlayerInput control;
+    [SerializeField] Transform playerCamera; // 플레이어 카메라
+    [SerializeField] LayerMask interactableLayer; // 상호작용 가능한 레이어
+    [SerializeField] Transform zoomPosition; // 줌 위치
 
-    public void OnInteraction( InputValue value )
+    private bool isZoomed = false; // 줌 상태 여부
+    private Quaternion initialRotation; // 초기 회전값
+    private Vector3 initialPosition; // 초기 위치값
+    RaycastHit hit;
+    Vector3 rayOrigin;  
+    Vector3 rayDirection; 
+    private void Start()
     {
-        Vector3 origin = playerCamera.position;
-        RaycastHit hit;
-        Vector3 rayDir = playerCamera.transform.forward;
-
-        Vector3 zoom = zoomPos.position;
-
-        if ( Physics.Raycast(origin, rayDir, out hit, 100, layerMask) )
-        {
-            if ( zoomObject == false )
-            {
-                rotate = hit.transform.rotation;
-                // 오브젝트의 처음 위치를 저장
-                curObject = hit.transform.position;
-                Vector3 dir = transform.position - curObject;
-                hit.transform.rotation =  Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * 2f);
-
-                hit.transform.position = Vector3.Lerp(zoom, hit.transform.position, Time.deltaTime * 2f);
-
-                zoomObject = true;
-            }
-            else
-            {
-                // 나중에 q또는 esc로 바꿀 예정
-                hit.transform.position = Vector3.Lerp(curObject, zoom, Time.deltaTime * 2f);
-                hit.transform.rotation = rotate;
-                zoomObject = false;
-            }
-        }
-
+        initialRotation = Quaternion.identity; // 초기 회전값을 초기화
+       
     }
 
-    private void Update()
+    // 상호작용 입력 처리
+    public void OnInteraction( InputValue value )
     {
+        rayOrigin = playerCamera.position; // 레이 시작점은 플레이어 카메라 위치
+        rayDirection = playerCamera.forward; // 레이 방향은 플레이어 카메라의 정면 방향
 
+        // 레이캐스트로 상호작용 가능한 대상 확인
+        if ( Physics.Raycast(rayOrigin, rayDirection, out hit, 100, interactableLayer) )
+        {
+            // 줌되어 있지 않은 상태라면
+            if ( !isZoomed )
+            {
+                ZoomObject(hit.transform); // 대상을 줌
+                PlayerIdle(); // 플레이어 움직임 뺏기
+            }
+
+        }
+    }
+    public void OnCancel( InputValue value )
+    {
+        UnzoomObject(hit.transform); // 대상을 줌 해제
+        ResumeMovement(); // 움직임 활성화
+    }
+
+    // 대상을 줌 상태로 변경
+    private void ZoomObject( Transform objTransform )
+    {
+        initialRotation = objTransform.rotation; // 초기 회전값 저장
+        initialPosition = objTransform.position; // 초기 위치값 저장
+
+        // 카메라와 대상 사이의 방향 벡터 계산하여 대상이 플레이어 카메라를 바라보도록 함
+        Vector3 cameraToObject = objTransform.position - playerCamera.position;
+        objTransform.rotation = Quaternion.LookRotation(cameraToObject);
+
+        // 대상을 줌 위치로 이동시킴
+        objTransform.position = Vector3.Lerp(zoomPosition.position, objTransform.position, Time.deltaTime * 2f);
+
+        isZoomed = true; // 줌 상태로 변경
+    }
+
+    // 대상을 줌 상태 해제
+    private void UnzoomObject( Transform objTransform )
+    {
+        // 대상을 초기 위치로 이동시킴
+        objTransform.position = Vector3.Lerp(initialPosition, zoomPosition.position, Time.deltaTime * 2f);
+        objTransform.rotation = initialRotation; // 대상의 회전을 초기 회전값으로 설정
+
+        isZoomed = false; // 줌 상태 해제
+    }
+
+    private void PlayerIdle()
+    {
+        control.enabled = false;
+    }
+    private void ResumeMovement()
+    {
+        control.enabled = true;
     }
 }
