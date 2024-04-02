@@ -11,17 +11,22 @@ public class PlayerCameraControl : MonoBehaviour
     Vector3 SitDown1State = new Vector3(0, 0.5f, 0);
     Vector3 SitUpState = new Vector3(0, 1, 0);
     Vector3 SitDown2State = new Vector3(0, 0.25f, 0);
+
+    // 플레이어 조작중 확대
     private void OnZoom( InputValue value )
     {
         Zoom();
     }
     private void Zoom()
     {
+        // FOv를 이용하여 확대가 된거처럼 보이게함
         if ( mainCamera.m_Lens.FieldOfView == 60 )
             mainCamera.m_Lens.FieldOfView = 40;
         else
             mainCamera.m_Lens.FieldOfView = 60;
     }
+
+    // 누를때마다 앉은 상태 변화
     private void OnSitDown( InputValue value )
     {
         CinemachineTransposer transposer = mainCamera.GetCinemachineComponent<CinemachineTransposer>();
@@ -42,6 +47,7 @@ public class PlayerCameraControl : MonoBehaviour
             sitDownCount = 0;
         }
     }
+
     // 마우스
 
     // 카메라의 위아래를 돌려서 위아래를 봄
@@ -54,7 +60,7 @@ public class PlayerCameraControl : MonoBehaviour
 
     private void OnEnable()
     {
-        // 마우스가 가운데에 잡혀서 그자리에 있게해줌
+        // 마우스가 가운데에 잡혀서 그자리에 있게해줌(커서가 사라지게됨)
         Cursor.lockState = CursorLockMode.Locked;
     }
     private void OnDisable()
@@ -64,7 +70,7 @@ public class PlayerCameraControl : MonoBehaviour
     }
     private void Update()
     {
-
+        
         xRotation -= inputDir.y * mouseSensitivity * Time.deltaTime;
         xRotation = Mathf.Clamp(xRotation, -80f, 80f);
 
