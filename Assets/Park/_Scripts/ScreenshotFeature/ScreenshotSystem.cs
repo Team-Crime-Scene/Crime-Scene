@@ -8,23 +8,27 @@ using UnityEngine.InputSystem;
 
 public class ScreenshotSystem : MonoBehaviour
 {
+    //Screenshot을 찍고 관리하는 스크립트
+    //todo : Singleton 으로 만들것
 
-    //카메라가 달려있는 오브젝트에 이 컴포넌트를 같이 부착해야 사용가능
+    //* MainCamera에 이 컴포넌트를 부착해야 사용가능
+
+    /***********************************************************************
+    *                               Fields & Properties
+    ***********************************************************************/
 
     [SerializeField] string folderName = "ScreenShots";
     [SerializeField] string fileName = "MyScreenShot";
     [SerializeField] string extName = "png";
 
+    [SerializeField, Range(20, 100)] int maxCapacity; //최대 이미지 갯수
+    [SerializeField] ScreenshotAlbumUI albumUI;
     [SerializeField]
-    public bool isTakeScreenshot;
+    public List<Screenshot> screenshots;
 
+    [SerializeField]
+    public bool isTakeScreenshot; // test하느라 public 해둠. private로 바꾸고 프로퍼티 생성할것 
 
-    public List<string> screenshots = new List<string>();  //스크린샷 경로 저장용 List 나중에 AlbumManager 등으로 옮길 것
-
-
-    /***********************************************************************
-    *                               Fields & Properties
-    ***********************************************************************/
     #region Properties
     private Texture2D _imageTexture; // imageToShow의 소스 텍스쳐
 
@@ -53,9 +57,14 @@ public class ScreenshotSystem : MonoBehaviour
     *                               Unity Events
     ***********************************************************************/
 
+    private void Awake()
+    {
+        screenshots = new List<Screenshot>(maxCapacity); // 나중에 저장, 불러오기시 여기서 저장데이터 참조
+
+    }
+
     // 카메라가 랜더링 마친 이후임을 보장하기 위해 OnPostRender()에서 호출
-    // .. 인데 OnPostRender는 시네머신 컴포넌트에서는 호출 안해줌
-    // 메인카메라에 달아주자
+    // .. 인데 OnPostRender는 시네머신 컴포넌트에서는 호출 안해주니 유의
     private void OnPostRender()
     {
         if ( !isTakeScreenshot )
@@ -65,14 +74,27 @@ public class ScreenshotSystem : MonoBehaviour
         isTakeScreenshot = false;
     }
 
+    // debug 용으로 일단 input받는거 넣어뒀음 나중에 다른데서 처리할것
+    private void Update()
+    {
+       if(Input.GetKeyDown(KeyCode.I)){
+            albumUI.isActive = !albumUI.isActive;
+            albumUI.albumPanel.SetActive(albumUI.isActive);
+        }
+    }
+
     /***********************************************************************
     *                               Methods
     ***********************************************************************/
 
+    //스크린샷을 찍는 메소드
+    #region ScreenShot
     private void ScreenShot()
     {
         string totalPath = TotalPath; // 프로퍼티 참조 시 시간에 따라 이름이 결정되므로 캐싱
-        screenshots.Add(totalPath);
+        
+        //List에 사진 객체 추가
+        screenshots.Add(new Screenshot(new ScreenshotData(totalPath))); // ;; 이게 맞노
 
         Texture2D screenTex = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
         Rect area = new Rect(0f, 0f, Screen.width, Screen.height); 
@@ -111,5 +133,7 @@ public class ScreenshotSystem : MonoBehaviour
         Debug.Log("아무튼 개쩌는 스크린샷 효과,");
         yield return null;
     }
+    #endregion
+
 
 }
