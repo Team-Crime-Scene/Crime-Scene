@@ -81,9 +81,11 @@ public class InteractController : MonoBehaviour
         isZoomed = false; // 줌 상태 해제
     }
 
+    // 밑에까지 다 인터페이스 만드셈
     // 오브젝트의 쿼터니언
     Quaternion interactrotation;
 
+    // 인터페이스
     // 마우스커서가 있을때는 오브젝트가 안돌아가게해주고 있을땐 돌아가게함
     public void OnClick( InputValue value )
     {
@@ -95,6 +97,8 @@ public class InteractController : MonoBehaviour
                 Cursor.lockState = CursorLockMode.None;
         }
     }
+
+    // 인터페이스
     // 마우스를 보일때와 안보일때 컨트롤해줌 
     public void OnRotationCon( InputValue value )
     {
@@ -108,6 +112,8 @@ public class InteractController : MonoBehaviour
 
     }
 
+
+    // 인터페이스
     // 마우스 움직임에 따라 바꿔줌
     public void RotationCon()
     {
@@ -124,6 +130,7 @@ public class InteractController : MonoBehaviour
             RotationCon();
     }
 
+    // 읽기 인터페이스
     // R키를 누르면 읽기 ui가 나오게해줌
     public void OnRead( InputValue value )
     {
