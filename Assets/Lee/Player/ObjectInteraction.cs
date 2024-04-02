@@ -9,14 +9,16 @@ public class ObjectInteraction : MonoBehaviour
     [SerializeField] LayerMask interactableLayer; // 상호작용 가능한 레이어
     [SerializeField] Transform zoomPosition; // 줌 위치
     [SerializeField] Image aim;
-    [SerializeField] Image background;
+    [SerializeField] Canvas background;
 
+    private InteractionController interactionController;
     private bool isZoomed = false; // 줌 상태 여부
     private Quaternion initialRotation; // 초기 회전값
     private Vector3 initialPosition; // 초기 위치값
     RaycastHit hit;
     Vector3 rayOrigin;
     Vector3 rayDirection;
+
     private void Start()
     {
         initialRotation = Quaternion.identity; // 초기 회전값을 초기화
@@ -71,6 +73,10 @@ public class ObjectInteraction : MonoBehaviour
         // ui 백그라운드를 생성
         background.enabled = true;
 
+        // 로테이션 스크립터 활성화
+        interactionController = objTransform.gameObject.GetComponent<InteractionController>();
+        interactionController.enabled = true;
+
         isZoomed = true; // 줌 상태로 변경
     }
 
@@ -91,7 +97,10 @@ public class ObjectInteraction : MonoBehaviour
         aim.enabled = true;
 
         // 백그라운드 없애기
-        background.enabled = false;  
+        background.enabled = false;
+
+        // 로테이션 돌려주는 스크립터 비활성화
+        interactionController.enabled = false;
 
 
         isZoomed = false; // 줌 상태 해제

@@ -228,6 +228,74 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "InteractionControl",
+            "id": "b5f06bb1-d3aa-454a-87fd-27dd3fcece38",
+            "actions": [
+                {
+                    "name": "RotationCon",
+                    "type": "Value",
+                    "id": "e1e28e49-7533-4d15-b0a5-01cd6fba0ef0",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Click",
+                    "type": "Button",
+                    "id": "a08ec104-8fd1-4006-9f87-03939021988d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Read",
+                    "type": "Button",
+                    "id": "5afcd9a7-45d0-4c82-b52d-ee2527a4ba16",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c884ac3a-3805-4693-bfaa-8d7885b2ea06",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotationCon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f5763934-7124-4481-a45c-21091524d74f",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "911968e6-5e71-43b9-8231-ebd26c1249b2",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Read",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
