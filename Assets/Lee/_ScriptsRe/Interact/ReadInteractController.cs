@@ -1,27 +1,28 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class RotInteractContorller : MonoBehaviour, IRotatable, IZoomable
+public class ReadInteractController : MonoBehaviour, IReadable, IZoomable
 {
     private Vector3 initialPosition; //초기위치값
     private Quaternion initialRotation; // 초기 회전값
-
     private void Awake()
     {
         initialPosition = transform.position;
         initialRotation = transform.rotation;
     }
 
-    public void Rotation()
+    public void Read()
     {
-        transform.Rotate(initialRotation.x, 0, 0);
-        transform.Rotate(0, initialRotation.y, 0);
-    }
-    public void RotationTrnas( InputValue Value )
-    {
-        Vector2 input = Value.Get<Vector2>();
-        initialRotation.x = input.x;
-        initialRotation.y = input.y;
+        Canvas readKey = gameObject.GetComponentInChildren<Canvas>(true);
+        if ( readKey.enabled == false )
+        {
+            readKey.enabled = true;
+        }
+        else
+        {
+            readKey.enabled = false;
+        }
     }
 
     public void UnzoomObject( Transform ZoomTrans )
@@ -47,6 +48,4 @@ public class RotInteractContorller : MonoBehaviour, IRotatable, IZoomable
         Cursor.lockState = CursorLockMode.None;
 
     }
-
-   
 }

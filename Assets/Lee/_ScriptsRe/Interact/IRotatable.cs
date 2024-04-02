@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using UnityEngine.InputSystem;
 
 public interface IRotatable
 {
     public void Rotation();
+    public void RotationTrnas( InputValue inputValue );
 }
