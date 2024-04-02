@@ -4,25 +4,28 @@ using UnityEngine.EventSystems;
 
 public class WhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler ,IPointerExitHandler
 {
+    // 각각의 색에 해당되는 LineRenderer를 가지고 이를 이용해 선을 그리는 버전
+
+    // 장점 : Save & Load시 부하가 적음
+    // 단점 : 같은 색의 선은 통째로 같은 객체이기 때문에 나중에 사진 기능을 추가할 때 순서에 맞춰 SortingLayer 설정을 해줄 수 없음
     [SerializeField] LineRenderer lineRendererBlack;
     [SerializeField] LineRenderer lineRendererRed;
     [SerializeField] LineRenderer lineRendererBlue;
 
-    [SerializeField] float brushSize = 0.03f;
+    [SerializeField] Color currentColor = Color.black;
+    [SerializeField] float brushSize = 0.03f; // 선 굵기
 
-    private List<List<PointData>> allLines = new List<List<PointData>>(); // 모든 선 
-    private List<PointData> currentLine = new List<PointData>(); //현재 그리는 선 
+    private List<List<PointData>> allLines = new List<List<PointData>>(); 
+    private List<PointData> currentLine = new List<PointData>(); 
 
     private bool isDrawing = false;
-    [SerializeField] Color currentColor = Color.black;
-    private int positionCount = 2;
 
     void Start()
     {
         InitLineRenderer();
     }
     /******************************************************
-     *          Pointer Down/Up & Drag Interface
+     *              Mouse Pointer Interfaces
      ******************************************************/
     #region Interfaces
 
@@ -31,11 +34,18 @@ public class WhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
         isDrawing = true;
         currentLine.Clear();
 
-
-        // AddPoint(eventData.pointerCurrentRaycast.worldPosition); // LineRender 초기 위치 부터 시작해서 삐죽삐죽함
-        Vector3 downPos = GetLocalPosition(eventData);
-        AddPoint(new Vector3(downPos.x, downPos.y, 0)); // 모든 선이 다 그려짐
+        Vector3 downPos = eventData.GetLocalPosition(transform);
+        AddPoint(new Vector3(downPos.x, downPos.y, 0)); 
         RenderAllLines();
+    }
+    public void OnDrag( PointerEventData eventData )
+    {
+
+        if ( isDrawing )
+        {
+            AddPoint(eventData.GetLocalPosition(transform)); 
+            RenderAllLines();
+        }
     }
 
     public void OnPointerUp( PointerEventData eventData )
@@ -54,15 +64,6 @@ public class WhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
         isDrawing=false;
     }
 
-    public void OnDrag( PointerEventData eventData )
-    {
-
-        if ( isDrawing )
-        {
-            AddPoint(GetLocalPosition(eventData)); // 범위 안에 있을 때만 추가하도록 수정해야함
-            RenderAllLines();
-        }
-    }
     #endregion
 
 
@@ -83,12 +84,6 @@ public class WhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
         lineRendererBlue.endWidth = brushSize;
     }
 
-    private Vector3 GetLocalPosition( PointerEventData eventData )
-    {
-        Vector3 worldPosition = eventData.pointerCurrentRaycast.worldPosition;
-        return transform.InverseTransformPoint(worldPosition);
-    }
-
     private void AddPoint( Vector3 position )
     {
         PointData pointData = new PointData
@@ -102,11 +97,6 @@ public class WhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
     public void SetColor( Color color )
     {
         currentColor = color;
-    }
-    private void RenderCurrentLine() //RenderAllLines에 병합됨
-    {
-        // lineRenderer.positionCount = currentLine.Count;
-        // lineRenderer.SetPositions(currentLine.ToArray());
     }
 
     private void RenderAllLines()
@@ -167,7 +157,6 @@ public class WhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
     #region OnClick
     public void SetColorButton( int color )
     {
-        //매개변수가 Enum이라 OnClick에 등록 불가
         Color newColor = new Color();
         // 0 = black, 1 = red, 2 = blue
         switch ( color )
@@ -200,7 +189,5 @@ public class WhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
         }
         RenderAllLines();
     }
-
-   
     #endregion
 }
