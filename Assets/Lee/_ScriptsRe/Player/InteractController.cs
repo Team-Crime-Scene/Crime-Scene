@@ -22,7 +22,7 @@ public class InteractController : MonoBehaviour
 
 
     // 인터페이스
-    // 마우스 움직임에 따라 바꿔줌
+    // 마우스 움직임에 따라 바꿔줌 
     public void RotationCon()
     {
         if ( rotatable != null )
@@ -40,7 +40,7 @@ public class InteractController : MonoBehaviour
             RotationCon();
     }
 
-    // 상호작용 입력 처리
+    // 상호작용 입력 처리 (마우스 좌클릭) 
     public void OnInteract( InputValue value )
     {
         rayOrigin = playerCamera.position; // 레이 시작점은 플레이어 카메라 위치
@@ -61,6 +61,8 @@ public class InteractController : MonoBehaviour
             }
         }
     }
+
+    // Q키 
     public void OnCancel( InputValue value )
     {
         if ( zoomable != null && isreading == false )
@@ -73,7 +75,8 @@ public class InteractController : MonoBehaviour
         }
     }
     // 인터페이스
-    // 마우스커서가 있을때는 오브젝트가 안돌아가게해주고 있을땐 돌아가게함
+    // 마우스커서가 있을때는 오브젝트가 안돌아가게해주고 있을땐 돌아가게함 
+    // 마우스 좌클릭
     public void OnClick( InputValue value )
     {
         if ( hit.transform != null && readable == null )
