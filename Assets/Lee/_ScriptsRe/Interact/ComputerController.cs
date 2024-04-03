@@ -11,8 +11,10 @@ public class ComputerController : MonoBehaviour, IAnswerable, IZoomable
     [SerializeField] CinemachineVirtualCamera computerCamera;
     // 컴퓨터에 들어가는 ui
     [SerializeField] Canvas canvas;
-    // 제출 버튼
-    [SerializeField] Button submit;
+    // 점수
+    int score = 0;
+    int totalQuestions = 0;
+
 
     // 답안지
     [Header("Answer Sheet")]
@@ -26,16 +28,29 @@ public class ComputerController : MonoBehaviour, IAnswerable, IZoomable
 
     public void SubmitButton()
     {
-        if( PlayerSubAnswers [0].text == subjecttiveAnswers [0] )
+        totalQuestions += subjecttiveAnswers.Count;
+        totalQuestions += multipleChoiceAnswer.Count;
+        // 주관식 답 체크
+        for ( int i = 0; i < PlayerSubAnswers.Count; i++ )
         {
-
+            string answer = PlayerSubAnswers [i].text;
+            answer = answer.Replace(" ", string .Empty);
+            if ( answer == subjecttiveAnswers [i] )
+            {
+                score++;
+            }
         }
+        // 객관식 답 체크
+        for(int i = 0; i <PlayerMultiAnswer.Count; i++ )
+        {
+            if ( PlayerMultiAnswer [i].text == multipleChoiceAnswer [i] )
+            {
+                score++;
+            }
+        }
+        // 여기 끝날때 씬을 변화해주면될듯
+        Debug.Log($"점수는 {score}");
         
-    }
-
-    public void OpenAnwer()
-    {
-
     }
 
     public void UnzoomObject( Transform ZoomTrans )
