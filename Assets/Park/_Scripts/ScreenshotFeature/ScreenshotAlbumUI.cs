@@ -12,9 +12,11 @@ public class ScreenshotAlbumUI : MonoBehaviour
     [SerializeField] ScreenshotSystem screenshotSystem; //이것도 직접참조 원래는 하면 안됨... 나중에 Event로 처리 
     [SerializeField] public Image selectedScreenshotImage; //선택된 스크린샷 이미지
     [SerializeField] ScreenshotSlotUI ScreenshotSlotUIPrefab; //스크린샷 슬롯 UI Prefab
-    List<ScreenshotSlotUI> screenshotSlots;
-    public int curSlotIndex = 0;
+  
+    public List<ScreenshotSlotUI> screenshotSlots;
+    public int curIndex = 0;
     [SerializeField] GameObject albumPanel;
+    [SerializeField] GameObject lookedPanel;
     [SerializeField] Transform albumGrid;
    
     
@@ -44,7 +46,7 @@ public class ScreenshotAlbumUI : MonoBehaviour
         {
             ScreenshotSlotUI slot = Instantiate(ScreenshotSlotUIPrefab);
             RectTransform rect = slot.GetComponent<RectTransform>();
-            slot.path = screenshotSystem.screenshots [i].Data.path;
+            slot.screenshot = screenshotSystem.screenshots [i];
             slot.index = i;
             slot.albumUI = this;    
             rect.SetParent(albumGrid);
@@ -58,7 +60,7 @@ public class ScreenshotAlbumUI : MonoBehaviour
         Debug.Log("앨범 업데이트");
         ScreenshotSlotUI slot = Instantiate(ScreenshotSlotUIPrefab);
         RectTransform rect = slot.GetComponent<RectTransform>();
-        slot.path = screenshotSystem.screenshots [screenshotSystem.screenshots.Count-1].Data.path;
+        slot.screenshot = screenshotSystem.screenshots [screenshotSystem.screenshots.Count-1];
         slot.index = screenshotSystem.screenshots.Count - 1;
         slot.albumUI = this;
         rect.SetParent(albumGrid);
@@ -68,9 +70,9 @@ public class ScreenshotAlbumUI : MonoBehaviour
 
     private void DeleteFromAlbum()
     {
-        screenshotSlots [curSlotIndex].Remove();
-        screenshotSlots.RemoveAt(curSlotIndex);
-        screenshotSystem.Delete(curSlotIndex);
+        screenshotSlots [curIndex].Remove();
+        screenshotSlots.RemoveAt(curIndex);
+        screenshotSystem.Delete(curIndex);
     }
 
     public void Active()
@@ -97,12 +99,13 @@ public class ScreenshotAlbumUI : MonoBehaviour
 
     public void ButtonLook()
     {
-        //현재 선택되있는 사진을 확대
+        lookedPanel.SetActive(true);
     }
 
     public void ButtonMarking()
     {
-        screenshotSystem.screenshots [curSlotIndex].Data.isBookmarked = !screenshotSystem.screenshots [curSlotIndex].Data.isBookmarked;
+        screenshotSystem.screenshots [curIndex].Data.isBookmarked = !screenshotSystem.screenshots [curIndex].Data.isBookmarked;
+        screenshotSlots [curIndex].UpdateMarking();
     }
 
 }

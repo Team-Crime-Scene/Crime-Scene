@@ -7,6 +7,7 @@ public class Screenshot : MonoBehaviour
 {
     //ScreenshotData¸¦ °¡Áö´Â Screenshot °´Ã¼ 
     public ScreenshotData Data { get; private set; }
+    public ScreenshotSlotUI slotUI;
 
     public Screenshot( ScreenshotData data ) => Data = data;
 }
