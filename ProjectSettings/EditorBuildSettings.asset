@@ -4,5 +4,9 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Lee/Scenes/Refatoring.unity
+    guid: 59cf9c69142dd7a4686b8ef38568b3e9
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0
