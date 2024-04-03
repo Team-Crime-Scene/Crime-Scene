@@ -6,6 +6,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.VisualScripting;
+using Unity.Mathematics;
 
 public class ScreenshotSystem : MonoBehaviour
 {
@@ -27,10 +28,9 @@ public class ScreenshotSystem : MonoBehaviour
     [SerializeField]
     public List<Screenshot> screenshots;
 
-    bool isTakeScreenshot; // test하느라 public 해둠. private로 바꾸고 프로퍼티 생성할것 
+    bool isTakeScreenshot; 
 
     #region Properties
-    private Texture2D _imageTexture; // imageToShow의 소스 텍스쳐
 
 
     //경로 설정
@@ -136,6 +136,8 @@ public class ScreenshotSystem : MonoBehaviour
             Debug.Log($"Screenshot Saved : {totalPath}");
             StartCoroutine(ScreenshotAnimation());
             lastSavedPath = totalPath; // 최근 경로에 저장
+
+            albumUI.UpdateAlbum();
         }
     }
 
@@ -151,9 +153,33 @@ public class ScreenshotSystem : MonoBehaviour
         string [] paths = Directory.GetFiles(FolderPath, "*.png", SearchOption.AllDirectories);
         for(int i=0; i<paths.Length; i++)
         {
-            screenshots.Add(new Screenshot(new ScreenshotData(paths [i])));
+            screenshots.Add(new Screenshot(new ScreenshotData(paths [i]))); //나중에 즐겨찾기 여부도 불러와야함
         }
-        //나중에 예외처리 하는거 고려
+        //나중에 예외처리
+    }
+
+
+    public void Delete(int index)
+    {
+        string path = screenshots [index].Data.path;
+        screenshots.RemoveAt(index);
+        if ( File.Exists(path) )
+        {
+            try
+            {
+                // 파일 삭제
+                File.Delete(path);
+                Debug.Log("File deleted: " + path);
+            }
+            catch ( IOException ex )
+            {
+                Debug.LogError("Error deleting file: " + ex.Message);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("File does not exist: " + path);
+        }
     }
     #endregion
 
