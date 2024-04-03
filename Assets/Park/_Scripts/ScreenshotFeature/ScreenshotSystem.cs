@@ -5,11 +5,12 @@ using System.Xml.Linq;
 using System.IO;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Unity.VisualScripting;
 
 public class ScreenshotSystem : MonoBehaviour
 {
-    //Screenshot을 찍고 관리하는 스크립트
-    //todo : Singleton 으로 만들것
+    // Model
+    //Screenshot을 찍고 관리하는 스크립트 
 
     //* MainCamera에 이 컴포넌트를 부착해야 사용가능
 
@@ -22,12 +23,11 @@ public class ScreenshotSystem : MonoBehaviour
     [SerializeField] string extName = "png";
 
     [SerializeField, Range(20, 100)] int maxCapacity; //최대 이미지 갯수
-    [SerializeField] ScreenshotAlbumUI albumUI;
+    [SerializeField] ScreenshotAlbumUI albumUI; // 원래 MVC는 View에 대한 참조는 하지 않아야함. event를 사용해 View에 처리를 하는 법을 생각해 볼 것.
     [SerializeField]
     public List<Screenshot> screenshots;
 
-    [SerializeField]
-    public bool isTakeScreenshot; // test하느라 public 해둠. private로 바꾸고 프로퍼티 생성할것 
+    bool isTakeScreenshot; // test하느라 public 해둠. private로 바꾸고 프로퍼티 생성할것 
 
     #region Properties
     private Texture2D _imageTexture; // imageToShow의 소스 텍스쳐
@@ -60,7 +60,7 @@ public class ScreenshotSystem : MonoBehaviour
     private void Awake()
     {
         screenshots = new List<Screenshot>(maxCapacity); // 나중에 저장, 불러오기시 여기서 저장데이터 참조
-
+        LoadScreenshots();
     }
 
     // 카메라가 랜더링 마친 이후임을 보장하기 위해 OnPostRender()에서 호출
@@ -78,8 +78,19 @@ public class ScreenshotSystem : MonoBehaviour
     private void Update()
     {
        if(Input.GetKeyDown(KeyCode.I)){
-            albumUI.isActive = !albumUI.isActive;
-            albumUI.albumPanel.SetActive(albumUI.isActive);
+            albumUI.Active();
+        }
+       if(Input.GetKeyDown(KeyCode.C) ){
+            isTakeScreenshot=true;
+        }
+
+       //List 디버그용
+       if(Input.GetKeyDown(KeyCode.D) )
+        {
+            for(int i=0; i < screenshots.Count; i++ )
+            {
+                Debug.Log(screenshots [i].Data.path);
+            }
         }
     }
 
@@ -115,14 +126,14 @@ public class ScreenshotSystem : MonoBehaviour
         catch ( Exception e ) // 예외처리
         {
             succeeded = false;
-            Debug.LogWarning($"Screen Shot Save Failed : {totalPath}");
+            Debug.LogWarning($"Screenshot Save Failed : {totalPath}");
             Debug.LogWarning(e);
         }
         Destroy(screenTex); //가비지 제거
 
         if ( succeeded )
         {
-            Debug.Log($"Screen Shot Saved : {totalPath}");
+            Debug.Log($"Screenshot Saved : {totalPath}");
             StartCoroutine(ScreenshotAnimation());
             lastSavedPath = totalPath; // 최근 경로에 저장
         }
@@ -132,6 +143,17 @@ public class ScreenshotSystem : MonoBehaviour
     {
         Debug.Log("아무튼 개쩌는 스크린샷 효과,");
         yield return null;
+    }
+
+
+    private void LoadScreenshots()
+    {
+        string [] paths = Directory.GetFiles(FolderPath, "*.png", SearchOption.AllDirectories);
+        for(int i=0; i<paths.Length; i++)
+        {
+            screenshots.Add(new Screenshot(new ScreenshotData(paths [i])));
+        }
+        //나중에 예외처리 하는거 고려
     }
     #endregion
 
