@@ -18,6 +18,7 @@ public class InteractController : MonoBehaviour
     IRotatable rotatable;
     IZoomable zoomable;
     IReadable readable;
+    IAnswerable answerable;
     private bool isreading = false;
 
 
@@ -53,6 +54,8 @@ public class InteractController : MonoBehaviour
             rotatable = hit.transform.gameObject.GetComponent<IRotatable>();
             zoomable = hit.transform.gameObject.GetComponent<IZoomable>();
             readable = hit.transform.gameObject.GetComponent<IReadable>();
+            answerable = hit.transform.gameObject.GetComponent<IAnswerable>();
+
 
             if ( zoomable != null && isZoomed == false )
             {
@@ -71,15 +74,18 @@ public class InteractController : MonoBehaviour
             rotatable = null;
             zoomable = null;
             readable = null;
+            answerable = null;
+
             isZoomed = false;
         }
     }
+
     // 인터페이스
     // 마우스커서가 있을때는 오브젝트가 안돌아가게해주고 있을땐 돌아가게함 
     // 마우스 좌클릭
     public void OnClick( InputValue value )
     {
-        if ( hit.transform != null && readable == null )
+        if ( hit.transform != null && readable == null && answerable == null )
         {
             if ( Cursor.lockState == CursorLockMode.None )
                 Cursor.lockState = CursorLockMode.Locked;

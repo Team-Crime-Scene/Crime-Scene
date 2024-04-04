@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Lee/Scenes/TitleScene.unity
+    guid: 1adaa6572bcb7ae4884935c5dfda2a22
+  - enabled: 1
     path: Assets/Lee/Scenes/Refatoring.unity
     guid: 59cf9c69142dd7a4686b8ef38568b3e9
   m_configObjects: {}
