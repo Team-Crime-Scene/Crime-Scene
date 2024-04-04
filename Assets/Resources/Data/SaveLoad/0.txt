@@ -1,15 +1,23 @@
 {
-    "playerData": {
-        "PlayerPos": {
-            "x": 0.0,
-            "y": 0.0,
-            "z": 0.0
+    "gameSceneData": {
+        "playerPos": {
+            "x": -3.479417085647583,
+            "y": 1.0800000429153443,
+            "z": -8.974658966064454
         },
-        "PlayerRot": {
+        "playerRot": {
             "x": 0.0,
-            "y": 0.0,
+            "y": -0.09847380220890045,
             "z": 0.0,
-            "w": 0.0
-        }
+            "w": 0.9951397180557251
+        },
+        "PlayerSubAnswers": "sadas",
+        "PlayerMultiAnswer": "모름"
+    },
+    "PlayerSubAnswers": {
+        "instanceID": 0
+    },
+    "PlayerMultiAnswer": {
+        "instanceID": 0
     }
 }

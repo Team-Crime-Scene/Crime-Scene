@@ -17,7 +17,6 @@ public class TitleScene : BaseScene
     }
     public void ContinueGame()
     {
-        Manager.Data.LoadData();
         Manager.Scene.LoadScene("Refatoring");
     }
 
