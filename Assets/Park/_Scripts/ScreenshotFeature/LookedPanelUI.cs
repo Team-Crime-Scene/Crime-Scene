@@ -8,50 +8,33 @@ public class LookedPanel : MonoBehaviour
     [SerializeField] Image image;
     [SerializeField] ScreenshotAlbumUI albumUI;
 
-    int maxIndex;
-    int curIndex;
 
     public void OnEnable()
     {
-        curIndex = albumUI.curIndex;
-        maxIndex = albumUI.screenshotSlots.Count;
         UpdateImage();
     }
-
-    public void OnDisable()
-    {
-       albumUI.curIndex = curIndex;
-    }
-
     private void UpdateImage()
     {
-        image = albumUI.selectedScreenshotImage;
+        image.sprite = Extension.LoadSprite(albumUI.curSlot.screenshot.Data.path);
     }
 
     public void OnClickButtonNext()
     {
-        if(curIndex < maxIndex)
-        {
-            curIndex++;
-        }
-        else
-        {
-            curIndex = 0;
-        }
+        int currentIndex = albumUI.screenshotSlots.IndexOf(albumUI.curSlot);
+        int nextIndex = ( currentIndex + 1 ) % albumUI.screenshotSlots.Count;
+        albumUI.curSlot = albumUI.screenshotSlots [nextIndex];
+        albumUI.UpdateSelectedImage();
         UpdateImage();
     }
 
     public void OnClickButtonPrev()
     {
-        if ( curIndex != 0 )
-        {
-            curIndex--;
-        }
-        else
-        {
-            curIndex = albumUI.screenshotSlots.Count -1;
-        }
+        int currentIndex = albumUI.screenshotSlots.IndexOf(albumUI.curSlot);
+        int prevIndex = ( currentIndex - 1 + albumUI.screenshotSlots.Count ) % albumUI.screenshotSlots.Count;
+        albumUI.curSlot = albumUI.screenshotSlots [prevIndex];
+        albumUI.UpdateSelectedImage();
         UpdateImage();
     }
+
 
 }
