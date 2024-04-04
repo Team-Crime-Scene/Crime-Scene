@@ -9,15 +9,26 @@ using UnityEngine.InputSystem;
 public class CamaraController : MonoBehaviour
 {
     [SerializeField] CinemachineVirtualCamera mainCamera;
+    CinemachineTransposer transposer;
 
-    int sitDownCount = 0;
+    enum PlayerPosture
+    {
+        Standing, SitDown, Crouching
+    }
+    PlayerPosture playerPosture = PlayerPosture.Standing;
+
     // 캐릭터 크기에 따라 앉은 상태와 서있는 상태가 달라 질수 있음
-    Vector3 SitDown1State = new Vector3(0, 0.5f, 0);
-    Vector3 SitUpState = new Vector3(0, 1, 0);
-    Vector3 SitDown2State = new Vector3(0, 0.25f, 0);
+    Vector3 StandingPos = new Vector3(0, 1f, 0);
+    Vector3 SitDownPos = new Vector3(0, 0.5f, 0);
+    Vector3 CrouchingPos = new Vector3(0, 0.25f, 0);
 
     // 얜 상호작용에도 들어가야됨
     // 플레이어 조작중 확대
+    private void Awake()
+    {
+        transposer = mainCamera.GetCinemachineComponent<CinemachineTransposer>();
+    }
+
     private void OnZoom( InputValue value )
     {
         Zoom();
@@ -31,26 +42,23 @@ public class CamaraController : MonoBehaviour
             mainCamera.m_Lens.FieldOfView = 60;
     }
 
-
     // 누를때마다 앉은 상태 변화
     private void OnSitDown( InputValue value )
     {
-        CinemachineTransposer transposer = mainCamera.GetCinemachineComponent<CinemachineTransposer>();
-
-        if ( sitDownCount == 0 )
+        switch ( playerPosture )
         {
-            transposer.m_FollowOffset = SitDown1State;
-            sitDownCount = 1;
-        }
-        else if ( sitDownCount == 1 )
-        {
-            transposer.m_FollowOffset = SitDown2State;
-            sitDownCount = 2;
-        }
-        else if ( sitDownCount == 2 )
-        {
-            transposer.m_FollowOffset = SitUpState;
-            sitDownCount = 0;
+            case PlayerPosture.Standing:
+                transposer.m_FollowOffset = SitDownPos;
+                playerPosture = PlayerPosture.SitDown;
+                break;
+            case PlayerPosture.SitDown:
+                transposer.m_FollowOffset = CrouchingPos;
+                playerPosture = PlayerPosture.Crouching;
+                break;
+            case PlayerPosture.Crouching:
+                transposer.m_FollowOffset = StandingPos;
+                playerPosture = PlayerPosture.Standing;
+                break;
         }
     }
 

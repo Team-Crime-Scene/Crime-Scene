@@ -53,7 +53,7 @@ public class UIManager : Singleton<UIManager>
     {
         PopUpUI ui = popUpStack.Pop();
         Destroy(ui.gameObject);
-
+         
         if (popUpStack.Count > 0)
         {
             PopUpUI topUI = popUpStack.Peek();
