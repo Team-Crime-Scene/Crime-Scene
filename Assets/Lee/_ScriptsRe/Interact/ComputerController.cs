@@ -1,9 +1,7 @@
 using Cinemachine;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ComputerController : MonoBehaviour, IAnswerable, IZoomable
 {
@@ -23,8 +21,8 @@ public class ComputerController : MonoBehaviour, IAnswerable, IZoomable
 
     // 플레이어 답안지
     [Header("Player Answer Sheet")]
-    [SerializeField] List<TMP_InputField> PlayerSubAnswers = new List<TMP_InputField>() ;
-    [SerializeField] List<TextMeshProUGUI> PlayerMultiAnswer = new List<TextMeshProUGUI>() ;
+    [SerializeField] List<TMP_InputField> PlayerSubAnswers = new List<TMP_InputField>();
+    [SerializeField] List<TextMeshProUGUI> PlayerMultiAnswer = new List<TextMeshProUGUI>();
 
     public void SubmitButton()
     {
@@ -34,14 +32,14 @@ public class ComputerController : MonoBehaviour, IAnswerable, IZoomable
         for ( int i = 0; i < PlayerSubAnswers.Count; i++ )
         {
             string answer = PlayerSubAnswers [i].text;
-            answer = answer.Replace(" ", string .Empty);
+            answer = answer.Replace(" ", string.Empty);
             if ( answer == subjecttiveAnswers [i] )
             {
                 score++;
             }
         }
         // 객관식 답 체크
-        for(int i = 0; i <PlayerMultiAnswer.Count; i++ )
+        for ( int i = 0; i < PlayerMultiAnswer.Count; i++ )
         {
             if ( PlayerMultiAnswer [i].text == multipleChoiceAnswer [i] )
             {
@@ -50,7 +48,7 @@ public class ComputerController : MonoBehaviour, IAnswerable, IZoomable
         }
         // 여기 끝날때 씬을 변화해주면될듯
         Debug.Log($"점수는 {score}");
-        
+
     }
 
     public void UnzoomObject( Transform ZoomTrans )

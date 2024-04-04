@@ -2294,6 +2294,7 @@ GameObject:
   - component: {fileID: 792824917}
   - component: {fileID: 792824916}
   - component: {fileID: 792824925}
+  - component: {fileID: 792824926}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2511,6 +2512,18 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &792824926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792824915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38864a47434ddec4e8492193f6607c5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &837912698
 GameObject:
   m_ObjectHideFlags: 0
@@ -5308,6 +5321,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cc06b80a38732643ad802bbc27eba53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2017489628
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2017489630}
+  - component: {fileID: 2017489631}
+  m_Layer: 0
+  m_Name: RefatoringSceneManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2017489630
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017489628}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -209.5401, y: 124.8868, z: -4.187547}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2017489631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017489628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a155e418a9acb6c4ab904df01fbb53d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 792824924}
 --- !u!1 &2024863141
 GameObject:
   m_ObjectHideFlags: 0
@@ -5806,3 +5864,4 @@ SceneRoots:
   - {fileID: 1924527415}
   - {fileID: 1553410826}
   - {fileID: 1911915065}
+  - {fileID: 2017489630}
