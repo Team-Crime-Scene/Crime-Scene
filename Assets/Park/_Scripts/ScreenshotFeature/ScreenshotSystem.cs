@@ -25,8 +25,6 @@ public class ScreenshotSystem : MonoBehaviour
 
     [SerializeField, Range(20, 100)] int maxCapacity; //최대 이미지 갯수
     [SerializeField] ScreenshotAlbumUI albumUI; // 원래 MVC는 View에 대한 참조는 하지 않아야함. event를 사용해 View에 처리를 하는 법을 생각해 볼 것.
-    [SerializeField]
-    public List<Screenshot> screenshots;
 
     bool isTakeScreenshot; 
 
@@ -57,10 +55,9 @@ public class ScreenshotSystem : MonoBehaviour
     *                               Unity Events
     ***********************************************************************/
 
-    private void Awake()
+    private void Start()
     {
-        screenshots = new List<Screenshot>(maxCapacity); // 나중에 저장, 불러오기시 여기서 저장데이터 참조
-        LoadScreenshots();
+        ScreenshotAlbum.Instance.InitAlbum(FolderPath);
     }
 
     // 카메라가 랜더링 마친 이후임을 보장하기 위해 OnPostRender()에서 호출
@@ -69,8 +66,7 @@ public class ScreenshotSystem : MonoBehaviour
     {
         if ( !isTakeScreenshot )
             return;
-        Debug.Log("Call ScreenShot");
-        ScreenShot();
+        TakeScreenShot();
         isTakeScreenshot = false;
     }
 
@@ -83,15 +79,6 @@ public class ScreenshotSystem : MonoBehaviour
        if(Input.GetKeyDown(KeyCode.C) ){
             isTakeScreenshot=true;
         }
-
-       //List 디버그용
-       if(Input.GetKeyDown(KeyCode.D) )
-        {
-            for(int i=0; i < screenshots.Count; i++ )
-            {
-                Debug.Log(screenshots [i].Data.path);
-            }
-        }
     }
 
     /***********************************************************************
@@ -100,12 +87,12 @@ public class ScreenshotSystem : MonoBehaviour
 
     //스크린샷을 찍는 메소드
     #region ScreenShot
-    private void ScreenShot()
+    private void TakeScreenShot()
     {
         string totalPath = TotalPath; // 프로퍼티 참조 시 시간에 따라 이름이 결정되므로 캐싱
         
         //List에 사진 객체 추가
-        screenshots.Add(new Screenshot(new ScreenshotData(totalPath))); // ;; 이게 맞노
+        ScreenshotAlbum.Instance.Add(new Screenshot(new ScreenshotData(totalPath)));
 
         Texture2D screenTex = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
         Rect area = new Rect(0f, 0f, Screen.width, Screen.height); 
@@ -137,7 +124,7 @@ public class ScreenshotSystem : MonoBehaviour
             StartCoroutine(ScreenshotAnimation());
             lastSavedPath = totalPath; // 최근 경로에 저장
 
-            albumUI.UpdateAlbum();
+            albumUI.UpdateAlbumUISlots();
         }
     }
 
@@ -147,40 +134,6 @@ public class ScreenshotSystem : MonoBehaviour
         yield return null;
     }
 
-
-    private void LoadScreenshots()
-    {
-        string [] paths = Directory.GetFiles(FolderPath, "*.png", SearchOption.AllDirectories);
-        for(int i=0; i<paths.Length; i++)
-        {
-            screenshots.Add(new Screenshot(new ScreenshotData(paths [i]))); //나중에 즐겨찾기 여부도 불러와야함
-        }
-        //나중에 예외처리
-    }
-
-
-    public void Delete(int index)
-    {
-        string path = screenshots [index].Data.path;
-        screenshots.RemoveAt(index);
-        if ( File.Exists(path) )
-        {
-            try
-            {
-                // 파일 삭제
-                File.Delete(path);
-                Debug.Log("File deleted: " + path);
-            }
-            catch ( IOException ex )
-            {
-                Debug.LogError("Error deleting file: " + ex.Message);
-            }
-        }
-        else
-        {
-            Debug.LogWarning("File does not exist: " + path);
-        }
-    }
     #endregion
 
 

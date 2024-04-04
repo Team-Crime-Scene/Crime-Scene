@@ -8,13 +8,13 @@ using UnityEngine.UI;
 public class ScreenshotAlbumUI : MonoBehaviour
 {
     // View
-    //사용자의 Album UI 조작을 처리하고 ScreenshotSystem과 상호작용 하는 스크립트
-    [SerializeField] ScreenshotSystem screenshotSystem; //이것도 직접참조 원래는 하면 안됨... 나중에 Event로 처리 
-    [SerializeField] public Image selectedScreenshotImage; //선택된 스크린샷 이미지
+    //사용자의 Album UI 조작을 처리하고 ScreenshotAlbum과 상호작용 하는 스크립트
+    [SerializeField] Image selectedScreenshotImage; //선택된 스크린샷 이미지
     [SerializeField] ScreenshotSlotUI ScreenshotSlotUIPrefab; //스크린샷 슬롯 UI Prefab
   
     public List<ScreenshotSlotUI> screenshotSlots;
-    public int curIndex = 0;
+    public ScreenshotSlotUI curSlot;
+
     [SerializeField] GameObject albumPanel;
     [SerializeField] GameObject lookedPanel;
     [SerializeField] Transform albumGrid;
@@ -28,7 +28,6 @@ public class ScreenshotAlbumUI : MonoBehaviour
     ***********************************************************************/
     private void Awake()
     {
-        screenshotSystem = Camera.main.GetComponent<ScreenshotSystem>();
         screenshotSlots = new List<ScreenshotSlotUI>();
     }
 
@@ -39,40 +38,44 @@ public class ScreenshotAlbumUI : MonoBehaviour
     ***********************************************************************/
 
     //그리드 내에 ScreenshotSlotUI를 동적으로 생성
-    private void InitAlbum()
+    private void InitAlbumUISlots()
     {
         Debug.Log("앨범 초기화");
-        for ( int i = 0; i < screenshotSystem.screenshots.Count; i++ )
+        for ( int i = 0; i < ScreenshotAlbum.Instance.Screenshots.Count; i++ )
         {
             ScreenshotSlotUI slot = Instantiate(ScreenshotSlotUIPrefab);
             RectTransform rect = slot.GetComponent<RectTransform>();
-            slot.screenshot = screenshotSystem.screenshots [i];
-            slot.index = i;
+            slot.screenshot = ScreenshotAlbum.Instance.Screenshots[i];
             slot.albumUI = this;    
             rect.SetParent(albumGrid);
             rect.localScale = Vector3.one;
             screenshotSlots.Add(slot);
+            curSlot = slot;
         }
+        selectedScreenshotImage.sprite = Extension.LoadSprite(curSlot.screenshot.Data.path);
     }
 
-    public void UpdateAlbum()
+    public void UpdateAlbumUISlots()
     {
         Debug.Log("앨범 업데이트");
         ScreenshotSlotUI slot = Instantiate(ScreenshotSlotUIPrefab);
         RectTransform rect = slot.GetComponent<RectTransform>();
-        slot.screenshot = screenshotSystem.screenshots [screenshotSystem.screenshots.Count-1];
-        slot.index = screenshotSystem.screenshots.Count - 1;
+        slot.screenshot = ScreenshotAlbum.Instance.Screenshots[ScreenshotAlbum.Instance.Screenshots.Count-1];
         slot.albumUI = this;
         rect.SetParent(albumGrid);
         rect.localScale = Vector3.one;
         screenshotSlots.Add(slot);
     }
 
+    public void UpdateSelectedImage()
+    {
+        selectedScreenshotImage.sprite = Extension.LoadSprite(curSlot.screenshot.Data.path);
+    }
+
     private void DeleteFromAlbum()
     {
-        screenshotSlots [curIndex].Remove();
-        screenshotSlots.RemoveAt(curIndex);
-        screenshotSystem.Delete(curIndex);
+       screenshotSlots.Remove(curSlot);
+       curSlot.Delete();
     }
 
     public void Active()
@@ -83,9 +86,8 @@ public class ScreenshotAlbumUI : MonoBehaviour
         if ( !isInit )
         {
             isInit = true;
-            InitAlbum();
-        }
-            
+            InitAlbumUISlots();
+        }    
     }
 
     /***********************************************************************
@@ -94,6 +96,7 @@ public class ScreenshotAlbumUI : MonoBehaviour
     
     public void ButtonDelete()
     {
+        //확인팝업 묻는거 추가해야함
         DeleteFromAlbum();
     }
 
@@ -104,8 +107,7 @@ public class ScreenshotAlbumUI : MonoBehaviour
 
     public void ButtonMarking()
     {
-        screenshotSystem.screenshots [curIndex].Data.isBookmarked = !screenshotSystem.screenshots [curIndex].Data.isBookmarked;
-        screenshotSlots [curIndex].UpdateMarking();
+        curSlot.UpdateMarking();
     }
 
 }

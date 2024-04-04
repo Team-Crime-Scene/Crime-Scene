@@ -62,7 +62,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 3124898822938999516}
   markedImage: {fileID: 1607575160736344256}
-  index: 0
   screenshot: {fileID: 0}
   albumUI: {fileID: 0}
 --- !u!114 &3124898822938999516
