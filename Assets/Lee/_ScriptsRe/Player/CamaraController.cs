@@ -88,7 +88,6 @@ public class CamaraController : MonoBehaviour
         xRotation -= inputDir.y * mouseSensitivity * Time.deltaTime;
         xRotation = Mathf.Clamp(xRotation, -80f, 80f);
 
-
         player.transform.Rotate(Vector3.up, inputDir.x * mouseSensitivity * Time.deltaTime);
 
         transform.Rotate(Vector3.up, mouseSensitivity * inputDir.x * Time.deltaTime);

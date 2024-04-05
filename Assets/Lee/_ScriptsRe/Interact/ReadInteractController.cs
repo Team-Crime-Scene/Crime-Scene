@@ -29,10 +29,8 @@ public class ReadInteractController : MonoBehaviour, IReadable, IZoomable
     {
         transform.position = Vector3.Lerp(initialPosition, ZoomTrans.position, Time.deltaTime * 2f);
         transform.rotation = initialRotation;
-
         // 줌 해체시 커서 꺼짐
         Cursor.lockState = CursorLockMode.Locked;
-
     }
 
     public void ZoomObject( Transform ZoomTrans )
@@ -46,6 +44,5 @@ public class ReadInteractController : MonoBehaviour, IReadable, IZoomable
 
         // 오브젝트를 가져왔을 때 커서보이게
         Cursor.lockState = CursorLockMode.None;
-
     }
 }

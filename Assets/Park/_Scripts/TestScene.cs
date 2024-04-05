@@ -2,31 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class RefatoringScene : BaseScene
+public class TestScene : BaseScene
 {
     // 저장할 데이터들 
-    [SerializeField] Transform player;
+    [SerializeField] GameObject player;
+    [SerializeField] PlayerController playerController;
     [SerializeField] TMP_InputField PlayerSubAnswers;
     [SerializeField] TextMeshProUGUI PlayerMultiAnswer;
 
+    [SerializeField] float AutoSaveGameTime =3f;
+
     private void Awake()
     {
-
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerController = player.GetComponent<PlayerController>();
     }
+
     public override IEnumerator LoadingRoutine()
     {
         Manager.Data.LoadData();
         yield return null;
-        StartCoroutine(AutoSaveRutine());
-        // 여기 로드된 데잍터들을 넣어줘야됨
-        player.position = Manager.Data.GameData.gameSceneData.playerPos;
-        player.rotation = Manager.Data.GameData.gameSceneData.playerRot;
+        player.transform.position = Manager.Data.GameData.gameSceneData.playerPos;
+        player.transform.rotation = Manager.Data.GameData.gameSceneData.playerRot;
         PlayerSubAnswers.text = Manager.Data.GameData.gameSceneData.PlayerSubAnswers;
         PlayerMultiAnswer.text = Manager.Data.GameData.gameSceneData.PlayerMultiAnswer;
         Debug.Log(Manager.Data.GameData.gameSceneData.playerPos);
-
+        StartCoroutine(AutoSaveRutine());
     }
 
     IEnumerator AutoSaveRutine()
@@ -34,14 +36,12 @@ public class RefatoringScene : BaseScene
         while ( true )
         {
             //데이터 자동저장
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(AutoSaveGameTime);
             Debug.Log("자동 저장");
-            Debug.Log(player.position);
-            Manager.Data.GameData.gameSceneData.playerPos = player.position;
-            Manager.Data.GameData.gameSceneData.playerRot = player.rotation;
+            Manager.Data.GameData.gameSceneData.playerPos = player.transform.position;
+            Manager.Data.GameData.gameSceneData.playerRot = player.transform.rotation;
             Manager.Data.GameData.gameSceneData.PlayerSubAnswers = PlayerSubAnswers.text;
             Manager.Data.GameData.gameSceneData.PlayerMultiAnswer = PlayerMultiAnswer.text;
-
             Manager.Data.SaveData();
         }
     }

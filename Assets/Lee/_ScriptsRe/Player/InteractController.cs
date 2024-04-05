@@ -5,6 +5,7 @@ public class InteractController : MonoBehaviour
 {
     [SerializeField] LayerMask interactableLayer; // 상호작용 가능한 레이어
     [SerializeField] Transform zoomPosition; // 줌 위치
+    [SerializeField] float interactRange= 100;
 
     private bool isZoomed = false; // 줌 상태 여부
     public bool IsZoomed { get { return isZoomed; } }
@@ -24,7 +25,7 @@ public class InteractController : MonoBehaviour
     {
         if ( rotatable != null )
         {
-            rotatable.Rotation();
+            rotatable.Rotate();
         }
         else { return; }
     }
@@ -45,7 +46,7 @@ public class InteractController : MonoBehaviour
 
 
         // 레이캐스트로 상호작용 가능한 대상 확인
-        if ( Physics.Raycast(rayOrigin, rayDirection, out hit, 100, interactableLayer) )
+        if ( Physics.Raycast(rayOrigin, rayDirection, out hit, interactRange, interactableLayer) )
         {
             rotatable = hit.transform.gameObject.GetComponent<IRotatable>();
             zoomable = hit.transform.gameObject.GetComponent<IZoomable>();
@@ -94,7 +95,7 @@ public class InteractController : MonoBehaviour
     public void OnRotationCon( InputValue value )
     {
         if ( rotatable != null )
-            rotatable.RotationTrnas(value);
+            rotatable.GetRotationInput(value);
 
     }
     // 읽기 인터페이스

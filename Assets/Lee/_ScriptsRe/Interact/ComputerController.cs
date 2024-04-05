@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class ComputerController : MonoBehaviour, IAnswerable, IZoomable
+public class ComputerController : MonoBehaviour,IInteractable
 {
     // 컴퓨터에 줌되는 카메라
-    [SerializeField] CinemachineVirtualCamera computerCamera;
+    [SerializeField] CinemachineVirtualCamera vCam;
     // 컴퓨터에 들어가는 ui
-    [SerializeField] Canvas canvas;
+    [SerializeField] GameObject computerPanel;
     // 점수
     int score = 0;
     int totalQuestions = 0;
@@ -24,7 +24,13 @@ public class ComputerController : MonoBehaviour, IAnswerable, IZoomable
     [SerializeField] List<TMP_InputField> PlayerSubAnswers = new List<TMP_InputField>();
     [SerializeField] List<TextMeshProUGUI> PlayerMultiAnswer = new List<TextMeshProUGUI>();
 
-    public void SubmitButton()
+    public void Interact( PlayerController player )
+    {
+        vCam.Priority = 20;
+        computerPanel.SetActive(true);
+    }
+
+    public void Submit()
     {
         totalQuestions += subjecttiveAnswers.Count;
         totalQuestions += multipleChoiceAnswer.Count;
@@ -51,17 +57,10 @@ public class ComputerController : MonoBehaviour, IAnswerable, IZoomable
 
     }
 
-    public void UnzoomObject( Transform ZoomTrans )
+    public void UnInteract( PlayerController player )
     {
-        computerCamera.m_Priority = 0;
-        canvas.enabled = false;
+        vCam.Priority = 0;
+        computerPanel.SetActive(false);
     }
-
-    public void ZoomObject( Transform ZoomTrans )
-    {
-        computerCamera.m_Priority = 20;
-        canvas.enabled = true;
-    }
-
 
 }

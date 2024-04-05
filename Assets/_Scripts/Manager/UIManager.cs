@@ -30,6 +30,8 @@ public class UIManager : Singleton<UIManager>
         Instantiate(eventSystem);
     }
 
+
+     // PoPUpUI Methods //
     public T ShowPopUpUI<T>(T popUpUI) where T : PopUpUI
     {
         if (popUpStack.Count > 0)
@@ -74,6 +76,11 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
+    #region UnUsed
+
+
+    // WindowUI Methods //
+
     public T ShowWindowUI<T>(T windowUI) where T : WindowUI
     {
         return Instantiate(windowUI, windowCanvas.transform);
@@ -97,6 +104,8 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
+    // InGameUI Methods //
+
     public T ShowInGameUI<T>(T inGameUI) where T : InGameUI
     {
         if (curInGameUI != null)
@@ -119,4 +128,5 @@ public class UIManager : Singleton<UIManager>
         Destroy(curInGameUI.gameObject);
         curInGameUI = null;
     }
+    #endregion
 }
