@@ -2,6 +2,7 @@ using Cinemachine;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ComputerController : MonoBehaviour, IAnswerable, IZoomable
 {
@@ -9,11 +10,13 @@ public class ComputerController : MonoBehaviour, IAnswerable, IZoomable
     [SerializeField] CinemachineVirtualCamera computerCamera;
     // 컴퓨터에 들어가는 ui
     [SerializeField] Canvas canvas;
+    Vector2 CreatePoint;
     // 점수
     int score = 0;
-    int totalQuestions = 0;
 
-
+    // 답안지 추가
+    [SerializeField] GameObject prefab;
+    [SerializeField] GameObject answerParents;
     // 답안지
     [Header("Answer Sheet")]
     [SerializeField] List<string> subjecttiveAnswers;
@@ -24,14 +27,28 @@ public class ComputerController : MonoBehaviour, IAnswerable, IZoomable
     [SerializeField] List<TMP_InputField> PlayerSubAnswers = new List<TMP_InputField>();
     [SerializeField] List<TextMeshProUGUI> PlayerMultiAnswer = new List<TextMeshProUGUI>();
 
+    [SerializeField] List<GameObject> addedList = new List<GameObject>();
+    public void CreateAnswerSheet()
+    {
+        addedList.Add(Instantiate(prefab, CreatePoint, Quaternion.identity, answerParents.transform));
+        PlayerSubAnswers.Add(addedList [0].gameObject.GetComponent<TMP_InputField>());
+    }
+
+    public void ClearAnswerSheet()
+    {
+        if ( addedList != null )
+        {
+            Destroy(addedList [0]);
+            addedList.RemoveAt(0);
+        }
+    }
     public void SubmitButton()
     {
-        totalQuestions += subjecttiveAnswers.Count;
-        totalQuestions += multipleChoiceAnswer.Count;
         // 주관식 답 체크
         for ( int i = 0; i < PlayerSubAnswers.Count; i++ )
         {
             string answer = PlayerSubAnswers [i].text;
+            Debug.Log(answer);
             answer = answer.Replace(" ", string.Empty);
             if ( answer == subjecttiveAnswers [i] )
             {
