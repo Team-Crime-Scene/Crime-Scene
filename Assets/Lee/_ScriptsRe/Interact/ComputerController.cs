@@ -2,6 +2,7 @@ using Cinemachine;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ComputerController : MonoBehaviour,IInteractable
 {
@@ -12,9 +13,10 @@ public class ComputerController : MonoBehaviour,IInteractable
     [SerializeField] PopUpUI popUpUI;
     // 점수
     int score = 0;
-    int totalQuestions = 0;
 
-
+    // 답안지 추가
+    [SerializeField] GameObject prefab;
+    [SerializeField] GameObject answerParents;
     // 답안지
     [Header("Answer Sheet")]
     [SerializeField] List<string> subjecttiveAnswers;
@@ -33,12 +35,11 @@ public class ComputerController : MonoBehaviour,IInteractable
 
     public void Submit()
     {
-        totalQuestions += subjecttiveAnswers.Count;
-        totalQuestions += multipleChoiceAnswer.Count;
         // 주관식 답 체크
         for ( int i = 0; i < PlayerSubAnswers.Count; i++ )
         {
             string answer = PlayerSubAnswers [i].text;
+            Debug.Log(answer);
             answer = answer.Replace(" ", string.Empty);
             if ( answer == subjecttiveAnswers [i] )
             {
