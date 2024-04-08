@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class ReadableObject : InteractableObject , IReadable
 {
     [SerializeField] PopUpUI popUpUI;
-    //[SerializeField] PopUpUI readInfo; 
+    [SerializeField] PopUpUI readInfoPrefab; 
     [SerializeField] Texture2D readInfo;
 
     public override void Interact( PlayerController player )
@@ -20,7 +20,10 @@ public class ReadableObject : InteractableObject , IReadable
     public void Read()
     {
         Cursor.visible = true;
-       // Manager.UI.ShowPopUpUI(readInfo);
+        if( readInfoPrefab != null)
+        {
+             Manager.UI.ShowPopUpUI(readInfoPrefab);
+        }
         Manager.UI.CreatePopUpFromTexture(readInfo);
     }
 

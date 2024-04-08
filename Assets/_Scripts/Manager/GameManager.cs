@@ -28,7 +28,7 @@ public class GameManager : Singleton<GameManager>
 
     public void OnCancel()
     {
-       if(!Manager.UI.IsPopUpLeft()) //원 조건 palyer.isInteract;
+       if(Manager.UI.IsPopUpLastOne()) //원 조건 palyer.isInteract;
        {
             Debug.Log("Manager Cancel");
             player.isInteract = false;
@@ -38,15 +38,17 @@ public class GameManager : Singleton<GameManager>
     }
 
     void OnPause(InputValue inputValue){
-        if ( Manager.UI.IsPopUpLeft() ) return;
+        if ( Manager.UI.IsPopUpLastOne() ) return;
         if ( inputValue.isPressed )
         {
-
+            // 여기서 Pause UI Instantiate
         }
     }
 
     public void OnScreenshot(InputValue inputValue)
     {
+        if ( player == null ) return;
+
         if ( inputValue.isPressed )
         {
             screenshotSystem.isTakeScreenshot=true;
@@ -62,12 +64,13 @@ public class GameManager : Singleton<GameManager>
                 IReadable readable = ( IReadable ) interactObject;
                 readable.Read();
             }
-            //ReadableObject readable = interactObject. 상호작용중인 대상의 Read UI PopUP 하도록 요청
         }
     }
 
     public void OnAlbum( InputValue inputValue )
     {
+        if ( player == null ) return;
+
         if ( inputValue.isPressed )
         {
             screenshotSystem.OpenAlbum();

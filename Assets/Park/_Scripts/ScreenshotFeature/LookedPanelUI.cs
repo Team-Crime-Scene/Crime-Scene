@@ -44,6 +44,4 @@ public class LookedPanel : PopUpUI
         albumUI.UpdateSelectedImage();
         UpdateImage();
     }
-
-
 }

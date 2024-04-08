@@ -112,7 +112,6 @@ public class ScreenshotAlbumUI : PopUpUI
 
     public void ButtonLook()
     {
-        // lookedPanel.SetActive(true);
         Manager.UI.ShowPopUpUI(lookedPanelUI);
     }
 

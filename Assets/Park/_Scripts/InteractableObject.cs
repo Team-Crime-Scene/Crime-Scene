@@ -23,7 +23,8 @@ public class InteractableObject : MonoBehaviour , IInteractable
     public virtual void UnInteract( PlayerController player )
     {
         transform.position = initialPosition;
-        transform.rotation = initialRotation; 
+        transform.rotation = initialRotation;
+        Manager.UI.ClosePopUpUI();
     }
 
 }

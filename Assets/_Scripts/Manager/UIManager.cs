@@ -42,9 +42,6 @@ public class UIManager : Singleton<UIManager>
             PopUpUI topUI = popUpStack.Peek();
             if ( topUI is ScreenshotAlbumUI )
             {
-                  
-
-
 
             }
             else
@@ -100,6 +97,7 @@ public class UIManager : Singleton<UIManager>
         PopUpUI ui = popUpStack.Pop();
         if ( ui is ScreenshotAlbumUI ) //ScreenshotAlbumUI 만 destroy 하지 않고 키고 끄게 예외처리
         {
+            Debug.Log("Close Album UI");
             ScreenshotAlbumUI screenshotAlbumUI = ( ScreenshotAlbumUI ) ui;
             screenshotAlbumUI.Active();
         }
@@ -113,8 +111,9 @@ public class UIManager : Singleton<UIManager>
             PopUpUI topUI = popUpStack.Peek();
             if ( topUI is ScreenshotAlbumUI )
             {
+                Debug.Log("Next UI is Album");
                 ScreenshotAlbumUI screenshotAlbumUI = ( ScreenshotAlbumUI ) topUI;
-                screenshotAlbumUI.Active();
+               // screenshotAlbumUI.Active();
             }
             topUI.gameObject.SetActive(true);
         }
@@ -125,10 +124,10 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
-    public bool IsPopUpLeft()
+    public bool IsPopUpLastOne()
     {
-        Debug.Log(popUpStack.Count > 0);
-        return ( popUpStack.Count > 0 );
+        Debug.Log(popUpStack.Count);
+        return ( popUpStack.Count==1 );
     }
 
     public void ClearPopUpUI()

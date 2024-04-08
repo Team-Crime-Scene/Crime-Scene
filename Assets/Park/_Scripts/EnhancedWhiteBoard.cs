@@ -75,13 +75,12 @@ public class EnhancedWhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUp
     {
         vCam.Priority = 100;
         interacter.transform.position = vCam.transform.position;
-       // interacter.camaraController.mainCamera.enabled = false;
-        Manager.UI.ShowPopUpUI(popUpUI); //카메라 우선순위는 변하는데 보여지는건 똑같음
+        Manager.UI.ShowPopUpUI(popUpUI);
     }
 
     public void UnInteract( PlayerController interacter )
     {
-        //interacter.camaraController.mainCamera.enabled = true;
+        Manager.UI.ClosePopUpUI();
         vCam.Priority = 0;
     }
 
