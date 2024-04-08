@@ -28,12 +28,20 @@ public class GameManager : Singleton<GameManager>
 
     public void OnCancel()
     {
-        if(player.isInteract)
-        {
+       if(!Manager.UI.IsPopUpLeft()) //원 조건 palyer.isInteract;
+       {
             Debug.Log("Manager Cancel");
             player.isInteract = false;
             interactObject?.UnInteract(player);
-           // Manager.UI.ClearPopUpUI();
+       }
+       Manager.UI.ClosePopUpUI();
+    }
+
+    void OnPause(InputValue inputValue){
+        if ( Manager.UI.IsPopUpLeft() ) return;
+        if ( inputValue.isPressed )
+        {
+
         }
     }
 
@@ -49,7 +57,12 @@ public class GameManager : Singleton<GameManager>
     {
         if( inputValue.isPressed )
         {
-            
+            if(interactObject is IReadable )
+            {
+                IReadable readable = ( IReadable ) interactObject;
+                readable.Read();
+            }
+            //ReadableObject readable = interactObject. 상호작용중인 대상의 Read UI PopUP 하도록 요청
         }
     }
 

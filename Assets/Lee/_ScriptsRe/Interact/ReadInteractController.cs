@@ -45,4 +45,14 @@ public class ReadInteractController : MonoBehaviour, IReadable, IZoomable
         // 오브젝트를 가져왔을 때 커서보이게
         Cursor.lockState = CursorLockMode.None;
     }
+
+    public void Interact( PlayerController player )
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void UnInteract( PlayerController player )
+    {
+        throw new System.NotImplementedException();
+    }
 }

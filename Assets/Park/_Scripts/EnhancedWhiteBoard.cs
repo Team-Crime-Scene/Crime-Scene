@@ -12,7 +12,7 @@ public class EnhancedWhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUp
     // 단점 : Save&Load 시 부하가 큼
     [SerializeField] CinemachineVirtualCamera vCam;
     [SerializeField] LineRenderer linePrefab;
-    [SerializeField] GameObject UIPanel;
+    [SerializeField] PopUpUI popUpUI;
     [SerializeField] Color color; 
 
     private List<LineRenderer> lines = new List<LineRenderer>();
@@ -73,14 +73,16 @@ public class EnhancedWhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUp
     ******************************************************/
     public void Interact( PlayerController interacter )
     {
-        vCam.Priority = 20;
-        UIPanel.SetActive(true);
+        vCam.Priority = 100;
+        interacter.transform.position = vCam.transform.position;
+       // interacter.camaraController.mainCamera.enabled = false;
+        Manager.UI.ShowPopUpUI(popUpUI); //카메라 우선순위는 변하는데 보여지는건 똑같음
     }
 
     public void UnInteract( PlayerController interacter )
     {
+        //interacter.camaraController.mainCamera.enabled = true;
         vCam.Priority = 0;
-        UIPanel.SetActive(false);
     }
 
 

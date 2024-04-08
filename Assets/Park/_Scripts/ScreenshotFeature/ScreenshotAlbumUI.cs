@@ -16,7 +16,7 @@ public class ScreenshotAlbumUI : PopUpUI
     public ScreenshotSlotUI curSlot;
 
     [SerializeField] GameObject albumPanel;
-    [SerializeField] GameObject lookedPanel;
+    [SerializeField] PopUpUI lookedPanelUI;
     [SerializeField] Transform albumGrid;
    
     
@@ -30,6 +30,8 @@ public class ScreenshotAlbumUI : PopUpUI
     {
         base.Awake();
         screenshotSlots = new List<ScreenshotSlotUI>();
+        GetUI<Button>("BTN_Look").onClick.AddListener(ButtonLook);
+        //InitAlbumUISlots();
     }
 
 
@@ -86,7 +88,7 @@ public class ScreenshotAlbumUI : PopUpUI
         isActive = !isActive;
         albumPanel.SetActive(isActive);
 
-        if ( !isInit )
+        if ( !isInit ) // 최초 실행시에만 초기화
         {
             isInit = true;
             InitAlbumUISlots();
@@ -110,7 +112,8 @@ public class ScreenshotAlbumUI : PopUpUI
 
     public void ButtonLook()
     {
-        lookedPanel.SetActive(true);
+        // lookedPanel.SetActive(true);
+        Manager.UI.ShowPopUpUI(lookedPanelUI);
     }
 
     public void ButtonMarking()

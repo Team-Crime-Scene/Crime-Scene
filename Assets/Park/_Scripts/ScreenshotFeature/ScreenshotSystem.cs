@@ -125,8 +125,10 @@ public class ScreenshotSystem : MonoBehaviour
 
     public void OpenAlbum()
     {
-         albumUI.Active();
-       // Manager.UI.ShowPopUpUI<ScreenshotAlbumUI>(albumUI);
+        //albumUI.Active();
+        // Manager.UI.ShowPopUpUI(albumUI); 
+        if ( albumUI.IsActive() ) return;
+        Manager.UI.ShowAlbumUI(albumUI);
     }
 
     public bool IsOpend()

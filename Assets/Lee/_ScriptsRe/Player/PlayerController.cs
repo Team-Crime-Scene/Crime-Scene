@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] PlayerMove mover;
-    [SerializeField] CamaraController camaraController;
+    [SerializeField] public CamaraController camaraController;
     [SerializeField] Image aimedImage;
     [SerializeField] public Transform ZoomedPos; 
     [SerializeField] Light flash;

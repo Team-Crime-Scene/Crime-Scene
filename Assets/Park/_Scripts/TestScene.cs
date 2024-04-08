@@ -11,7 +11,7 @@ public class TestScene : BaseScene
     [SerializeField] TMP_InputField PlayerSubAnswers;
     [SerializeField] TextMeshProUGUI PlayerMultiAnswer;
 
-    [SerializeField] float AutoSaveGameTime =3f;
+    [SerializeField] float AutoSaveGameTime =300f;
 
     private void Awake()
     {

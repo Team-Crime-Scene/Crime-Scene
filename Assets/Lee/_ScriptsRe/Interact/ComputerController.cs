@@ -9,6 +9,7 @@ public class ComputerController : MonoBehaviour,IInteractable
     [SerializeField] CinemachineVirtualCamera vCam;
     // 컴퓨터에 들어가는 ui
     [SerializeField] GameObject computerPanel;
+    [SerializeField] PopUpUI popUpUI;
     // 점수
     int score = 0;
     int totalQuestions = 0;
@@ -27,7 +28,7 @@ public class ComputerController : MonoBehaviour,IInteractable
     public void Interact( PlayerController player )
     {
         vCam.Priority = 20;
-        computerPanel.SetActive(true);
+        Manager.UI.ShowPopUpUI(popUpUI);
     }
 
     public void Submit()
@@ -60,7 +61,6 @@ public class ComputerController : MonoBehaviour,IInteractable
     public void UnInteract( PlayerController player )
     {
         vCam.Priority = 0;
-        computerPanel.SetActive(false);
     }
 
 }

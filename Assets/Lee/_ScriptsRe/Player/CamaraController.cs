@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 // 상호작용때는 사용하지 않는다.
 public class CamaraController : MonoBehaviour
 {
-    [SerializeField] CinemachineVirtualCamera mainCamera;
+    [SerializeField] public CinemachineVirtualCamera mainCamera;
     CinemachineTransposer transposer;
 
     enum PlayerPosture
