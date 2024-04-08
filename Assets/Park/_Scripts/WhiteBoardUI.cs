@@ -16,6 +16,6 @@ public class WhiteBoardUI : PopUpUI
         GetUI<Button>("BTN_SetColor(Red)").onClick.AddListener(()=>whiteBoard.SetColorButton(1));
         GetUI<Button>("BTN_SetColor(Blue)").onClick.AddListener(()=>whiteBoard.SetColorButton(2));
         GetUI<Button>("BTN_EraseAll").onClick.AddListener(whiteBoard.EraseAll);
-        GetUI<Button>("BTN_EraseAll").onClick.AddListener(whiteBoard.Undo);
+        GetUI<Button>("BTN_Undo").onClick.AddListener(whiteBoard.Undo);
     }
 }

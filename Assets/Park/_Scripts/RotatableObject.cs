@@ -8,6 +8,11 @@ public class RotatableObject : InteractableObject , IPointerMoveHandler
     [SerializeField] PopUpUI popUpUI;
     float rotateSpeed= 10;
 
+    void Awake()
+    {
+        popUpUI = Resources.Load<PopUpUI>("UI/RotatableUI"); //최적화 생각하면 지워야함
+    }
+
     public override void Interact( PlayerController player )
     {
         base.Interact(player);
