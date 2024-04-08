@@ -290,7 +290,7 @@ namespace Maze
 
                     var myTransform = transform;
                     var mazeHalfSize = new Vector3(mazeSize.x, 0, mazeSize.y) / 2;
-                    var wallPosition = new Vector3(x, 0.5f, y) - mazeHalfSize + myTransform.position;
+                    var wallPosition = new Vector3(x * wallPrefab.transform.localScale.x, 0.5f, y * wallPrefab.transform.localScale.z) - mazeHalfSize + myTransform.position;
 
                     Instantiate(wallPrefab, wallPosition, Quaternion.identity, myTransform);
                 }
