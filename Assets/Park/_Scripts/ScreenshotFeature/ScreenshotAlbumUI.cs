@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ScreenshotAlbumUI : MonoBehaviour
+public class ScreenshotAlbumUI : PopUpUI
 {
     // View
     //사용자의 Album UI 조작을 처리하고 ScreenshotAlbum과 상호작용 하는 스크립트
@@ -16,7 +16,7 @@ public class ScreenshotAlbumUI : MonoBehaviour
     public ScreenshotSlotUI curSlot;
 
     [SerializeField] GameObject albumPanel;
-    [SerializeField] GameObject lookedPanel;
+    [SerializeField] PopUpUI lookedPanelUI;
     [SerializeField] Transform albumGrid;
    
     
@@ -26,9 +26,12 @@ public class ScreenshotAlbumUI : MonoBehaviour
     /***********************************************************************
     *                               Unity Events
     ***********************************************************************/
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         screenshotSlots = new List<ScreenshotSlotUI>();
+        GetUI<Button>("BTN_Look").onClick.AddListener(ButtonLook);
+        //InitAlbumUISlots();
     }
 
 
@@ -38,6 +41,8 @@ public class ScreenshotAlbumUI : MonoBehaviour
     ***********************************************************************/
 
     //그리드 내에 ScreenshotSlotUI를 동적으로 생성
+
+    // ToDo 슬롯 생성/삭제시 ScrollView Content(album Grid)의 Height를 동적으로 증감해주는 것
     private void InitAlbumUISlots()
     {
         Debug.Log("앨범 초기화");
@@ -83,11 +88,16 @@ public class ScreenshotAlbumUI : MonoBehaviour
         isActive = !isActive;
         albumPanel.SetActive(isActive);
 
-        if ( !isInit )
+        if ( !isInit ) // 최초 실행시에만 초기화
         {
             isInit = true;
             InitAlbumUISlots();
         }    
+    }
+
+    public bool IsActive()
+    {
+        return isActive;
     }
 
     /***********************************************************************
@@ -102,7 +112,7 @@ public class ScreenshotAlbumUI : MonoBehaviour
 
     public void ButtonLook()
     {
-        lookedPanel.SetActive(true);
+        Manager.UI.ShowPopUpUI(lookedPanelUI);
     }
 
     public void ButtonMarking()

@@ -11,6 +11,8 @@ public class PlayerMove : MonoBehaviour
     private bool isRun;
     private void Update()
     {
+        if ( moveDir == Vector3.zero )
+            return;
         Move();
     }
 

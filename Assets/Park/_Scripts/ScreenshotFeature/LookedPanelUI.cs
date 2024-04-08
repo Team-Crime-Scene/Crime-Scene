@@ -3,11 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LookedPanel : MonoBehaviour
+public class LookedPanel : PopUpUI
 {
     [SerializeField] Image image;
     [SerializeField] ScreenshotAlbumUI albumUI;
 
+
+    protected override void Awake()
+    {
+        base.Awake(); //UI 바인딩 작업
+        GetUI<Button>("BTN_Prev").onClick.AddListener(OnClickButtonPrev);
+        GetUI<Button>("BTN_Next").onClick.AddListener(OnClickButtonNext);
+        albumUI = FindAnyObjectByType<ScreenshotAlbumUI>();
+        UpdateImage();
+    }
 
     public void OnEnable()
     {
@@ -35,6 +44,4 @@ public class LookedPanel : MonoBehaviour
         albumUI.UpdateSelectedImage();
         UpdateImage();
     }
-
-
 }

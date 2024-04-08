@@ -26,7 +26,7 @@ public class ScreenshotSystem : MonoBehaviour
     [SerializeField, Range(20, 100)] int maxCapacity; //최대 이미지 갯수
     [SerializeField] ScreenshotAlbumUI albumUI; // 원래 MVC는 View에 대한 참조는 하지 않아야함. event를 사용해 View에 처리를 하는 법을 생각해 볼 것.
 
-    bool isTakeScreenshot; 
+    public bool isTakeScreenshot; 
 
     #region Properties
 
@@ -68,17 +68,6 @@ public class ScreenshotSystem : MonoBehaviour
             return;
         TakeScreenShot();
         isTakeScreenshot = false;
-    }
-
-    // debug 용으로 일단 input받는거 넣어뒀음 나중에 다른데서 처리할것
-    private void Update()
-    {
-       if(Input.GetKeyDown(KeyCode.I)){
-            albumUI.Active();
-        }
-       if(Input.GetKeyDown(KeyCode.C) ){
-            isTakeScreenshot=true;
-        }
     }
 
     /***********************************************************************
@@ -132,6 +121,20 @@ public class ScreenshotSystem : MonoBehaviour
     {
         Debug.Log("아무튼 개쩌는 스크린샷 효과,");
         yield return null;
+    }
+
+    public void OpenAlbum()
+    {
+        //albumUI.Active();
+        // Manager.UI.ShowPopUpUI(albumUI); 
+        if ( albumUI.IsActive() ) return;
+        Manager.UI.ShowAlbumUI(albumUI);
+    }
+
+    public bool IsOpend()
+    {
+        //return false;
+       return albumUI.IsActive();
     }
 
     #endregion

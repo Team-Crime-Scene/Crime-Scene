@@ -6,22 +6,24 @@ public class RotInteractContorller : MonoBehaviour, IRotatable, IZoomable
     private Vector3 initialPosition; //초기위치값
     private Quaternion initialRotation; // 초기 회전값
 
+    private Vector2 rotateDir;
+
     private void Awake()
     {
         initialPosition = transform.position;
         initialRotation = transform.rotation;
     }
 
-    public void Rotation()
+    public void Rotate()
     {
         transform.Rotate(initialRotation.x, 0, 0);
         transform.Rotate(0, initialRotation.y, 0);
     }
-    public void RotationTrnas( InputValue Value )
+    public void GetRotationInput( InputValue Value )
     {
         Vector2 input = Value.Get<Vector2>();
-        initialRotation.x = input.x;
-        initialRotation.y = input.y;
+        rotateDir.x = input.x;
+        rotateDir.y = input.y;
     }
 
     public void UnzoomObject( Transform ZoomTrans )
@@ -45,8 +47,6 @@ public class RotInteractContorller : MonoBehaviour, IRotatable, IZoomable
 
         // 오브젝트를 가져왔을 때 커서보이게
         Cursor.lockState = CursorLockMode.None;
-
     }
-
    
 }
