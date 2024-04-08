@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 public class InteractController : MonoBehaviour
 {
-    [SerializeField] Transform playerCamera; // 플레이어 카메라
     [SerializeField] LayerMask interactableLayer; // 상호작용 가능한 레이어
     [SerializeField] Transform zoomPosition; // 줌 위치
+    [SerializeField] float interactRange= 100;
 
     private bool isZoomed = false; // 줌 상태 여부
     public bool IsZoomed { get { return isZoomed; } }
@@ -28,7 +25,7 @@ public class InteractController : MonoBehaviour
     {
         if ( rotatable != null )
         {
-            rotatable.Rotation();
+            rotatable.Rotate();
         }
         else { return; }
     }
@@ -44,12 +41,12 @@ public class InteractController : MonoBehaviour
     // 상호작용 입력 처리 (마우스 좌클릭) 
     public void OnInteract( InputValue value )
     {
-        rayOrigin = playerCamera.position; // 레이 시작점은 플레이어 카메라 위치
-        rayDirection = playerCamera.forward; // 레이 방향은 플레이어 카메라의 정면 방향
+        rayOrigin = transform.position; // 레이 시작점은 플레이어 카메라 위치
+        rayDirection = transform.forward; // 레이 방향은 플레이어 카메라의 정면 방향
 
 
         // 레이캐스트로 상호작용 가능한 대상 확인
-        if ( Physics.Raycast(rayOrigin, rayDirection, out hit, 100, interactableLayer) )
+        if ( Physics.Raycast(rayOrigin, rayDirection, out hit, interactRange, interactableLayer) )
         {
             rotatable = hit.transform.gameObject.GetComponent<IRotatable>();
             zoomable = hit.transform.gameObject.GetComponent<IZoomable>();
@@ -98,30 +95,18 @@ public class InteractController : MonoBehaviour
     public void OnRotationCon( InputValue value )
     {
         if ( rotatable != null )
-            rotatable.RotationTrnas(value);
+            rotatable.GetRotationInput(value);
 
     }
     // 읽기 인터페이스
     // R키를 누르면 읽기 ui가 나오게해줌
     public void OnRead( InputValue value )
     {
-        if ( isreading == false )
-        {
-            if ( readable != null )
-            {
-                readable.Read();
-                isreading = true;
-            }
-        }
-        else
-        {
-            if ( readable != null )
-            {
-                readable.Read();
-                isreading = false;
-            }
-        }
+        if ( readable == null )
+            return;
 
+        isreading = !isreading;
+        readable.Read();
     }
 
 }
