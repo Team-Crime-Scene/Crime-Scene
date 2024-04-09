@@ -4,5 +4,13 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
-  m_configObjects: {}
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Lee/Scenes/TitleScene.unity
+    guid: 1adaa6572bcb7ae4884935c5dfda2a22
+  - enabled: 1
+    path: Assets/Lee/Scenes/Refatoring.unity
+    guid: 59cf9c69142dd7a4686b8ef38568b3e9
+  m_configObjects:
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 6ea0a2c5d6afb574bb5156c1102c5513, type: 2}
+  m_UseUCBPForAssetBundles: 0
