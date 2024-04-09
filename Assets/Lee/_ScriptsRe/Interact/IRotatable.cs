@@ -2,6 +2,6 @@ using UnityEngine.InputSystem;
 
 public interface IRotatable
 {
-    public void Rotation();
-    public void RotationTrnas( InputValue inputValue );
+    public void Rotate();
+    public void GetRotationInput( InputValue inputValue );
 }

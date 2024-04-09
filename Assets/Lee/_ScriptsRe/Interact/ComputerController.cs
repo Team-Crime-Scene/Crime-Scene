@@ -4,13 +4,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ComputerController : MonoBehaviour, IAnswerable, IZoomable
+public class ComputerController : MonoBehaviour,IInteractable
 {
     // 컴퓨터에 줌되는 카메라
-    [SerializeField] CinemachineVirtualCamera computerCamera;
+    [SerializeField] CinemachineVirtualCamera vCam;
     // 컴퓨터에 들어가는 ui
-    [SerializeField] Canvas canvas;
-    Vector2 CreatePoint;
+    [SerializeField] GameObject computerPanel;
+    [SerializeField] PopUpUI popUpUI;
     // 점수
     int score = 0;
 
@@ -27,22 +27,13 @@ public class ComputerController : MonoBehaviour, IAnswerable, IZoomable
     [SerializeField] List<TMP_InputField> PlayerSubAnswers = new List<TMP_InputField>();
     [SerializeField] List<TextMeshProUGUI> PlayerMultiAnswer = new List<TextMeshProUGUI>();
 
-    [SerializeField] List<GameObject> addedList = new List<GameObject>();
-    public void CreateAnswerSheet()
+    public void Interact( PlayerController player )
     {
-        addedList.Add(Instantiate(prefab, CreatePoint, Quaternion.identity, answerParents.transform));
-        PlayerSubAnswers.Add(addedList [0].gameObject.GetComponent<TMP_InputField>());
+        vCam.Priority = 20;
+        Manager.UI.ShowPopUpUI(popUpUI);
     }
 
-    public void ClearAnswerSheet()
-    {
-        if ( addedList != null )
-        {
-            Destroy(addedList [0]);
-            addedList.RemoveAt(0);
-        }
-    }
-    public void SubmitButton()
+    public void Submit()
     {
         // 주관식 답 체크
         for ( int i = 0; i < PlayerSubAnswers.Count; i++ )
@@ -68,17 +59,9 @@ public class ComputerController : MonoBehaviour, IAnswerable, IZoomable
 
     }
 
-    public void UnzoomObject( Transform ZoomTrans )
+    public void UnInteract( PlayerController player )
     {
-        computerCamera.m_Priority = 0;
-        canvas.enabled = false;
+        vCam.Priority = 0;
     }
-
-    public void ZoomObject( Transform ZoomTrans )
-    {
-        computerCamera.m_Priority = 20;
-        canvas.enabled = true;
-    }
-
 
 }

@@ -50,7 +50,6 @@ public class RefatoringScene : BaseScene
     {
         PlayerSubAnswers.text = Manager.Data.GameData.gameSceneData.PlayerSubAnswers;
         PlayerMultiAnswer.text = Manager.Data.GameData.gameSceneData.PlayerMultiAnswer;
-
     }
 
 }

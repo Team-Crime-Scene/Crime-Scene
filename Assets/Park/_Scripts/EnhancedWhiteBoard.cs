@@ -1,16 +1,18 @@
+using Cinemachine;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class EnhancedWhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerExitHandler, IDragHandler
+public class EnhancedWhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerExitHandler, IDragHandler , IInteractable 
 {
     //선을 그릴 때 마다 새로운 LineRender 객체를 생성하는 버전
 
     // 장점 : 선을 개별로 관리하기 용이함. 나중에 사진 객체를 보드에 추가할때 SortingLayer 설정을 따로 해줄 수 있음
     // 단점 : Save&Load 시 부하가 큼
-
+    [SerializeField] CinemachineVirtualCamera vCam;
     [SerializeField] LineRenderer linePrefab;
+    [SerializeField] PopUpUI popUpUI;
     [SerializeField] Color color; 
 
     private List<LineRenderer> lines = new List<LineRenderer>();
@@ -64,6 +66,23 @@ public class EnhancedWhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUp
     }
 
     #endregion
+
+
+    /******************************************************
+     *             Interact  Interfaces
+    ******************************************************/
+    public void Interact( PlayerController interacter )
+    {
+        vCam.Priority = 100;
+        interacter.transform.position = vCam.transform.position;
+        Manager.UI.ShowPopUpUI(popUpUI);
+    }
+
+    public void UnInteract( PlayerController interacter )
+    {
+        Manager.UI.ClosePopUpUI();
+        vCam.Priority = 0;
+    }
 
 
     /******************************************************
@@ -124,6 +143,8 @@ public class EnhancedWhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUp
         Destroy(lines [lines.Count - 1].gameObject); 
         lines.RemoveAt(lines.Count - 1);
     }
+
+   
 }
 
 struct PointData
