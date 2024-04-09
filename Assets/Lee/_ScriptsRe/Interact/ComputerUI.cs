@@ -32,6 +32,7 @@ public class ComputerUI : PopUpUI
     {
         base.Awake();
         //GetUI<TMP_InputField>("Subjecttive 1").text = "UI Binding Test";
+
     }
     public void CreateAnswerSheet()
     {
@@ -92,7 +93,7 @@ public class ComputerUI : PopUpUI
     }
     private void OnDisable()
     {
-        for ( int i = 0; i < PlayerSubAnswers1.Count; i++ )
+/*        for ( int i = 0; i < PlayerSubAnswers1.Count; i++ )
         {
             Manager.Data.GameData.answerData.PlayerSubAnswers1 [i] = PlayerSubAnswers1 [i].text;
         }
@@ -100,6 +101,11 @@ public class ComputerUI : PopUpUI
         {
             Manager.Data.GameData.answerData.PlayerMultiAnswer [i] = PlayerMultiAnswer [i].text;
         }
-    }
+        Manager.Data.SaveData();
+*/    }
 
+    public void ActivateInputField()
+    {
+        Manager.Game.ChangeIsChatTrue();
+    }
 }
