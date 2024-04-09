@@ -17,10 +17,11 @@ public class ScreenshotAlbumUI : PopUpUI
 
     [SerializeField] GameObject albumPanel;
     [SerializeField] PopUpUI lookedPanelUI;
-    [SerializeField] Transform albumGrid;
-   
-    
-    
+    [SerializeField] RectTransform albumGrid;
+
+
+    private float height;
+
     bool isActive = false;
     bool isInit = false;
     /***********************************************************************
@@ -46,7 +47,8 @@ public class ScreenshotAlbumUI : PopUpUI
     private void InitAlbumUISlots()
     {
         Debug.Log("앨범 초기화");
-        for ( int i = 0; i < ScreenshotAlbum.Instance.Screenshots.Count; i++ )
+        int count = ScreenshotAlbum.Instance.Screenshots.Count;
+        for ( int i = 0; i < count; i++ )
         {
             ScreenshotSlotUI slot = Instantiate(ScreenshotSlotUIPrefab);
             RectTransform rect = slot.GetComponent<RectTransform>();
@@ -57,19 +59,28 @@ public class ScreenshotAlbumUI : PopUpUI
             screenshotSlots.Add(slot);
             curSlot = slot;
         }
+        SetGridSize(count);
         selectedScreenshotImage.sprite = Extension.LoadSprite(curSlot.screenshot.Data.path);
     }
 
     public void UpdateAlbumUISlots()
     {
         Debug.Log("앨범 업데이트");
+        int count = ScreenshotAlbum.Instance.Screenshots.Count;
         ScreenshotSlotUI slot = Instantiate(ScreenshotSlotUIPrefab);
         RectTransform rect = slot.GetComponent<RectTransform>();
-        slot.screenshot = ScreenshotAlbum.Instance.Screenshots[ScreenshotAlbum.Instance.Screenshots.Count-1];
+        slot.screenshot = ScreenshotAlbum.Instance.Screenshots[count-1];
         slot.albumUI = this;
         rect.SetParent(albumGrid);
         rect.localScale = Vector3.one;
         screenshotSlots.Add(slot);
+        SetGridSize(count);
+    }
+
+    private void SetGridSize(int count )
+    {
+        height = (count / 3) * 110 + 100;
+        albumGrid.sizeDelta = new Vector2(albumGrid.sizeDelta.x, height);
     }
 
     public void UpdateSelectedImage()
@@ -81,6 +92,7 @@ public class ScreenshotAlbumUI : PopUpUI
     {
        screenshotSlots.Remove(curSlot);
        curSlot.Delete();
+       SetGridSize(screenshotSlots.Count);
     }
 
     public void Active()

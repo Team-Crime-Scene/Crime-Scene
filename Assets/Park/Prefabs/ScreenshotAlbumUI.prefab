@@ -1684,7 +1684,7 @@ MonoBehaviour:
   screenshotSlots: []
   curSlot: {fileID: 0}
   albumPanel: {fileID: 6887017814931602190}
-  lookedPanel: {fileID: 2186285098958518750}
+  lookedPanelUI: {fileID: 0}
   albumGrid: {fileID: 5419292031462932521}
 --- !u!1 &5109411139155044795
 GameObject:
