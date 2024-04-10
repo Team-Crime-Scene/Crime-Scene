@@ -108,4 +108,8 @@ public class ComputerUI : PopUpUI
     {
         Manager.Game.ChangeIsChatTrue();
     }
+    public void DisableInputField()
+    {
+        Manager.Game.ChangeIsChatFalse();
+    }
 }
