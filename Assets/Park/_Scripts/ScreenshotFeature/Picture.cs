@@ -9,8 +9,12 @@ using UnityEngine.UI;
 public class Picture : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler  ,IPointerEnterHandler , IPointerExitHandler
 {
     [SerializeField] Image screenshot;
-    [SerializeField] Image highLight;
+    [SerializeField] Image outLine;
     [SerializeField] TextMeshProUGUI text;
+
+    [SerializeField] Color selectedColor;
+    [SerializeField] Color deleteColor;
+    private Color defaultColor;
 
     float dragSpeed = 0.65f;
     private Transform prevTransform; 
@@ -30,6 +34,10 @@ public class Picture : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointe
         Vector3 delta = eventData.delta;
         delta.z = 0;
         transform.position += delta*Time.deltaTime*dragSpeed;
+
+        //raycast 해서 보드 안인지 밖인지에 따라서 color 변경
+        outLine.color = selectedColor;
+        // outLine.color = deleteColor;
     }
 
     public void OnPointerDown( PointerEventData eventData )
@@ -46,11 +54,11 @@ public class Picture : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointe
 
     public void OnPointerEnter( PointerEventData eventData )
     {
-        highLight.enabled = true;
+        outLine.color = selectedColor;
     }
 
     public void OnPointerExit( PointerEventData eventData )
     {
-        highLight.enabled = false;
+        outLine.color = defaultColor;
     }
 }
