@@ -7,12 +7,6 @@ public class GameSceneData
 {
     public Vector3 playerPos;
     public Quaternion playerRot;
-    public string PlayerSubAnswers;
-    public string PlayerMultiAnswer;
 
 
-    public GameSceneData()
-    {
-        // 초기화해줄 곳
-    }
 }
