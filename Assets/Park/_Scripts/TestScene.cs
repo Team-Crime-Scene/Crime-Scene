@@ -23,12 +23,10 @@ public class TestScene : BaseScene
     {
         Manager.Data.LoadData();
         yield return null;
-        player.transform.position = Manager.Data.GameData.gameSceneData.playerPos;
+/*        player.transform.position = Manager.Data.GameData.gameSceneData.playerPos;
         player.transform.rotation = Manager.Data.GameData.gameSceneData.playerRot;
-        PlayerSubAnswers.text = Manager.Data.GameData.gameSceneData.PlayerSubAnswers;
-        PlayerMultiAnswer.text = Manager.Data.GameData.gameSceneData.PlayerMultiAnswer;
         Debug.Log(Manager.Data.GameData.gameSceneData.playerPos);
-        StartCoroutine(AutoSaveRutine());
+*/        StartCoroutine(AutoSaveRutine());
     }
 
     IEnumerator AutoSaveRutine()
@@ -37,19 +35,12 @@ public class TestScene : BaseScene
         {
             //데이터 자동저장
             yield return new WaitForSeconds(AutoSaveGameTime);
-            Debug.Log("자동 저장");
+/*            Debug.Log("자동 저장");
             Manager.Data.GameData.gameSceneData.playerPos = player.transform.position;
             Manager.Data.GameData.gameSceneData.playerRot = player.transform.rotation;
-            Manager.Data.GameData.gameSceneData.PlayerSubAnswers = PlayerSubAnswers.text;
-            Manager.Data.GameData.gameSceneData.PlayerMultiAnswer = PlayerMultiAnswer.text;
-            Manager.Data.SaveData();
+*/            Manager.Data.SaveData();
         }
     }
 
-    public void Submit()
-    {
-        PlayerSubAnswers.text = Manager.Data.GameData.gameSceneData.PlayerSubAnswers;
-        PlayerMultiAnswer.text = Manager.Data.GameData.gameSceneData.PlayerMultiAnswer;
-    }
 
 }

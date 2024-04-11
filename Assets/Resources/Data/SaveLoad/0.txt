@@ -1,23 +1,36 @@
 {
-    "gameSceneData": {
+    "tutorialData": {
         "playerPos": {
-            "x": -3.479417085647583,
-            "y": 1.0800000429153443,
-            "z": -8.974658966064454
+            "x": 2.8290600776672365,
+            "y": 2.0822863578796388,
+            "z": -1.8197318315505982
         },
         "playerRot": {
             "x": 0.0,
-            "y": -0.09847380220890045,
+            "y": 0.010406025685369969,
             "z": 0.0,
-            "w": 0.9951397180557251
+            "w": 0.999945878982544
         },
-        "PlayerSubAnswers": "sadas",
-        "PlayerMultiAnswer": "모름"
+        "PlayerSubAnswers1": [
+            "안됨"
+        ],
+        "PlayerMultiAnswer": [
+            "1",
+            "1"
+        ],
+        "tutorialScore": 0
     },
-    "PlayerSubAnswers": {
-        "instanceID": 0
-    },
-    "PlayerMultiAnswer": {
-        "instanceID": 0
+    "chapter1Data": {
+        "playerPos": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "playerRot": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 0.0
+        }
     }
 }

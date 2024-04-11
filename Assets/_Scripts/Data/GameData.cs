@@ -1,15 +1,15 @@
 using System;
-using UnityEngine;
-using UnityEngine.Playables;
 
 [Serializable]
 
 public class GameData
 {
-    public GameSceneData gameSceneData;
+    public Tutorial tutorialData;
+    public Chapter1 chapter1Data;
 
-   public GameData()
+    public GameData()
     {
-        gameSceneData = new GameSceneData();
+        chapter1Data = new Chapter1();
+        tutorialData = new Tutorial();
     }
 }

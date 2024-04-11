@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
+// 챕터 만들때마다 만들자
 public class GameManager : Singleton<GameManager>
 {
     //상호작용 여부에 따라 플레이어 조작 제한
@@ -10,34 +11,56 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] ScreenshotSystem screenshotSystem;
     [SerializeField] IInteractable interactObject;
 
+    bool isChating;
+
+    public void ChangeIsChatTrue()
+    {
+        isChating = true;
+        Debug.Log($"비활성화 : {isChating}");
+    }
+    public void ChangeIsChatFalse()
+    {
+        isChating = false;
+        Debug.Log($"활성화 : {isChating}");
+    }
+
     void Start()
+    {
+        // 타이틀 씬에서 못찾아서 따로 함수 만들어서 플레이어 있을때 붙여줌
+        /*GameObject gameObject = GameObject.FindGameObjectWithTag("Player");
+        player = gameObject.GetComponent<PlayerController>();
+        screenshotSystem = Camera.main.GetComponent<ScreenshotSystem>();*/
+    }
+    public void PlayerFind()
     {
         GameObject gameObject = GameObject.FindGameObjectWithTag("Player");
         player = gameObject.GetComponent<PlayerController>();
         screenshotSystem = Camera.main.GetComponent<ScreenshotSystem>();
     }
 
-    public void Interaction(IInteractable interactable)
+    public void Interaction( IInteractable interactable )
     {
-        Debug.Log("Manager Interact");
         player.isInteract = true;
-     
-        interactObject= interactable;
+
+        interactObject = interactable;
         interactObject?.Interact(player);
     }
 
     public void OnCancel()
     {
-       if(Manager.UI.IsPopUpLastOne()) //원 조건 palyer.isInteract;
-       {
+        if ( isChating == true) return;
+        Debug.Log($"실행시 : {isChating}");
+        if ( Manager.UI.IsPopUpLastOne() ) //원 조건 palyer.isInteract;
+        {
             Debug.Log("Manager Cancel");
             player.isInteract = false;
             interactObject?.UnInteract(player);
-       }
-       Manager.UI.ClosePopUpUI();
+        }
+        Manager.UI.ClosePopUpUI();
     }
 
-    void OnPause(InputValue inputValue){
+    void OnPause( InputValue inputValue )
+    {
         if ( Manager.UI.IsPopUpLastOne() ) return;
         if ( inputValue.isPressed )
         {
@@ -45,23 +68,24 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    public void OnScreenshot(InputValue inputValue)
+    public void OnScreenshot( InputValue inputValue )
     {
+        if ( isChating == true ) return;
         if ( player == null ) return;
 
         if ( inputValue.isPressed )
         {
-            screenshotSystem.isTakeScreenshot=true;
+            screenshotSystem.isTakeScreenshot = true;
         }
     }
 
     public void OnRead( InputValue inputValue )
     {
-        if( inputValue.isPressed )
+        if ( inputValue.isPressed )
         {
-            if(interactObject is IReadable )
+            if ( interactObject is IReadable )
             {
-                IReadable readable = ( IReadable ) interactObject;
+                IReadable readable = ( IReadable )interactObject;
                 readable.Read();
             }
         }
