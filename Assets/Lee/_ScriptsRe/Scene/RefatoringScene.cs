@@ -23,8 +23,6 @@ public class RefatoringScene : BaseScene
         // 여기 로드된 데잍터들을 넣어줘야됨
         player.position = Manager.Data.GameData.gameSceneData.playerPos;
         player.rotation = Manager.Data.GameData.gameSceneData.playerRot;
-        PlayerSubAnswers.text = Manager.Data.GameData.gameSceneData.PlayerSubAnswers;
-        PlayerMultiAnswer.text = Manager.Data.GameData.gameSceneData.PlayerMultiAnswer;
         Debug.Log(Manager.Data.GameData.gameSceneData.playerPos);
 
     }
@@ -39,17 +37,9 @@ public class RefatoringScene : BaseScene
             Debug.Log(player.position);
             Manager.Data.GameData.gameSceneData.playerPos = player.position;
             Manager.Data.GameData.gameSceneData.playerRot = player.rotation;
-            Manager.Data.GameData.gameSceneData.PlayerSubAnswers = PlayerSubAnswers.text;
-            Manager.Data.GameData.gameSceneData.PlayerMultiAnswer = PlayerMultiAnswer.text;
-
             Manager.Data.SaveData();
         }
     }
 
-    public void Submit()
-    {
-        PlayerSubAnswers.text = Manager.Data.GameData.gameSceneData.PlayerSubAnswers;
-        PlayerMultiAnswer.text = Manager.Data.GameData.gameSceneData.PlayerMultiAnswer;
-    }
 
 }
