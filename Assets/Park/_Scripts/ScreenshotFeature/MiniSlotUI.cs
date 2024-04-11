@@ -7,10 +7,12 @@ using UnityEngine.UI;
 public class MiniSlotUI : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] Image image;
-    [SerializeField] public Screenshot screenshot;
+    Screenshot screenshot;
+    public Screenshot Screenshot {  get { return screenshot; } set { screenshot = value; } }
 
     [SerializeField] Picture prefab;
 
+    Vector3 offset = new Vector3(0,0,-0.1f);
     private void Start()
     {
         image.sprite = Extension.LoadSprite(screenshot.Data.path);
@@ -18,8 +20,20 @@ public class MiniSlotUI : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick( PointerEventData eventData )
     {
-        //클릭시 화이트 보드에 붙일 수 있는 prefab 생성
-        Picture picture = Instantiate(prefab, eventData.position, transform.rotation); //생성 좌표 다시 계산해줘야함
-        picture.SetSprite(image);
+        Ray ray = Camera.main.ScreenPointToRay(eventData.position);
+        RaycastHit hit;
+
+        // 월드 공간에 Raycast
+        if ( Physics.Raycast(ray, out hit) )
+        {
+            Picture picture = Instantiate(prefab, hit.point+offset, Quaternion.identity);
+            picture.SetSprite(image);
+        }
+    }
+
+    public void Delete()
+    {
+        Debug.Log($"이거 지웠음 => {screenshot.Data.path}");
+        Destroy(gameObject);
     }
 }

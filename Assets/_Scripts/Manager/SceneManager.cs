@@ -15,7 +15,7 @@ public class SceneManager : Singleton<SceneManager>
     {
         if (curScene == null)
         {
-            curScene = FindObjectOfType<BaseScene>();
+            curScene = FindAnyObjectByType<BaseScene>();
         }
         return curScene;
     }
@@ -24,7 +24,7 @@ public class SceneManager : Singleton<SceneManager>
     {
         if (curScene == null)
         {
-            curScene = FindObjectOfType<BaseScene>();
+            curScene = FindAnyObjectByType<BaseScene>();
         }
         return curScene as T;
     }

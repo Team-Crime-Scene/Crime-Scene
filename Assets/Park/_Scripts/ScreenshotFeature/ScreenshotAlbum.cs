@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -35,6 +36,8 @@ public class ScreenshotAlbum : MonoBehaviour
         Screenshots.Add( screenshot );
     }
 
+    public event Action<Screenshot> OnScreenshotDeleted;
+
     public void Delete( Screenshot screenshot )
     {
         string path = screenshot.Data.path;
@@ -43,6 +46,7 @@ public class ScreenshotAlbum : MonoBehaviour
         {
             try
             {
+                OnScreenshotDeleted?.Invoke(screenshot);
                 // 파일 삭제
                 File.Delete(path);
                 Debug.Log("File deleted: " + path);

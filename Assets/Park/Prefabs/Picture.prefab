@@ -192,7 +192,7 @@ GameObject:
   - component: {fileID: 3923415586801154031}
   - component: {fileID: 8196500171922840193}
   m_Layer: 8
-  m_Name: IMG_HighLight
+  m_Name: IMG_OutLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -232,13 +232,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2971057883125530135}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.012712002, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -377,8 +377,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screenshot: {fileID: 2868418428782026026}
-  highLight: {fileID: 8196500171922840193}
+  outLine: {fileID: 8196500171922840193}
   text: {fileID: 5234364089892923309}
+  selectedColor: {r: 0, g: 0, b: 1, a: 1}
+  deleteColor: {r: 1, g: 0, b: 0, a: 1}
+  dragSpeed: 0.65
 --- !u!1 &4944349330200062258
 GameObject:
   m_ObjectHideFlags: 0

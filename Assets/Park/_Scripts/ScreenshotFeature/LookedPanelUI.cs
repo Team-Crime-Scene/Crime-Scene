@@ -24,7 +24,7 @@ public class LookedPanel : PopUpUI
     }
     private void UpdateImage()
     {
-        image.sprite = Extension.LoadSprite(albumUI.curSlot.screenshot.Data.path);
+        image.sprite = Extension.LoadSprite(albumUI.curSlot.Screenshot.Data.path);
     }
 
     public void OnClickButtonNext()
