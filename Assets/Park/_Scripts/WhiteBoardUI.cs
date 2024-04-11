@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class WhiteBoardUI : PopUpUI
 {
     private EnhancedWhiteBoard whiteBoard;
+    [SerializeField] GameObject colorPallet;
+    [SerializeField] MiniAlbumUI miniAlbumUI;
 
     protected override void Awake()
     {
@@ -17,5 +19,13 @@ public class WhiteBoardUI : PopUpUI
         GetUI<Button>("BTN_SetColor(Blue)").onClick.AddListener(()=>whiteBoard.SetColorButton(2));
         GetUI<Button>("BTN_EraseAll").onClick.AddListener(whiteBoard.EraseAll);
         GetUI<Button>("BTN_Undo").onClick.AddListener(whiteBoard.Undo);
+        GetUI<Button>("BTN_Edit").onClick.AddListener(whiteBoard.Edit);
+    }
+    
+
+    public void Active()
+    {
+        miniAlbumUI.Active();
+        colorPallet.SetActive(!colorPallet.activeSelf);
     }
 }

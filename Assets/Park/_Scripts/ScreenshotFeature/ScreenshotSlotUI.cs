@@ -13,7 +13,8 @@ public class ScreenshotSlotUI : MonoBehaviour
     [SerializeField] Image image;
     [SerializeField] Image markedImage;
 
-    [SerializeField] public Screenshot screenshot;
+    [SerializeField] Screenshot screenshot;
+    public Screenshot Screenshot {  get { return screenshot; } set { screenshot = value; } }
 
     public ScreenshotAlbumUI albumUI;
     
@@ -22,7 +23,6 @@ public class ScreenshotSlotUI : MonoBehaviour
         image.sprite = Extension.LoadSprite(screenshot.Data.path);
         markedImage.enabled = screenshot.Data.isBookmarked;
     }
-
 
     public void OnClick()
     {

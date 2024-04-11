@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-
 [Serializable]
 public class Tutorial
 {
@@ -19,8 +18,8 @@ public class Tutorial
     public Tutorial()
     {
     }
-
 }
+
 [Serializable]
 public class Chapter1
 {

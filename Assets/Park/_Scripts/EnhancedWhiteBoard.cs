@@ -1,5 +1,6 @@
 using Cinemachine;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -12,13 +13,33 @@ public class EnhancedWhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUp
     // 단점 : Save&Load 시 부하가 큼
     [SerializeField] CinemachineVirtualCamera vCam;
     [SerializeField] LineRenderer linePrefab;
-    [SerializeField] PopUpUI popUpUI;
-    [SerializeField] Color color; 
+    [SerializeField] WhiteBoardUI whiteBoardUI;
+    [SerializeField] Color color = Color.black;
+    [SerializeField] LayerMask drawMask;
+    [SerializeField] LayerMask pictureMask;
+
+    LayerMask defaultMask;
+    PhysicsRaycaster raycaster;
+    [SerializeField] GameObject overUICam;
 
     private List<LineRenderer> lines = new List<LineRenderer>();
     private LineRenderer curLine;
 
     private bool isDrawing;
+    private bool isEdit;
+    private Vector3 lineOffset = new Vector3(0, 0, -0.1f);
+    private Vector3 playerPrevPos;
+
+    void Awake()
+    {
+        raycaster= Camera.main.GetComponent<PhysicsRaycaster>();
+        defaultMask = raycaster.eventMask;
+    }
+
+    void OnDisable()
+    {
+        raycaster.eventMask = defaultMask;
+    }
 
     /******************************************************
      *             Mouse Pointer  Interfaces
@@ -27,10 +48,13 @@ public class EnhancedWhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUp
 
     public void OnPointerDown( PointerEventData eventData ) 
     {
+        if(isEdit) return;
+
         isDrawing = true;
 
         Vector3 downPos = eventData.GetLocalPosition(transform);
-
+        downPos = new Vector3(downPos.x, downPos.y, 0.2f);
+        //curLine = Instantiate(linePrefab, transform.position+lineOffset, Quaternion.identity, transform);
         curLine = Instantiate(linePrefab, transform);
         curLine.startColor = color;
         curLine.endColor = color;
@@ -42,13 +66,16 @@ public class EnhancedWhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUp
     }
     public void OnDrag( PointerEventData eventData )
     {
+        if (isEdit ) return;
+
+
         if ( isDrawing == false )
             return;
 
         Vector3 [] positions = new Vector3 [curLine.positionCount + 1];
         curLine.GetPositions(positions);
         Vector3 downPos = eventData.GetLocalPosition(transform);
-
+        downPos = new Vector3(downPos.x, downPos.y, 0.2f);
         positions [curLine.positionCount] = downPos;
 
         curLine.positionCount++;
@@ -74,13 +101,17 @@ public class EnhancedWhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUp
     public void Interact( PlayerController interacter )
     {
         vCam.Priority = 100;
+        playerPrevPos = interacter.transform.position;
         interacter.transform.position = vCam.transform.position;
-        Manager.UI.ShowPopUpUI(popUpUI);
+        //Manager.UI.ShowPopUpUI(popUpUI); // 얘도 enable on off 형식으로 바꿔야함 // OverUICamera On
+        Manager.UI.ShowWhiteBoardUI(whiteBoardUI);
     }
 
     public void UnInteract( PlayerController interacter )
     {
         Manager.UI.ClosePopUpUI();
+        interacter.transform.position = playerPrevPos;
+        overUICam.SetActive(false);
         vCam.Priority = 0;
     }
 
@@ -88,12 +119,6 @@ public class EnhancedWhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUp
     /******************************************************
      *                         ETC
      ******************************************************/
-
-    private Vector3 GetLocalPosition( PointerEventData eventData ) //Extension에 확장메서드로 작성해둠. 나중에 지울 것
-    {
-        Vector3 worldPosition = eventData.pointerCurrentRaycast.worldPosition;
-        return transform.InverseTransformPoint(worldPosition);
-    }
 
     public void SetColor( Color color )
     {
@@ -106,6 +131,9 @@ public class EnhancedWhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUp
 
     public void SetColorButton( int color )
     {
+        isEdit = false;
+        overUICam.SetActive(isEdit);
+        raycaster.eventMask = drawMask;
         //매개변수가 Enum이면 OnClick에 등록 불가...
         Color newColor = new Color();
         // 0 = black, 1 = red, 2 = blue
@@ -144,7 +172,12 @@ public class EnhancedWhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUp
         lines.RemoveAt(lines.Count - 1);
     }
 
-   
+   public void Edit()
+    {
+        isEdit = true;
+        overUICam.SetActive(isEdit);
+        raycaster.eventMask = pictureMask;
+    }
 }
 
 struct PointData

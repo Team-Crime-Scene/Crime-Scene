@@ -40,7 +40,7 @@ public class UIManager : Singleton<UIManager>
         if ( popUpStack.Count > 0 )
         {
             PopUpUI topUI = popUpStack.Peek();
-            if ( topUI is ScreenshotAlbumUI )
+            if ( topUI is ScreenshotAlbumUI || topUI is WhiteBoardUI)
             {
 
             }
@@ -69,16 +69,23 @@ public class UIManager : Singleton<UIManager>
             PopUpUI topUI = popUpStack.Peek();
             topUI.gameObject.SetActive(false);
         }
-        else
-        {
-            //popUpBlocker.gameObject.SetActive(true);
-            // prevTimeScale = Time.timeScale;
-            //Time.timeScale = 0f;
-        }
 
         screenshotAlbumUI.Active();
         popUpStack.Push(screenshotAlbumUI);
         return screenshotAlbumUI;
+    }
+
+    public WhiteBoardUI ShowWhiteBoardUI( WhiteBoardUI whiteBoardUI )
+    {
+        if ( popUpStack.Count > 0 )
+        {
+            PopUpUI topUI = popUpStack.Peek();
+            topUI.gameObject.SetActive(false);
+        }
+
+        whiteBoardUI.Active();
+        popUpStack.Push(whiteBoardUI);
+        return whiteBoardUI;
     }
 
     public ReadableObjectUI CreatePopUpFromTexture(Texture2D texture2D )
@@ -97,9 +104,12 @@ public class UIManager : Singleton<UIManager>
         PopUpUI ui = popUpStack.Pop();
         if ( ui is ScreenshotAlbumUI ) //ScreenshotAlbumUI 만 destroy 하지 않고 키고 끄게 예외처리
         {
-            Debug.Log("Close Album UI");
             ScreenshotAlbumUI screenshotAlbumUI = ( ScreenshotAlbumUI ) ui;
             screenshotAlbumUI.Active();
+        }else if(ui is WhiteBoardUI )
+        {
+            WhiteBoardUI whiteBoardUI = ( WhiteBoardUI ) ui;
+            whiteBoardUI.Active();
         }
         else
         {
@@ -109,24 +119,12 @@ public class UIManager : Singleton<UIManager>
         if ( popUpStack.Count > 0 )
         {
             PopUpUI topUI = popUpStack.Peek();
-            if ( topUI is ScreenshotAlbumUI )
-            {
-                Debug.Log("Next UI is Album");
-                ScreenshotAlbumUI screenshotAlbumUI = ( ScreenshotAlbumUI ) topUI;
-               // screenshotAlbumUI.Active();
-            }
             topUI.gameObject.SetActive(true);
-        }
-        else
-        {
-            //popUpBlocker.gameObject.SetActive(false);
-            //Time.timeScale = prevTimeScale;
         }
     }
 
     public bool IsPopUpLastOne()
     {
-        Debug.Log(popUpStack.Count);
         return ( popUpStack.Count==1 );
     }
 

@@ -17,10 +17,11 @@ public class ScreenshotAlbumUI : PopUpUI
 
     [SerializeField] GameObject albumPanel;
     [SerializeField] PopUpUI lookedPanelUI;
-    [SerializeField] Transform albumGrid;
-   
-    
-    
+    [SerializeField] RectTransform albumGrid;
+
+
+    private float height;
+
     bool isActive = false;
     bool isInit = false;
     /***********************************************************************
@@ -40,47 +41,58 @@ public class ScreenshotAlbumUI : PopUpUI
     *                              Methods
     ***********************************************************************/
 
-    //그리드 내에 ScreenshotSlotUI를 동적으로 생성
-
-    // ToDo 슬롯 생성/삭제시 ScrollView Content(album Grid)의 Height를 동적으로 증감해주는 것
-    private void InitAlbumUISlots()
+    public void InitAlbumUISlots()
     {
         Debug.Log("앨범 초기화");
-        for ( int i = 0; i < ScreenshotAlbum.Instance.Screenshots.Count; i++ )
+        int count = ScreenshotAlbum.Instance.Screenshots.Count;
+        for ( int i = 0; i < count; i++ )
         {
             ScreenshotSlotUI slot = Instantiate(ScreenshotSlotUIPrefab);
             RectTransform rect = slot.GetComponent<RectTransform>();
-            slot.screenshot = ScreenshotAlbum.Instance.Screenshots[i];
+            slot.Screenshot = ScreenshotAlbum.Instance.Screenshots[i];
             slot.albumUI = this;    
             rect.SetParent(albumGrid);
             rect.localScale = Vector3.one;
             screenshotSlots.Add(slot);
             curSlot = slot;
         }
-        selectedScreenshotImage.sprite = Extension.LoadSprite(curSlot.screenshot.Data.path);
+        SetGridSize(count);
+        selectedScreenshotImage.sprite = Extension.LoadSprite(curSlot.Screenshot.Data.path);
+        isInit = true;
     }
 
     public void UpdateAlbumUISlots()
     {
         Debug.Log("앨범 업데이트");
+        int count = ScreenshotAlbum.Instance.Screenshots.Count;
         ScreenshotSlotUI slot = Instantiate(ScreenshotSlotUIPrefab);
         RectTransform rect = slot.GetComponent<RectTransform>();
-        slot.screenshot = ScreenshotAlbum.Instance.Screenshots[ScreenshotAlbum.Instance.Screenshots.Count-1];
+        slot.Screenshot = ScreenshotAlbum.Instance.Screenshots [count - 1];
         slot.albumUI = this;
         rect.SetParent(albumGrid);
         rect.localScale = Vector3.one;
         screenshotSlots.Add(slot);
+        SetGridSize(count);
+    }
+
+    private void SetGridSize(int count )
+    {
+        height = (count / 3) * 110 + 100;
+        albumGrid.sizeDelta = new Vector2(albumGrid.sizeDelta.x, height);
     }
 
     public void UpdateSelectedImage()
     {
-        selectedScreenshotImage.sprite = Extension.LoadSprite(curSlot.screenshot.Data.path);
+        selectedScreenshotImage.sprite = Extension.LoadSprite(curSlot.Screenshot.Data.path);
     }
 
     private void DeleteFromAlbum()
     {
        screenshotSlots.Remove(curSlot);
        curSlot.Delete();
+       SetGridSize(screenshotSlots.Count);
+       curSlot = screenshotSlots [screenshotSlots.Count - 1];
+       UpdateSelectedImage();
     }
 
     public void Active()
@@ -90,7 +102,6 @@ public class ScreenshotAlbumUI : PopUpUI
 
         if ( !isInit ) // 최초 실행시에만 초기화
         {
-            isInit = true;
             InitAlbumUISlots();
         }    
     }
@@ -98,6 +109,11 @@ public class ScreenshotAlbumUI : PopUpUI
     public bool IsActive()
     {
         return isActive;
+    }
+
+    public bool IsInit()
+    {
+        return isInit;
     }
 
     /***********************************************************************
