@@ -19,7 +19,6 @@ public class GameManager : Singleton<GameManager>
 
     public void Interaction(IInteractable interactable)
     {
-        Debug.Log("Manager Interact");
         player.isInteract = true;
      
         interactObject= interactable;
