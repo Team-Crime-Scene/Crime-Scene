@@ -16,7 +16,7 @@ public class KeypadUI : PopUpUI
         btnClicked = 0; // 버튼이 클릭된 횟수 초기화
         numOfGuesses = answerNumber.Length; // 비밀번호 길이
     }
-    void Update()
+    public void CheckButton()
     {
         if ( btnClicked == numOfGuesses ) // 버튼이 클릭된 횟수가 예상 비밀번호의 길이와 같은 경우
         {
@@ -58,6 +58,7 @@ public class KeypadUI : PopUpUI
                 displayText.text = input.ToString(); // 텍스트 영역에 입력된 값 표시
                 break;
         }
+        CheckButton();
     }
 
 }
