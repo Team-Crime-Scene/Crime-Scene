@@ -15,10 +15,15 @@ public class Tutorial
     // 튜토리얼 스코어
     public int tutorialScore;
 
+    // 피쳐 저장 데이터
+    public List<GameObject> Picture;
+
+
     public Tutorial()
     {
         PlayerSubAnswers1 = new List<string>();
         PlayerMultiAnswer = new List<int>();
+        Picture = new List<GameObject>();
     }
 }
 

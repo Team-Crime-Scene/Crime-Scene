@@ -1,11 +1,13 @@
+using NUnit.Framework;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TutorlalScene : BaseScene
 {
     [SerializeField] GameObject player;
     float AutoSaveGameTime = 5f;
-
+    [SerializeField] GameObject WhiteBoard; 
     public override IEnumerator LoadingRoutine()
     {
         Manager.Game.PlayerFind();
