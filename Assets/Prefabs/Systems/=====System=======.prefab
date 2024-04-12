@@ -133,6 +133,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed93a6ef089d81f408168083397d5684, type: 3}
+--- !u!1 &329473112328244312 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 532077669062678045, guid: ed93a6ef089d81f408168083397d5684, type: 3}
+  m_PrefabInstance: {fileID: 283964128869489221}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &2508019560860964267 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2395511885809143790, guid: ed93a6ef089d81f408168083397d5684, type: 3}
@@ -143,12 +148,17 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2660723903889650153, guid: ed93a6ef089d81f408168083397d5684, type: 3}
   m_PrefabInstance: {fileID: 283964128869489221}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 4527294709776266149}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &4527294709776266149 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4405920473297201632, guid: ed93a6ef089d81f408168083397d5684, type: 3}
+  m_PrefabInstance: {fileID: 283964128869489221}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5223829165135203296
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -205,6 +215,14 @@ PrefabInstance:
       propertyPath: aimedImage
       value: 
       objectReference: {fileID: 2818159995944938412}
+    - target: {fileID: 6612096553264386062, guid: 3ca3c158750bd264b87132cc75f37efb, type: 3}
+      propertyPath: image_Aim_Interactable
+      value: 
+      objectReference: {fileID: 329473112328244312}
+    - target: {fileID: 6612096553264386062, guid: 3ca3c158750bd264b87132cc75f37efb, type: 3}
+      propertyPath: image_Aim_UnInteractable
+      value: 
+      objectReference: {fileID: 4527294709776266149}
     - target: {fileID: 7564583065393509186, guid: 3ca3c158750bd264b87132cc75f37efb, type: 3}
       propertyPath: m_Priority
       value: 20
