@@ -4,12 +4,12 @@ using System;
 
 public class GameData
 {
-    public Tutorial tutorialData;
-    public Chapter1 chapter1Data;
+    public TutorialData tutorialData;
+    public Chapter1Data chapter1Data;
 
     public GameData()
     {
-        chapter1Data = new Chapter1();
-        tutorialData = new Tutorial();
+        chapter1Data = new Chapter1Data();
+        tutorialData = new TutorialData();
     }
 }

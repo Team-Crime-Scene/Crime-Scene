@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 
 [Serializable]
-public class Tutorial
+public class TutorialData
 {
     public Vector3 playerPos;
     public Quaternion playerRot;
@@ -21,7 +21,7 @@ public class Tutorial
     public List<GameObject> lines;
 
 
-    public Tutorial()
+    public TutorialData()
     {
         PlayerSubAnswers1 = new List<string>();
         PlayerMultiAnswer = new List<int>();
@@ -31,7 +31,7 @@ public class Tutorial
 }
 
 [Serializable]
-public class Chapter1
+public class Chapter1Data
 {
     public Vector3 playerPos;
     public Quaternion playerRot;

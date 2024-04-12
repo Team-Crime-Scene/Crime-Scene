@@ -20,7 +20,8 @@
             0
         ],
         "tutorialScore": 0,
-        "Picture": []
+        "Picture": [],
+        "lines": []
     },
     "chapter1Data": {
         "playerPos": {

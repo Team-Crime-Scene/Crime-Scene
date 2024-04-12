@@ -49,7 +49,6 @@ public class GameManager : Singleton<GameManager>
     public void OnCancel()
     {
         if ( isChating == true) return;
-        Debug.Log($"실행시 : {isChating}");
         if ( Manager.UI.IsPopUpLastOne() ) //원 조건 palyer.isInteract;
         {
             Debug.Log("Manager Cancel");
