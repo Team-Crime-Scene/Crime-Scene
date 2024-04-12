@@ -27,9 +27,9 @@ public class GameManager : Singleton<GameManager>
     void Start()
     {
         // 타이틀 씬에서 못찾아서 따로 함수 만들어서 플레이어 있을때 붙여줌(게임 씬에서 실험 할때 잠시 씀)
-        GameObject gameObject = GameObject.FindGameObjectWithTag("Player");
+        /*GameObject gameObject = GameObject.FindGameObjectWithTag("Player");
         player = gameObject.GetComponent<PlayerController>();
-        screenshotSystem = Camera.main.GetComponent<ScreenshotSystem>();
+        screenshotSystem = Camera.main.GetComponent<ScreenshotSystem>();*/
     }
     public void PlayerFind()
     {

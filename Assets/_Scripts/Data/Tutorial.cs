@@ -11,14 +11,14 @@ public class Tutorial
     // 주관식 플레이어 답
     public List<string> PlayerSubAnswers1;
     // 객관식 플레이어 답
-    public List<string> PlayerMultiAnswer;
+    public List<int> PlayerMultiAnswer;
     // 튜토리얼 스코어
     public int tutorialScore;
 
     public Tutorial()
     {
         PlayerSubAnswers1 = new List<string>();
-        PlayerMultiAnswer = new List<string>();
+        PlayerMultiAnswer = new List<int>();
     }
 }
 

@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ComputerUI : PopUpUI
 {
@@ -31,7 +33,21 @@ public class ComputerUI : PopUpUI
     protected override void Awake()
     {
         Manager.Data.LoadData();
-
+        for ( int i = 0; i < Manager.Data.GameData.tutorialData.PlayerSubAnswers1.Count; i++ )
+        {
+            if ( i > 0 )
+            {
+                // 답안지 추가
+                GameObject addList = Instantiate(prefab, CreatePoint, Quaternion.identity, answerParents.transform);
+                addedList.Add(addList);
+                PlayerSubAnswers1.Add(addList.GetComponent<TMP_InputField>());
+                // 백그라운드 크게 만들기
+                answerParents.GetComponent<RectTransform>().sizeDelta = new Vector2(answerParents.GetComponent<RectTransform>().sizeDelta.x, 70 * backgound);
+                // 스크롤 크게 만들기
+                ComputerContent.sizeDelta = new Vector2(ComputerContent.sizeDelta.x, 250 + 130 * backgound);
+                backgound++;
+            }
+        }
         base.Awake();
         //GetUI<TMP_InputField>("Subjecttive 1").text = "UI Binding Test";
     }
@@ -39,24 +55,18 @@ public class ComputerUI : PopUpUI
     {
         // 저장 불러오기
         for ( int i = 0; i < Manager.Data.GameData.tutorialData.PlayerSubAnswers1.Count; i++ )
-        {
-            if ( i > 1 )
-            {
-                addedList.Add(Instantiate(prefab, CreatePoint, Quaternion.identity, answerParents.transform));
-            }
             PlayerSubAnswers1 [i].text = Manager.Data.GameData.tutorialData.PlayerSubAnswers1 [i];
-
-        }
         for ( int i = 0; i < Manager.Data.GameData.tutorialData.PlayerMultiAnswer.Count; i++ )
-            PlayerMultiAnswer [i].text = Manager.Data.GameData.tutorialData.PlayerMultiAnswer [i];
+            PlayerMultiAnswer [i].GetComponentInParent<TMP_Dropdown>().value = Manager.Data.GameData.tutorialData.PlayerMultiAnswer [i];
     }
     public void CreateAnswerSheet()
     {
+        // 답안지 추가
         addedList.Add(Instantiate(prefab, CreatePoint, Quaternion.identity, answerParents.transform));
         // 백그라운드 크게 만들기
-        answerParents.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 50 * backgound);
+        answerParents.GetComponent<RectTransform>().sizeDelta = new Vector2(answerParents.GetComponent<RectTransform>().sizeDelta.x, 70 * backgound);
         // 스크롤 크게 만들기
-        ComputerContent.sizeDelta = new Vector2(0, 250 + 50 * backgound);
+        ComputerContent.sizeDelta = new Vector2(ComputerContent.sizeDelta.x, 250 + 130 * backgound);
 
         PlayerSubAnswers1.Add(addedList [0].gameObject.GetComponent<TMP_InputField>());
         backgound++;
@@ -68,11 +78,12 @@ public class ComputerUI : PopUpUI
         {
             Destroy(addedList [0]);
             addedList.RemoveAt(0);
+            PlayerSubAnswers1.RemoveAt(1);
             backgound--;
             // 백그라운드 크게 만들기
-            answerParents.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 50 * backgound);
+            answerParents.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 70 * backgound);
             // 스크롤 크게 만들기
-            ComputerContent.sizeDelta = new Vector2(0, 250 + 50 * backgound);
+            ComputerContent.sizeDelta = new Vector2(0, 250 + 130 * backgound);
         }
     }
 
@@ -101,30 +112,38 @@ public class ComputerUI : PopUpUI
             }
         }
         // 여기 끝날때 씬을 변화해주면될듯 (저장, 씬 이동)
+        Manager.Data.SaveData();
+        Manager.Data.GameData.tutorialData.PlayerSubAnswers1.Clear();
+        Manager.Data.GameData.tutorialData.PlayerMultiAnswer.Clear();
         // 주관식 저장
         for ( int i = 0; i < PlayerSubAnswers1.Count; i++ )
+        {
             Manager.Data.GameData.tutorialData.PlayerSubAnswers1.Add(PlayerSubAnswers1 [i].text);
-
+        }
         // 객관식 저장
         for ( int i = 0; i < PlayerMultiAnswer.Count; i++ )
-            Manager.Data.GameData.tutorialData.PlayerMultiAnswer.Add(PlayerMultiAnswer [i].text);
-
+        {
+            Manager.Data.GameData.tutorialData.PlayerMultiAnswer.Add(PlayerMultiAnswer [i].GetComponentInParent<TMP_Dropdown>().value);
+        }
         Manager.Data.GameData.tutorialData.tutorialScore = score;
-        Debug.Log("주관식 객관식 저장");
-        Manager.Data.SaveData();
         Debug.Log($"점수는 {score}");
 
 
     }
     private void OnDisable()
     {
+        Manager.Data.GameData.tutorialData.PlayerSubAnswers1.Clear();
+        Manager.Data.GameData.tutorialData.PlayerMultiAnswer.Clear();
         // 주관식 저장
         for ( int i = 0; i < PlayerSubAnswers1.Count; i++ )
-            Manager.Data.GameData.tutorialData.PlayerSubAnswers1.Add( PlayerSubAnswers1 [i].text);
+        {
+            Manager.Data.GameData.tutorialData.PlayerSubAnswers1.Add(PlayerSubAnswers1 [i].text);
+        }
         // 객관식 저장
         for ( int i = 0; i < PlayerMultiAnswer.Count; i++ )
-            Manager.Data.GameData.tutorialData.PlayerMultiAnswer.Add(PlayerMultiAnswer [i].text);
-        Debug.Log("꺼질때 저장");
+        {
+            Manager.Data.GameData.tutorialData.PlayerMultiAnswer.Add(PlayerMultiAnswer [i].GetComponentInParent<TMP_Dropdown>().value);
+        }
         Manager.Data.SaveData();
     }
 

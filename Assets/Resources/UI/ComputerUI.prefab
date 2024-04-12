@@ -2665,6 +2665,9 @@ MonoBehaviour:
   PlayerMultiAnswer:
   - {fileID: 2368571565164398752}
   - {fileID: 8135181845503912997}
+  PlayerMultiAnswerState:
+  - {fileID: 9092568767420055908}
+  - {fileID: 0}
 --- !u!1 &5907101612866158671
 GameObject:
   m_ObjectHideFlags: 0
@@ -4347,7 +4350,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.0009816212}
+  m_AnchoredPosition: {x: 0, y: -0.00000957653}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &226270162025076132
