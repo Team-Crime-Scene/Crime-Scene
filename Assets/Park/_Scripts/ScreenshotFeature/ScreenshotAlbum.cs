@@ -27,7 +27,8 @@ public class ScreenshotAlbum : MonoBehaviour
         string [] paths = Directory.GetFiles(folderPath, "*.png", SearchOption.AllDirectories);
         for ( int i = 0; i < paths.Length; i++ )
         {
-            Screenshots.Add(new Screenshot(new ScreenshotData(paths [i]))); //나중에 즐겨찾기 여부도 불러와야함
+            //Screenshots.Add(new Screenshot(new ScreenshotData(paths [i]))); //나중에 즐겨찾기 여부도 불러와야함 // ScreenshotData에 new 쓰지 말아야함 // 팩토리 패턴 적용
+            Screenshots.Add(new Screenshot(Extension.CreateScreenshotData(paths [i])));
         }
     }
 

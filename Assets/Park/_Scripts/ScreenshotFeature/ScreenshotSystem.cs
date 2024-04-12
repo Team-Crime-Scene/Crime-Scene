@@ -80,8 +80,9 @@ public class ScreenshotSystem : MonoBehaviour
     {
         string totalPath = TotalPath; // 프로퍼티 참조 시 시간에 따라 이름이 결정되므로 캐싱
 
+        ScriptableObject.CreateInstance<ScreenshotData>();
         //List에 사진 객체 추가
-        ScreenshotAlbum.Instance.Add(new Screenshot(new ScreenshotData(totalPath)));
+        ScreenshotAlbum.Instance.Add(new Screenshot(Extension.CreateScreenshotData(totalPath)));
 
         Texture2D screenTex = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
         Rect area = new Rect(0f, 0f, Screen.width, Screen.height);
@@ -105,7 +106,7 @@ public class ScreenshotSystem : MonoBehaviour
             Debug.LogWarning($"Screenshot Save Failed : {totalPath}");
             Debug.LogWarning(e);
         }
-        Destroy(screenTex); //가비지 제거
+        Destroy(screenTex); //가비지 제거 
 
         if ( succeeded )
         {

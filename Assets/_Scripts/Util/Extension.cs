@@ -42,4 +42,11 @@ public static class Extension
 
         return NewSprite;
     }
+
+    public static ScreenshotData CreateScreenshotData( string path )
+    {
+        ScreenshotData screenshotData = ScriptableObject.CreateInstance<ScreenshotData>();
+        screenshotData.path = path;
+        return screenshotData;
+    }
 }
