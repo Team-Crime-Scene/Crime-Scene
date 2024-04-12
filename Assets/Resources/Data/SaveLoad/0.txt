@@ -12,13 +12,50 @@
             "w": 0.9995973706245422
         },
         "PlayerSubAnswers1": [
+            "안qwqeqweqw",
+            "안qwqeqweqw",
+            "asdasdqw",
+            "안qwqeqweqw",
+            "asdasdqw",
+            "안qwqeqweqw",
+            "안qwqeqweqw",
+            "안qwqeqweqw",
+            "안qwqeqweqw",
+            "안qwqeqweqw",
+            "qweqwe",
+            "안qwqeqweqw",
+            "qweqwe",
+            "안qwqeqweqw",
+            "안qwqeqweqw",
             "안qwqeqweqw"
         ],
         "PlayerMultiAnswer": [
+            "1",
+            "1",
             "3",
-            "3"
+            "4",
+            "3",
+            "4",
+            "1",
+            "1",
+            "3",
+            "4",
+            "3",
+            "4",
+            "1",
+            "1",
+            "3",
+            "4",
+            "3",
+            "4",
+            "3",
+            "4",
+            "3",
+            "4",
+            "1",
+            "1"
         ],
-        "tutorialScore": 1
+        "tutorialScore": 0
     },
     "chapter1Data": {
         "playerPos": {
