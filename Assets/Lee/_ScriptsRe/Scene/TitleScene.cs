@@ -17,12 +17,12 @@ public class TitleScene : BaseScene
     }
     public void ContinueGame()
     {
-        Manager.Scene.LoadScene("Refatoring");
+        Manager.Scene.LoadScene("LobbyScene");
     }
 
     public void StartGame()
     {
         Manager.Data.NewData();
-        Manager.Scene.LoadScene("Refatoring");
+        Manager.Scene.LoadScene("LobbyScene");
     }
 }

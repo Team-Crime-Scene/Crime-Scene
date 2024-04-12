@@ -23,5 +23,5 @@ public class ComputerController : MonoBehaviour,IInteractable
     {
         vCam.Priority = 0;
     }
-
+    
 }

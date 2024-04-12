@@ -21,11 +21,11 @@ public class RefatoringScene : BaseScene
         yield return null;
         StartCoroutine(AutoSaveRutine());
         // 여기 로드된 데잍터들을 넣어줘야됨
-        player.position = Manager.Data.GameData.gameSceneData.playerPos;
+/*        player.position = Manager.Data.GameData.gameSceneData.playerPos;
         player.rotation = Manager.Data.GameData.gameSceneData.playerRot;
         Debug.Log(Manager.Data.GameData.gameSceneData.playerPos);
 
-    }
+*/    }
 
     IEnumerator AutoSaveRutine()
     {
@@ -33,12 +33,12 @@ public class RefatoringScene : BaseScene
         {
             //데이터 자동저장
             yield return new WaitForSeconds(3f);
-            Debug.Log("자동 저장");
+/*            Debug.Log("자동 저장");
             Debug.Log(player.position);
             Manager.Data.GameData.gameSceneData.playerPos = player.position;
             Manager.Data.GameData.gameSceneData.playerRot = player.rotation;
             Manager.Data.SaveData();
-        }
+*/        }
     }
 
 

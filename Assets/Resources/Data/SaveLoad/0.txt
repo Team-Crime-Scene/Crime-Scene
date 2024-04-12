@@ -1,23 +1,73 @@
 {
-    "gameSceneData": {
+    "tutorialData": {
         "playerPos": {
-            "x": -3.479417085647583,
-            "y": 1.0800000429153443,
-            "z": -8.974658966064454
+            "x": 3.0323920249938967,
+            "y": 2.0822863578796388,
+            "z": -0.6700505614280701
         },
         "playerRot": {
             "x": 0.0,
-            "y": -0.09847380220890045,
+            "y": 0.028373997658491136,
             "z": 0.0,
-            "w": 0.9951397180557251
+            "w": 0.9995973706245422
         },
-        "PlayerSubAnswers": "sadas",
-        "PlayerMultiAnswer": "모름"
+        "PlayerSubAnswers1": [
+            "안qwqeqweqw",
+            "안qwqeqweqw",
+            "asdasdqw",
+            "안qwqeqweqw",
+            "asdasdqw",
+            "안qwqeqweqw",
+            "안qwqeqweqw",
+            "안qwqeqweqw",
+            "안qwqeqweqw",
+            "안qwqeqweqw",
+            "qweqwe",
+            "안qwqeqweqw",
+            "qweqwe",
+            "안qwqeqweqw",
+            "안qwqeqweqw",
+            "안qwqeqweqw"
+        ],
+        "PlayerMultiAnswer": [
+            "1",
+            "1",
+            "3",
+            "4",
+            "3",
+            "4",
+            "1",
+            "1",
+            "3",
+            "4",
+            "3",
+            "4",
+            "1",
+            "1",
+            "3",
+            "4",
+            "3",
+            "4",
+            "3",
+            "4",
+            "3",
+            "4",
+            "1",
+            "1"
+        ],
+        "tutorialScore": 0
     },
-    "PlayerSubAnswers": {
-        "instanceID": 0
-    },
-    "PlayerMultiAnswer": {
-        "instanceID": 0
+    "chapter1Data": {
+        "playerPos": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "playerRot": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 0.0
+        }
     }
 }

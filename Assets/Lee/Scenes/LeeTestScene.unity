@@ -675,6 +675,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21f0c6627ea3b234f90516b3e0b907f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  popUpUI: {fileID: 0}
 --- !u!23 &190878678
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4296,15 +4297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vCam: {fileID: 225728155}
-  computerPanel: {fileID: 1982061469}
-  subjecttiveAnswers:
-  - "\uCD94\uB9AC\uAC8C\uC784"
-  multipleChoiceAnswer:
-  - Crune-Scene
-  PlayerSubAnswers:
-  - {fileID: 654114179}
-  PlayerMultiAnswer:
-  - {fileID: 168863248}
+  popUpUI: {fileID: 0}
 --- !u!65 &1353198081
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6195,7 +6188,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4645556039932125209, guid: 5f32390b9010b744080bf4ac3908d2fe, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -16.666666
+      value: -16.666664
       objectReference: {fileID: 0}
     - target: {fileID: 5445008160497386727, guid: 5f32390b9010b744080bf4ac3908d2fe, type: 3}
       propertyPath: m_Name
@@ -6260,8 +6253,8 @@ SceneRoots:
   - {fileID: 190878680}
   - {fileID: 1353198084}
   - {fileID: 4661989159018074894}
-  - {fileID: 109889601}
   - {fileID: 792824924}
+  - {fileID: 109889601}
   - {fileID: 1538049535}
   - {fileID: 1625141691}
   - {fileID: 670131542}

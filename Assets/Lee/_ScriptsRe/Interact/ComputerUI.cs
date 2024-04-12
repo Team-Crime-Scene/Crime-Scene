@@ -30,9 +30,25 @@ public class ComputerUI : PopUpUI
 
     protected override void Awake()
     {
+        Manager.Data.LoadData();
+
         base.Awake();
         //GetUI<TMP_InputField>("Subjecttive 1").text = "UI Binding Test";
+    }
+    public void Start()
+    {
+        // 저장 불러오기
+        for ( int i = 0; i < Manager.Data.GameData.tutorialData.PlayerSubAnswers1.Count; i++ )
+        {
+            if ( i > 1 )
+            {
+                addedList.Add(Instantiate(prefab, CreatePoint, Quaternion.identity, answerParents.transform));
+            }
+            PlayerSubAnswers1 [i].text = Manager.Data.GameData.tutorialData.PlayerSubAnswers1 [i];
 
+        }
+        for ( int i = 0; i < Manager.Data.GameData.tutorialData.PlayerMultiAnswer.Count; i++ )
+            PlayerMultiAnswer [i].text = Manager.Data.GameData.tutorialData.PlayerMultiAnswer [i];
     }
     public void CreateAnswerSheet()
     {
@@ -60,9 +76,6 @@ public class ComputerUI : PopUpUI
         }
     }
 
-
-
-
     public void Submit()
     {
         // 주관식 답 체크
@@ -87,22 +100,33 @@ public class ComputerUI : PopUpUI
                 score++;
             }
         }
-        // 여기 끝날때 씬을 변화해주면될듯
+        // 여기 끝날때 씬을 변화해주면될듯 (저장, 씬 이동)
+        // 주관식 저장
+        for ( int i = 0; i < PlayerSubAnswers1.Count; i++ )
+            Manager.Data.GameData.tutorialData.PlayerSubAnswers1.Add(PlayerSubAnswers1 [i].text);
+
+        // 객관식 저장
+        for ( int i = 0; i < PlayerMultiAnswer.Count; i++ )
+            Manager.Data.GameData.tutorialData.PlayerMultiAnswer.Add(PlayerMultiAnswer [i].text);
+
+        Manager.Data.GameData.tutorialData.tutorialScore = score;
+        Debug.Log("주관식 객관식 저장");
+        Manager.Data.SaveData();
         Debug.Log($"점수는 {score}");
+
 
     }
     private void OnDisable()
     {
-/*        for ( int i = 0; i < PlayerSubAnswers1.Count; i++ )
-        {
-            Manager.Data.GameData.answerData.PlayerSubAnswers1 [i] = PlayerSubAnswers1 [i].text;
-        }
+        // 주관식 저장
+        for ( int i = 0; i < PlayerSubAnswers1.Count; i++ )
+            Manager.Data.GameData.tutorialData.PlayerSubAnswers1.Add( PlayerSubAnswers1 [i].text);
+        // 객관식 저장
         for ( int i = 0; i < PlayerMultiAnswer.Count; i++ )
-        {
-            Manager.Data.GameData.answerData.PlayerMultiAnswer [i] = PlayerMultiAnswer [i].text;
-        }
+            Manager.Data.GameData.tutorialData.PlayerMultiAnswer.Add(PlayerMultiAnswer [i].text);
+        Debug.Log("꺼질때 저장");
         Manager.Data.SaveData();
-*/    }
+    }
 
     public void ActivateInputField()
     {
