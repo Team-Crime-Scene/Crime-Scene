@@ -45,6 +45,8 @@ public class ScreenshotAlbumUI : PopUpUI
     {
         Debug.Log("앨범 초기화");
         int count = ScreenshotAlbum.Instance.Screenshots.Count;
+        if ( count == 0 ) return;
+
         for ( int i = 0; i < count; i++ )
         {
             ScreenshotSlotUI slot = Instantiate(ScreenshotSlotUIPrefab);
