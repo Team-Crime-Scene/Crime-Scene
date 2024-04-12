@@ -51,13 +51,9 @@ public class ComputerUI : PopUpUI
         base.Awake();
         //GetUI<TMP_InputField>("Subjecttive 1").text = "UI Binding Test";
     }
-    public void Start()
+    private void Start()
     {
-        // 저장 불러오기
-        for ( int i = 0; i < Manager.Data.GameData.tutorialData.PlayerSubAnswers1.Count; i++ )
-            PlayerSubAnswers1 [i].text = Manager.Data.GameData.tutorialData.PlayerSubAnswers1 [i];
-        for ( int i = 0; i < Manager.Data.GameData.tutorialData.PlayerMultiAnswer.Count; i++ )
-            PlayerMultiAnswer [i].GetComponentInParent<TMP_Dropdown>().value = Manager.Data.GameData.tutorialData.PlayerMultiAnswer [i];
+        Manager.Data.LoadAnswer(PlayerSubAnswers1, PlayerMultiAnswer);
     }
     public void CreateAnswerSheet()
     {
@@ -112,39 +108,14 @@ public class ComputerUI : PopUpUI
             }
         }
         // 여기 끝날때 씬을 변화해주면될듯 (저장, 씬 이동)
-        Manager.Data.SaveData();
-        Manager.Data.GameData.tutorialData.PlayerSubAnswers1.Clear();
-        Manager.Data.GameData.tutorialData.PlayerMultiAnswer.Clear();
-        // 주관식 저장
-        for ( int i = 0; i < PlayerSubAnswers1.Count; i++ )
-        {
-            Manager.Data.GameData.tutorialData.PlayerSubAnswers1.Add(PlayerSubAnswers1 [i].text);
-        }
-        // 객관식 저장
-        for ( int i = 0; i < PlayerMultiAnswer.Count; i++ )
-        {
-            Manager.Data.GameData.tutorialData.PlayerMultiAnswer.Add(PlayerMultiAnswer [i].GetComponentInParent<TMP_Dropdown>().value);
-        }
-        Manager.Data.GameData.tutorialData.tutorialScore = score;
+        Manager.Data.SaveAnswer(PlayerSubAnswers1, PlayerMultiAnswer, score);
         Debug.Log($"점수는 {score}");
 
 
     }
     private void OnDisable()
     {
-        Manager.Data.GameData.tutorialData.PlayerSubAnswers1.Clear();
-        Manager.Data.GameData.tutorialData.PlayerMultiAnswer.Clear();
-        // 주관식 저장
-        for ( int i = 0; i < PlayerSubAnswers1.Count; i++ )
-        {
-            Manager.Data.GameData.tutorialData.PlayerSubAnswers1.Add(PlayerSubAnswers1 [i].text);
-        }
-        // 객관식 저장
-        for ( int i = 0; i < PlayerMultiAnswer.Count; i++ )
-        {
-            Manager.Data.GameData.tutorialData.PlayerMultiAnswer.Add(PlayerMultiAnswer [i].GetComponentInParent<TMP_Dropdown>().value);
-        }
-        Manager.Data.SaveData();
+        Manager.Data.SaveAnswer(PlayerSubAnswers1, PlayerMultiAnswer, score);
     }
 
     public void ActivateInputField()

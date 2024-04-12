@@ -674,6 +674,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 6930574641479417984}
+  WhuteBoard: {fileID: 8859540405212720299}
 --- !u!1001 &1451370806
 PrefabInstance:
   m_ObjectHideFlags: 0

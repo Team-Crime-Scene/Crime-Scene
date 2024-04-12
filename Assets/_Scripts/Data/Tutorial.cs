@@ -18,12 +18,15 @@ public class Tutorial
     // 피쳐 저장 데이터
     public List<GameObject> Picture;
 
+    public List<GameObject> lines;
+
 
     public Tutorial()
     {
         PlayerSubAnswers1 = new List<string>();
         PlayerMultiAnswer = new List<int>();
         Picture = new List<GameObject>();
+        lines = new List<GameObject>();
     }
 }
 

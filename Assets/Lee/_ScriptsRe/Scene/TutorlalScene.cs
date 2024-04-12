@@ -6,13 +6,15 @@ using UnityEngine;
 public class TutorlalScene : BaseScene
 {
     [SerializeField] GameObject player;
-    float AutoSaveGameTime = 5f;
-    [SerializeField] GameObject WhiteBoard; 
+    float AutoSaveGameTime = 300f;
+    [SerializeField] Transform WhuteBoard;
     public override IEnumerator LoadingRoutine()
     {
         Manager.Game.PlayerFind();
         Manager.Data.LoadData();
         yield return null;
+        Manager.Data.LoadPictuer();
+        Manager.Data.LoadLines(WhuteBoard);
         player.transform.position = Manager.Data.GameData.tutorialData.playerPos;
         player.transform.rotation = Manager.Data.GameData.tutorialData.playerRot;
         Debug.Log(Manager.Data.GameData.tutorialData.playerPos);

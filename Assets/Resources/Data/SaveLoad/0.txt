@@ -12,15 +12,15 @@
             "w": 0.8589863181114197
         },
         "PlayerSubAnswers1": [
-            "asdasd",
-            "asdasd",
-            "asdasd"
+            "qweqwe",
+            "asda"
         ],
         "PlayerMultiAnswer": [
-            0,
-            4
+            3,
+            0
         ],
-        "tutorialScore": 1
+        "tutorialScore": 0,
+        "Picture": []
     },
     "chapter1Data": {
         "playerPos": {
