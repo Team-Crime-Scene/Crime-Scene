@@ -34,11 +34,12 @@ public class ScreenshotSystem : MonoBehaviour
     {
         get
         {
-#if UNITY_EDITOR || UNITY_STANDALONE
+#if UNITY_EDITOR
             return Application.dataPath;
 #elif UNITY_ANDROID
             return $"/storage/emulated/0/DCIM/{Application.productName}/";
-            //return Application.persistentDataPath;
+#else
+    return Application.persistentDataPath;
 #endif
         }
     }
@@ -114,7 +115,7 @@ public class ScreenshotSystem : MonoBehaviour
             StartCoroutine(ScreenshotAnimation());
             lastSavedPath = totalPath; // 최근 경로에 저장
 
-            if (albumUI.IsInit())
+            if ( albumUI.IsInit() )
             {
                 albumUI.UpdateAlbumUISlots();
                 miniAlbumUI.UpdateAlbumUISlots();
