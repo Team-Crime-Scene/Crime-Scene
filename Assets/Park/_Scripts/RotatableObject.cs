@@ -1,12 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class RotatableObject : InteractableObject , IPointerMoveHandler 
+public class RotatableObject : InteractableObject , IDragHandler
 {
     [SerializeField] PopUpUI popUpUI;
-    float rotateSpeed= 10;
+    [SerializeField] float rotateSpeed = 10;
+    [SerializeField] float smoothSpeed = 0.04f;
+    float mouseX;
+    float mouseY;
+
+    bool isInteract=false;
 
     void Awake()
     {
@@ -16,21 +22,34 @@ public class RotatableObject : InteractableObject , IPointerMoveHandler
     public override void Interact( PlayerController player )
     {
         base.Interact(player);
-        Manager.UI.ShowPopUpUI(popUpUI); //
-        Cursor.visible = false;
+        Manager.UI.ShowPopUpUI(popUpUI); 
+        isInteract = true;
+        Cursor.visible = isInteract;
     }
 
-    public void OnPointerMove( PointerEventData eventData )
-    {
-        float x = eventData.delta.x * Time.unscaledDeltaTime * rotateSpeed; //deltaTime => unscaledDeltaTime
-        float y = eventData.delta.y * Time.unscaledDeltaTime * rotateSpeed;
 
-        transform.Rotate(0, -x, y, Space.World);
+    public void OnDrag( PointerEventData eventData )
+    {
+        if (!isInteract ) return;
+        mouseX += eventData.delta.x * Time.unscaledDeltaTime * rotateSpeed;
+        mouseY += eventData.delta.y * Time.unscaledDeltaTime * rotateSpeed;
+    }
+
+    private void LateUpdate()
+    {
+        if ( !isInteract ) return;
+        transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(0, -mouseX, mouseY), smoothSpeed);
+        //transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(-mouseY, mouseX,0f), smoothSpeed);
     }
 
     public override void UnInteract( PlayerController player )
     {
         base.UnInteract( player );
-        Cursor.visible = true;
+        isInteract=false;
+        mouseX = 0;
+        mouseY = 0;
+        Cursor.visible = isInteract;
     }
 }
+
+  
