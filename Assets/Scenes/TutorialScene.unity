@@ -462,7 +462,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2660723903889650153, guid: ed93a6ef089d81f408168083397d5684, type: 3}
   m_PrefabInstance: {fileID: 1629191096182759251}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1843042004}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -1290,6 +1290,16 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4183138572902968091, guid: 401b8f84c6207ec4bb32de030a1272c1, type: 3}
   m_PrefabInstance: {fileID: 6972736079302323985}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1843042004 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4405920473297201632, guid: ed93a6ef089d81f408168083397d5684, type: 3}
+  m_PrefabInstance: {fileID: 1629191096182759251}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1880219441 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 532077669062678045, guid: ed93a6ef089d81f408168083397d5684, type: 3}
+  m_PrefabInstance: {fileID: 1629191096182759251}
+  m_PrefabAsset: {fileID: 0}
 --- !u!20 &1905215478 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 7393162662082557761, guid: 401b8f84c6207ec4bb32de030a1272c1, type: 3}
@@ -1515,7 +1525,7 @@ MonoBehaviour:
   popUpUI: {fileID: 671033241971685104, guid: 9fb7bc542281dda49ab63f4e080adb7c, type: 3}
   readInfoPrefab: {fileID: 0}
   readInfo: {fileID: 2800000, guid: fbc0d96b81076db4ba94593be24038ba, type: 3}
-  isAttachedToWall: 1
+  isAttachedToWall: 0
 --- !u!1001 &1143380459907151173
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1607,6 +1617,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DefaultCanvas1
       objectReference: {fileID: 0}
+    - target: {fileID: 2209687189692714516, guid: ed93a6ef089d81f408168083397d5684, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2395511885809143790, guid: ed93a6ef089d81f408168083397d5684, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1686,6 +1700,10 @@ PrefabInstance:
     - target: {fileID: 2395511885809143790, guid: ed93a6ef089d81f408168083397d5684, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2660723903889650153, guid: ed93a6ef089d81f408168083397d5684, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2174,6 +2192,14 @@ PrefabInstance:
       propertyPath: aimedImage
       value: 
       objectReference: {fileID: 1248959375}
+    - target: {fileID: 6612096553264386062, guid: 3ca3c158750bd264b87132cc75f37efb, type: 3}
+      propertyPath: image_Aim_Interactable
+      value: 
+      objectReference: {fileID: 1880219441}
+    - target: {fileID: 6612096553264386062, guid: 3ca3c158750bd264b87132cc75f37efb, type: 3}
+      propertyPath: image_Aim_UnInteractable
+      value: 
+      objectReference: {fileID: 1843042004}
     - target: {fileID: 7564583065393509186, guid: 3ca3c158750bd264b87132cc75f37efb, type: 3}
       propertyPath: m_Priority
       value: 20

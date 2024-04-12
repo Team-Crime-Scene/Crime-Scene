@@ -1,13 +1,13 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] PlayerMove mover;
     [SerializeField] public CamaraController camaraController;
-    [SerializeField] Image aimedImage;
-    [SerializeField] public Transform ZoomedPos; 
+    [SerializeField] GameObject image_Aim_Interactable;
+    [SerializeField] GameObject image_Aim_UnInteractable;
+    [SerializeField] public Transform ZoomedPos;
     [SerializeField] Light flash;
     [SerializeField] float interactRange = 100;
 
@@ -17,15 +17,35 @@ public class PlayerController : MonoBehaviour
     {
         mover.enabled = !isInteract;
         camaraController.enabled = !isInteract;
-        aimedImage.enabled = !isInteract; // 나중에 이벤트로
+        if ( isInteract )
+        {
+            image_Aim_Interactable.SetActive(false);
+            image_Aim_UnInteractable.SetActive(false);
+            return;
+        }
+
+        if ( Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, interactRange) )
+        {
+            IInteractable interactable = hit.transform.gameObject.GetComponent<IInteractable>();
+            if ( interactable == null )
+            {
+                image_Aim_Interactable.SetActive(false);
+                image_Aim_UnInteractable.SetActive(true);
+                return;
+            }
+            image_Aim_Interactable.SetActive(true);
+            image_Aim_UnInteractable.SetActive(false);
+            return;
+        }
     }
+
 
 
     private void OnInteract( InputValue value )
     {
         if ( isInteract ) return;
 
-        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * interactRange, Color.red,1.5f);
+        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * interactRange, Color.red, 1.5f);
         if ( Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, interactRange) )
         {
             IInteractable interactable = hit.transform.gameObject.GetComponent<IInteractable>();
@@ -37,13 +57,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnFlash(InputValue value )
+    private void OnFlash( InputValue value )
     {
         if ( value.isPressed )
         {
             flash.enabled = !flash.enabled;
         }
     }
-       
-    
 }
