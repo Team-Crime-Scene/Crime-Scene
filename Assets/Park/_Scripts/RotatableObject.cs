@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class RotatableObject : InteractableObject , IPointerMoveHandler 
+public class RotatableObject : InteractableObject , IDragHandler 
 {
     [SerializeField] PopUpUI popUpUI;
     float rotateSpeed= 10;
+
+    bool isInteract=false;
 
     void Awake()
     {
@@ -17,20 +19,26 @@ public class RotatableObject : InteractableObject , IPointerMoveHandler
     {
         base.Interact(player);
         Manager.UI.ShowPopUpUI(popUpUI); //
-        Cursor.visible = false;
+        isInteract = true;
+        Cursor.visible = isInteract;
     }
 
-    public void OnPointerMove( PointerEventData eventData )
+    public void OnDrag( PointerEventData eventData )
     {
+        if ( !isInteract ) return;
+
         float x = eventData.delta.x * Time.unscaledDeltaTime * rotateSpeed; //deltaTime => unscaledDeltaTime
         float y = eventData.delta.y * Time.unscaledDeltaTime * rotateSpeed;
 
-        transform.Rotate(0, -x, y, Space.World);
+        // transform.Rotate(0, -x, y, Space.World);
+        transform.Rotate(Vector3.up, -x);
+        transform.Rotate(Vector3.right, y);
     }
 
     public override void UnInteract( PlayerController player )
     {
         base.UnInteract( player );
-        Cursor.visible = true;
+        isInteract=false;
+        Cursor.visible = isInteract;
     }
 }

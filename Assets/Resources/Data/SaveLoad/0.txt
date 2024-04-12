@@ -27,7 +27,15 @@
             "qweqwe",
             "안qwqeqweqw",
             "안qwqeqweqw",
-            "안qwqeqweqw"
+            "안qwqeqweqw",
+            "안qwqeqweqw",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
         ],
         "PlayerMultiAnswer": [
             "1",
@@ -53,7 +61,9 @@
             "3",
             "4",
             "1",
-            "1"
+            "1",
+            "4",
+            "2"
         ],
         "tutorialScore": 0
     },
