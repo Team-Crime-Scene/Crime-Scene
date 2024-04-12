@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float interactRange = 100;
 
     public bool isInteract = false;
+    private IInteractable interactable;
 
     private void Update()
     {
@@ -26,7 +27,7 @@ public class PlayerController : MonoBehaviour
 
         if ( Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, interactRange) )
         {
-            IInteractable interactable = hit.transform.gameObject.GetComponent<IInteractable>();
+            interactable = hit.transform.gameObject.GetComponent<IInteractable>();
             if ( interactable == null )
             {
                 image_Aim_Interactable.SetActive(false);
@@ -45,14 +46,8 @@ public class PlayerController : MonoBehaviour
     {
         if ( isInteract ) return;
 
-        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * interactRange, Color.red, 1.5f);
-        if ( Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, interactRange) )
+        if ( interactable != null )
         {
-            IInteractable interactable = hit.transform.gameObject.GetComponent<IInteractable>();
-            if ( interactable == null )
-            {
-                return;
-            }
             Manager.Game.Interaction(interactable);
         }
     }
