@@ -5,10 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TitleScene.unity
     guid: 1adaa6572bcb7ae4884935c5dfda2a22
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/LobbyScene.unity
     guid: 6c61a680aef4bcf4aa80e44810208acc
   - enabled: 0
@@ -17,12 +17,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TutorialScene.unity
     guid: 8ae13aa60ba026c479dd8a6e4c0e3893
-  - enabled: 1
+  - enabled: 0
     path: Assets/Lee/Scenes/LeeTutorialScene.unity
     guid: 098bb0b2e813f41449e9aef8e1709dcc
   - enabled: 0
     path: Assets/Lee/Scenes/Refatoring.unity
     guid: 59cf9c69142dd7a4686b8ef38568b3e9
   m_configObjects:
-    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 6ea0a2c5d6afb574bb5156c1102c5513, type: 2}
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 2e59295285f711a448c186c2c1103dd9, type: 2}
   m_UseUCBPForAssetBundles: 0
