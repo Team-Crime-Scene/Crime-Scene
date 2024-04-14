@@ -105,10 +105,10 @@ public class DataManager : Singleton<DataManager>
     }
 
     // parent =화이트보드이면될듯?
-    public void LoadLines(Transform parent)
+    public void LoadLines( Transform parent )
     {
         for ( int i = 0; i < Manager.Data.GameData.tutorialData.lines.Count; i++ )
             Instantiate(Manager.Data.GameData.tutorialData.lines [i], Manager.Data.GameData.tutorialData.lines [i].transform.position,
-                Manager.Data.GameData.tutorialData.lines [i].transform.rotation, parent); ;
+                Manager.Data.GameData.tutorialData.lines [i].transform.rotation, parent); 
     }
 }

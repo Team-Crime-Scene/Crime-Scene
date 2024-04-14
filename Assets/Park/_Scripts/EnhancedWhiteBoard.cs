@@ -39,6 +39,8 @@ public class EnhancedWhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUp
     void OnDisable()
     {
         raycaster.eventMask = defaultMask;
+        Manager.Data.SaveLines( lines);
+       
     }
 
     /******************************************************
@@ -178,6 +180,7 @@ public class EnhancedWhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUp
         overUICam.SetActive(isEdit);
         raycaster.eventMask = pictureMask;
     }
+    
 }
 
 struct PointData

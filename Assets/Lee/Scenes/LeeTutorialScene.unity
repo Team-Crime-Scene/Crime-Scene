@@ -132,6 +132,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popUpUI: {fileID: 4748964517991660351, guid: efe930b265cd1a644871f0fe6ac05192, type: 3}
+  rotateSpeed: 10
+  smoothSpeed: 0.04
 --- !u!1 &473614730
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,17 +316,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 413229187771809846, guid: 42d23c4a324e64a418f35a24fbed3ebc, type: 3}
-      propertyPath: popUpUI
-      value: 
-      objectReference: {fileID: 8130640914209487847, guid: 3e7b195b4353bac46a6643cdbf7364d7, type: 3}
+    - target: {fileID: 1238367088473641601, guid: 42d23c4a324e64a418f35a24fbed3ebc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -50
+      objectReference: {fileID: 0}
     - target: {fileID: 3310717842272111443, guid: 42d23c4a324e64a418f35a24fbed3ebc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.13
       objectReference: {fileID: 0}
     - target: {fileID: 3310717842272111443, guid: 42d23c4a324e64a418f35a24fbed3ebc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.91
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3310717842272111443, guid: 42d23c4a324e64a418f35a24fbed3ebc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -358,9 +360,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3453204358282243239, guid: 42d23c4a324e64a418f35a24fbed3ebc, type: 3}
+      propertyPath: m_FollowOffset.z
+      value: -0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6804128001538693805, guid: 42d23c4a324e64a418f35a24fbed3ebc, type: 3}
       propertyPath: m_Name
       value: KeypadObj
+      objectReference: {fileID: 0}
+    - target: {fileID: 8339224543026174023, guid: 42d23c4a324e64a418f35a24fbed3ebc, type: 3}
+      propertyPath: m_Priority
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -735,7 +745,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 6930574641479417984}
-  WhiteBoard: {fileID: 0}
+  WhiteBoard: {fileID: 8859540405212720299}
 --- !u!1001 &1451370806
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1219,6 +1229,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05613d5a471ec2f4abcaaf5a6da375d8, type: 3}
+--- !u!1 &1912841304 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 532077669062678045, guid: ed93a6ef089d81f408168083397d5684, type: 3}
+  m_PrefabInstance: {fileID: 3143595856225866203}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1932582135 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 174288501986466026, guid: 9bca5810d7ad7584885715c903931a9b, type: 3}
@@ -1440,6 +1455,7 @@ MonoBehaviour:
   popUpUI: {fileID: 671033241971685104, guid: 9fb7bc542281dda49ab63f4e080adb7c, type: 3}
   readInfoPrefab: {fileID: 0}
   readInfo: {fileID: 2800000, guid: fbc0d96b81076db4ba94593be24038ba, type: 3}
+  isAttachedToWall: 0
 --- !u!1001 &1143380459907151173
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2048,6 +2064,14 @@ PrefabInstance:
       propertyPath: aimedImage
       value: 
       objectReference: {fileID: 3143595856225866204}
+    - target: {fileID: 6612096553264386062, guid: 3ca3c158750bd264b87132cc75f37efb, type: 3}
+      propertyPath: image_Aim_Interactable
+      value: 
+      objectReference: {fileID: 1912841304}
+    - target: {fileID: 6612096553264386062, guid: 3ca3c158750bd264b87132cc75f37efb, type: 3}
+      propertyPath: image_Aim_UnInteractable
+      value: 
+      objectReference: {fileID: 1912841304}
     - target: {fileID: 7564583065393509186, guid: 3ca3c158750bd264b87132cc75f37efb, type: 3}
       propertyPath: m_Priority
       value: 20
@@ -2362,6 +2386,14 @@ PrefabInstance:
     - target: {fileID: 789854503708527950, guid: 581016905350f784db294e42e0bb7693, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1089735433921542761, guid: 581016905350f784db294e42e0bb7693, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 187.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3827203622844515992, guid: 581016905350f784db294e42e0bb7693, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 112.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

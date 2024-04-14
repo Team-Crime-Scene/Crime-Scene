@@ -8,22 +8,52 @@ public class LobbyScene : BaseScene
 {
     [SerializeField] TextMeshProUGUI tutorialRank;
     [SerializeField] TextMeshProUGUI tutorialScore;
+    [SerializeField] GameObject unlockChampter1;
+    [SerializeField] GameObject notExam1;
+    [SerializeField]  GameObject image1;
+    [SerializeField] List<GameObject> activate1;
     public override IEnumerator LoadingRoutine()
     {
         Manager.Data.LoadData();
-        tutorialScore.text = $"{Manager.Data.GameData.tutorialData.tutorialScore}/4 ";
-        if( Manager.Data.GameData.tutorialData.tutorialScore/ 4 < 1)
-
+        tutorialScore.text = $"{Manager.Data.GameData.tutorialData.tutorialScore}/3 ";
+        TutorialRnak(Manager.Data.GameData.tutorialData.tutorialScore);
         yield return null;
     }
 
-    public void Rnak(int score)
+    public void TutorialRnak( int score )
     {
-        
+        if ( score < 2 )
+        {
+            tutorialRank.text = "C";
+        }
+        else if ( score < 3 )
+        {
+            tutorialRank.text = "B";
+        }
+        else if ( score == 3 )
+        {
+            tutorialRank.text = "A";
+        }
+        if ( score >= 2 )
+        {
+            Debug.Log("µé¾î¿È");
+            unlockChampter1.SetActive(false);
+            notExam1.SetActive(false);
+            image1.SetActive(false);
+            for (int i = 0; i <activate1.Count; i++)
+            {
+                activate1 [i].SetActive(true);
+            }
+        }
     }
     public void Tutorial()
     {
         Manager.Scene.LoadScene("LeeTutorialScene");
+    }
+
+    public void Chapter1()
+    {
+        Manager.Scene.LoadScene("chapter1");
     }
 
 }
