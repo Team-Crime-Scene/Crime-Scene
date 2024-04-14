@@ -1,11 +1,8 @@
-using System;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.UI;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class ComputerUI : PopUpUI
+public class ComputerChapter1UI : PopUpUI
 {
     [SerializeField] RectTransform ComputerContent;
     Vector2 CreatePoint;
@@ -19,13 +16,19 @@ public class ComputerUI : PopUpUI
 
     // 답안지
     [Header("Answer Sheet")]
-    [SerializeField] List<string> subjecttiveAnswers1;
+    [SerializeField] string subjecttiveAnswer1;
+    [SerializeField] List<string> subjecttiveAnswers2;
+    [SerializeField] string subjecttiveAnswer3;
     [SerializeField] List<string> multipleChoiceAnswer;
 
     // 플레이어 답안지
     [Header("Player Answer Sheet")]
+    [SerializeField] TMP_InputField PlayerSubAnswers1;
     // 주관식은 만들어질때마다 보관할 리스트들을 생성해주고 사용해야될듯
-    [SerializeField] List<TMP_InputField> PlayerSubAnswers1 = new List<TMP_InputField>();
+    // 얘는 걍 이대로 쓰면됨
+    [SerializeField] List<TMP_InputField> PlayerSubAnswers2 = new List<TMP_InputField>();
+    [SerializeField] TMP_InputField PlayerSubAnswers3;
+
     // 문제당 하나씩 밖에 없으니 혼자 관리 하면될거같다
     [SerializeField] List<TextMeshProUGUI> PlayerMultiAnswer = new List<TextMeshProUGUI>();
     List<GameObject> addedList = new List<GameObject>();
@@ -40,7 +43,7 @@ public class ComputerUI : PopUpUI
                 // 답안지 추가
                 GameObject addList = Instantiate(prefab, CreatePoint, Quaternion.identity, answerParents.transform);
                 addedList.Add(addList);
-                PlayerSubAnswers1.Add(addList.GetComponent<TMP_InputField>());
+                PlayerSubAnswers2.Add(addList.GetComponent<TMP_InputField>());
                 // 백그라운드 크게 만들기
                 answerParents.GetComponent<RectTransform>().sizeDelta = new Vector2(answerParents.GetComponent<RectTransform>().sizeDelta.x, 70 * backgound);
                 // 스크롤 크게 만들기
@@ -53,7 +56,7 @@ public class ComputerUI : PopUpUI
     }
     private void Start()
     {
-        Manager.Data.LoadAnswer(PlayerSubAnswers1, PlayerMultiAnswer);
+        Manager.Data.LoadAnswer(PlayerSubAnswers2, PlayerMultiAnswer);
     }
     public void CreateAnswerSheet()
     {
@@ -64,7 +67,7 @@ public class ComputerUI : PopUpUI
         // 스크롤 크게 만들기
         ComputerContent.sizeDelta = new Vector2(ComputerContent.sizeDelta.x, 250 + 130 * backgound);
 
-        PlayerSubAnswers1.Add(addedList [0].gameObject.GetComponent<TMP_InputField>());
+        PlayerSubAnswers2.Add(addedList [0].gameObject.GetComponent<TMP_InputField>());
         backgound++;
     }
 
@@ -74,7 +77,7 @@ public class ComputerUI : PopUpUI
         {
             Destroy(addedList [0]);
             addedList.RemoveAt(0);
-            PlayerSubAnswers1.RemoveAt(1);
+            PlayerSubAnswers2.RemoveAt(1);
             backgound--;
             // 백그라운드 크게 만들기
             answerParents.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 70 * backgound);
@@ -85,20 +88,30 @@ public class ComputerUI : PopUpUI
 
     public void Submit()
     {
-        // 주관식 답 체크
-        for ( int i = 0; i < subjecttiveAnswers1.Count; i++ )
+        string answer;
+        answer = PlayerSubAnswers1.text;
+        answer = answer.Replace(" ", string.Empty);
+        if ( subjecttiveAnswer1 == answer )
+            score++;
+        // 주관식 답 체크(추가되는 친구)
+        for ( int i = 0; i < subjecttiveAnswers2.Count; i++ )
         {
-            for ( int j = 0; j < PlayerSubAnswers1.Count; j++ )
+            for ( int j = 0; j < PlayerSubAnswers2.Count; j++ )
             {
-                string answer = PlayerSubAnswers1 [j].text;
+                answer = PlayerSubAnswers2 [j].text;
                 answer = answer.Replace(" ", string.Empty);
 
-                if ( subjecttiveAnswers1 [i] == answer )
+                if ( subjecttiveAnswers2 [i] == answer )
                 {
                     score++;
                 }
             }
         }
+        answer = PlayerSubAnswers3.text;
+        answer = answer.Replace(" ", string.Empty);
+        if ( subjecttiveAnswer3 == answer )
+            score++;
+
         // 객관식 답 체크
         for ( int i = 0; i < PlayerMultiAnswer.Count; i++ )
         {
@@ -108,14 +121,14 @@ public class ComputerUI : PopUpUI
             }
         }
         // 여기 끝날때 씬을 변화해주면될듯 (저장, 씬 이동)
-        Manager.Data.SaveAnswer(PlayerSubAnswers1, PlayerMultiAnswer, score);
+        //Manager.Data.SaveAnswer(PlayerSubAnswers2, PlayerMultiAnswer, score);
         Debug.Log($"점수는 {score}");
 
 
     }
     private void OnDisable()
     {
-        Manager.Data.SaveAnswer(PlayerSubAnswers1, PlayerMultiAnswer, score);
+        //Manager.Data.SaveAnswer(PlayerSubAnswers2, PlayerMultiAnswer, score);
     }
 
     public void ActivateInputField()

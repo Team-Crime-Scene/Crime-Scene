@@ -1,18 +1,35 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class KeypadUI : PopUpUI
+public class KeypadUI : MonoBehaviour, IInteractable
 {
     [SerializeField] string answerNumber;
     string input; // 현재 입력된 값
     [SerializeField] TextMeshProUGUI displayText; // 키패드에 입력된 비밀번호가 표시되는 텍스트 영역
     float numOfGuesses; // 예상 비밀번호의 길이
     float btnClicked = 0; // 버튼이 클릭된 횟수
+    [SerializeField] CinemachineVirtualCamera Vcam;
+    [SerializeField] PopUpUI popUpUI;
+
+    public void Interact( PlayerController player )
+    {
+        Vcam.Priority = 100;
+        Manager.UI.ShowPopUpUI( popUpUI);
+    }
+
+    public void UnInteract( PlayerController player )
+    {
+        Vcam.Priority = 0;
+
+    }
+
     private void Start()
     {
+
         btnClicked = 0; // 버튼이 클릭된 횟수 초기화
         numOfGuesses = answerNumber.Length; // 비밀번호 길이
     }
@@ -32,6 +49,7 @@ public class KeypadUI : PopUpUI
                 input = ""; // 입력 초기화
                 displayText.text = input.ToString(); // 입력된 값을 텍스트 영역에 표시
                 Debug.Log("틀림");
+
             }
         }
     }

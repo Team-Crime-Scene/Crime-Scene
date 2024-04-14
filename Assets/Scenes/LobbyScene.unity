@@ -6974,7 +6974,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: /
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 953fc07449913d64ca535d046ef7c00e, type: 2}
   m_sharedMaterial: {fileID: 1128582007334669645, guid: 953fc07449913d64ca535d046ef7c00e, type: 2}
@@ -7993,6 +7993,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe0a2af560229864d8495f23a664e84e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tutorialRank: {fileID: 530611359}
+  tutorialScore: {fileID: 1294829393}
 --- !u!1 &1596754256
 GameObject:
   m_ObjectHideFlags: 0

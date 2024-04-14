@@ -306,8 +306,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vCam: {fileID: 1890397742}
   linePrefab: {fileID: 7176764042580181816, guid: 4bca21d5ab52d1f4783976c0173170c1, type: 3}
-  popUpUI: {fileID: 611297601753509790, guid: 96710cac98a90d749b1f22198ec45088, type: 3}
+  whiteBoardUI: {fileID: 0}
   color: {r: 0, g: 0, b: 0, a: 0}
+  drawMask:
+    serializedVersion: 2
+    m_Bits: 0
+  pictureMask:
+    serializedVersion: 2
+    m_Bits: 0
+  overUICam: {fileID: 0}
 --- !u!65 &462666073
 BoxCollider:
   m_ObjectHideFlags: 0
