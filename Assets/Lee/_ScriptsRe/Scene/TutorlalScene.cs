@@ -25,7 +25,6 @@ public class TutorlalScene : BaseScene
         Manager.Data.LoadLines(WhiteBoard);
         player.transform.position = Manager.Data.GameData.tutorialData.playerPos;
         player.transform.rotation = Manager.Data.GameData.tutorialData.playerRot;
-        Debug.Log(Manager.Data.GameData.tutorialData.playerPos);
         StartCoroutine(AutoSaveRutine());
 
     }

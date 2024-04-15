@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEditor.UI;
@@ -9,6 +10,7 @@ public class ComputerUI : PopUpUI
 {
     [SerializeField] RectTransform ComputerContent;
     Vector2 CreatePoint;
+    [SerializeField] GameObject Grading;
     // 점수
     int score = 0;
     int backgound = 1;
@@ -109,10 +111,9 @@ public class ComputerUI : PopUpUI
         }
         // 여기 끝날때 씬을 변화해주면될듯 (저장, 씬 이동)
         Manager.Data.SaveAnswer(PlayerSubAnswers1, PlayerMultiAnswer, score);
-        Debug.Log($"점수는 {score}");
-
-
+        Grading.SetActive(true);
     }
+
     private void OnDisable()
     {
         Manager.Data.SaveAnswer(PlayerSubAnswers1, PlayerMultiAnswer, score);

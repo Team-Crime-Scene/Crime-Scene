@@ -124,7 +124,6 @@ public class ComputerChapter1UI : PopUpUI
         //Manager.Data.SaveAnswer(PlayerSubAnswers2, PlayerMultiAnswer, score);
         Debug.Log($"Á¡¼ö´Â {score}");
 
-
     }
     private void OnDisable()
     {

@@ -66,29 +66,6 @@ public class DataManager : Singleton<DataManager>
         return File.Exists($"{path}/{index}.txt");
     }
 
-/*    public void SavePicture()
-    {
-        // picture찾는 로직
-        List<GameObject> picture = new List<GameObject>();
-        GameObject [] pictures = GameObject.FindGameObjectsWithTag("Picture"); // Picture 프리팹에 태그설정 해줄 것
-        
-        for ( int i = 0; i < picture.Count; i++ )
-        {
-            PictureData data = new PictureData();
-            data.transform = picture [i].transform;
-            data.image = picture [i].GetComponent<Picture>().Screenshot;
-            Debug.Log(data.image.name);
-        }
-        SaveData(0);
-    }
-    public void LoadPictuer(GameObject prefabs)
-    {
-        for (int i= 0; gameData.tutorialData.pictureData.Count > 0; i++ )
-        {
-           GameObject picture = Instantiate(prefabs, gameData.tutorialData.pictureData [i].transform);
-           picture.GetComponent<Picture>().Screenshot = gameData.tutorialData.pictureData [i].image;
-        }
-    }*/
     public void SaveAnswer( List<TMP_InputField> PlayerSubAnswers1, List<TextMeshProUGUI> PlayerMultiAnswer, int score )
     {
         if ( GameData.tutorialData.PlayerSubAnswers1 != null )
