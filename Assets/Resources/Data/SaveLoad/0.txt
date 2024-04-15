@@ -1,33 +1,21 @@
 {
     "tutorialData": {
         "playerPos": {
-            "x": 0.2513814866542816,
-            "y": 2.0822863578796388,
-            "z": 0.10863196104764939
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
         },
         "playerRot": {
             "x": 0.0,
-            "y": 0.5119985342025757,
+            "y": 0.0,
             "z": 0.0,
-            "w": 0.8589863181114197
+            "w": 0.0
         },
-        "PlayerSubAnswers1": [
-            "qweqwe",
-            "asda"
-        ],
-        "PlayerMultiAnswer": [
-            3,
-            0
-        ],
-        "PlayerMultiAnswer": [
-            "1",
-            "1",
-            "3",
-
-        ],
+        "PlayerSubAnswers1": [],
+        "PlayerMultiAnswer": [],
         "tutorialScore": 0,
-        "Picture": [],
-        "lines": []
+        "pictureData": [],
+        "lineDatas": []
     },
     "chapter1Data": {
         "playerPos": {

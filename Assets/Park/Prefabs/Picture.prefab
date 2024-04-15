@@ -270,7 +270,7 @@ GameObject:
   - component: {fileID: 2273024511285494999}
   m_Layer: 8
   m_Name: Picture
-  m_TagString: Untagged
+  m_TagString: Picture
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
