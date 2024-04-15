@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using TMPro;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -12,6 +13,8 @@ public class DataManager : Singleton<DataManager>
     private GameData gameData;
     public GameData GameData { get { return gameData; } }
 
+    [SerializeField] LineRenderer linePrefab;
+
 #if UNITY_EDITOR
     private string path => Path.Combine(Application.dataPath, $"Resources/Data/SaveLoad");
 #else
@@ -20,6 +23,10 @@ public class DataManager : Singleton<DataManager>
 
     public void NewData()
     {
+        if ( ExistData() )
+        {
+            File.Delete($"{path}/0.txt");
+        }
         gameData = new GameData();
     }
 
@@ -125,14 +132,15 @@ public class DataManager : Singleton<DataManager>
     }
 
     // parent =화이트보드이면될듯?
-    public void LoadLines( Transform parent, LineRenderer linePrefab )
+    public void LoadLines( EnhancedWhiteBoard whiteBoard )
     {
         for ( int i = 0; i < gameData.tutorialData.lineDatas.Count; i++ )
         {
-            LineRenderer line = Instantiate(linePrefab, new Vector3(parent.position.x, parent.position.y, parent.position.z - 0.1f), parent.rotation, parent);
-            //프리팹 건드지 마세요 ㅡ.ㅡ 미안....
-            EnhancedWhiteBoard wb = parent.GetComponent<EnhancedWhiteBoard>();
-            wb.AddLine(line);
+            LineRenderer line = Instantiate(linePrefab, new Vector3(whiteBoard.transform.transform.position.x,
+                whiteBoard.transform.position.y, whiteBoard.transform.position.z - 0.1f), 
+                whiteBoard.transform.rotation, whiteBoard.transform);
+            //프리팹 건드지 마세요 ㅡ.ㅡ 미안...
+            whiteBoard.AddLine(line);
             line.positionCount = gameData.tutorialData.lineDatas [i].count;
             line.SetPositions(gameData.tutorialData.lineDatas [i].pos);
             line.startColor = gameData.tutorialData.lineDatas [i].color;
