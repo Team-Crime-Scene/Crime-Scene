@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 [Serializable]
 public class TutorialData
@@ -16,17 +17,15 @@ public class TutorialData
     public int tutorialScore;
 
     // 피쳐 저장 데이터
-    public List<GameObject> Picture;
-
-    public List<GameObject> lines;
-
+    /*    public List<PictureData> pictureData;*/
+    // 라인 저장 데이터
+    public List<LineData> lineDatas;
 
     public TutorialData()
     {
         PlayerSubAnswers1 = new List<string>();
         PlayerMultiAnswer = new List<int>();
-        Picture = new List<GameObject>();
-        lines = new List<GameObject>();
+        lineDatas = new List<LineData>();
     }
 }
 
@@ -36,4 +35,18 @@ public class Chapter1Data
     public Vector3 playerPos;
     public Quaternion playerRot;
 
+}
+/*[Serializable]
+public struct PictureData
+{
+    public Transform transform;
+    public Image image;
+}
+*/
+[Serializable]
+public struct LineData
+{
+    public Color color;
+    public int count;
+    public Vector3 [] pos;
 }
