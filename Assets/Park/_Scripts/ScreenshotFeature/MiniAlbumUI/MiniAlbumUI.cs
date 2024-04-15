@@ -39,7 +39,6 @@ public class MiniAlbumUI : MonoBehaviour
 
     public void InitAlbumUISlots()
     {
-        Debug.Log("미니 앨범 초기화");
         int count = ScreenshotAlbum.Instance.Screenshots.Count;
         for ( int i = 0; i < count; i++ )
         {
@@ -56,7 +55,6 @@ public class MiniAlbumUI : MonoBehaviour
 
     public void UpdateAlbumUISlots()
     {
-        Debug.Log("미니 앨범 업데이트");
         int count = ScreenshotAlbum.Instance.Screenshots.Count;
         MiniSlotUI slot = Instantiate(ScreenshotSlotUIPrefab);
         RectTransform rect = slot.GetComponent<RectTransform>();
@@ -69,11 +67,9 @@ public class MiniAlbumUI : MonoBehaviour
 
     public void OnScreenshotDeleted( Screenshot screenshot )
     {
-        Debug.Log($"이거 삭제한다고함 => {screenshot.Data.path}");
-        MiniSlotUI slotUI = screenshotSlots.Find(s => s.Screenshot.Data.path == screenshot.Data.path); //그냥 Screenshot 객체만 가지고 찾았더니 가장먼저 찾은 젤 첫번째 객체 반환함;;
+        MiniSlotUI slotUI = screenshotSlots.Find(s => s.Screenshot.Data.path == screenshot.Data.path); 
         if ( slotUI != null )
         {
-            Debug.Log("삭제할 슬롯 찾았음");
             screenshotSlots.Remove(slotUI);
             slotUI.Delete();
         }

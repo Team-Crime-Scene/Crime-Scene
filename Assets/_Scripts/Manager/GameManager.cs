@@ -16,12 +16,10 @@ public class GameManager : Singleton<GameManager>
     public void ChangeIsChatTrue()
     {
         isChating = true;
-        Debug.Log($"비활성화 : {isChating}");
     }
     public void ChangeIsChatFalse()
     {
         isChating = false;
-        Debug.Log($"활성화 : {isChating}");
     }
 
     public void InitGameManager()
@@ -44,7 +42,6 @@ public class GameManager : Singleton<GameManager>
         if ( isChating == true) return;
         if ( Manager.UI.IsPopUpLastOne() ) //원 조건 palyer.isInteract;
         {
-            Debug.Log("Manager Cancel");
             player.isInteract = false;
             interactObject?.UnInteract(player);
         }

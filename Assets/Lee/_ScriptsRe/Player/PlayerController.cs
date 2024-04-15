@@ -41,8 +41,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
-
     private void OnInteract( InputValue value )
     {
         if ( isInteract ) return;

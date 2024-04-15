@@ -145,7 +145,6 @@ public class ScreenshotSystem : MonoBehaviour
 
     public bool IsOpend()
     {
-        //return false;
         return albumUI.IsActive();
     }
 

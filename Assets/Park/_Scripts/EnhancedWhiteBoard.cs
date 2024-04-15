@@ -44,8 +44,6 @@ public class EnhancedWhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUp
     void OnDisable()
     {
         raycaster.eventMask = defaultMask;
-        //Manager.Data.SaveLines(lines);
-
     }
 
     /******************************************************
@@ -61,7 +59,6 @@ public class EnhancedWhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUp
 
         Vector3 downPos = eventData.GetLocalPosition(transform);
         downPos = new Vector3(downPos.x, downPos.y, 0.2f);
-        //curLine = Instantiate(linePrefab, transform.position+lineOffset, Quaternion.identity, transform);
         curLine = Instantiate(linePrefab, transform);
         curLine.startColor = color;
         curLine.endColor = color;
@@ -110,7 +107,6 @@ public class EnhancedWhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUp
         vCam.Priority = 100;
         playerPrevPos = interacter.transform.position;
         interacter.transform.position = vCam.transform.position;
-        //Manager.UI.ShowPopUpUI(popUpUI); // ¾êµµ enable on off Çü½ÄÀ¸·Î ¹Ù²ã¾ßÇÔ // OverUICamera On
         Manager.UI.ShowWhiteBoardUI(whiteBoardUI);
     }
 

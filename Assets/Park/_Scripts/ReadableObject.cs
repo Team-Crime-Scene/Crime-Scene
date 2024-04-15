@@ -38,7 +38,4 @@ public class ReadableObject : InteractableObject , IReadable
         base.UnInteract(player);
         Cursor.visible = true;
     }
-
-
-
 }

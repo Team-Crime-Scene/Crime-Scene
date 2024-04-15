@@ -43,7 +43,7 @@ public class ScreenshotAlbumUI : PopUpUI
 
     public void InitAlbumUISlots()
     {
-        Debug.Log("앨범 초기화");
+        Debug.Log("Init AlbumUI");
         int count = ScreenshotAlbum.Instance.Screenshots.Count;
         if ( count == 0 ) return;
 
@@ -65,7 +65,7 @@ public class ScreenshotAlbumUI : PopUpUI
 
     public void UpdateAlbumUISlots()
     {
-        Debug.Log("앨범 업데이트");
+        Debug.Log("Album Slot Update");
         int count = ScreenshotAlbum.Instance.Screenshots.Count;
         ScreenshotSlotUI slot = Instantiate(ScreenshotSlotUIPrefab);
         RectTransform rect = slot.GetComponent<RectTransform>();
