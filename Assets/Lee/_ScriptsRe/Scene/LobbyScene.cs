@@ -48,12 +48,12 @@ public class LobbyScene : BaseScene
     }
     public void Tutorial()
     {
-        Manager.Scene.LoadScene("LeeTutorialScene");
+        Manager.Scene.LoadScene("TutorialScene");
     }
 
     public void Chapter1()
     {
-        Manager.Scene.LoadScene("chapter1");
+        Manager.Scene.LoadScene("Chapter1");
     }
 
 }
