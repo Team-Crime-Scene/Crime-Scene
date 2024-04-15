@@ -160,8 +160,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mover: {fileID: 9147238224106095491}
   camaraController: {fileID: 5617527599345034372}
-  aimedImage: {fileID: 0}
+  image_Aim_Interactable: {fileID: 0}
+  image_Aim_UnInteractable: {fileID: 0}
   ZoomedPos: {fileID: 5304113864198465927}
+  ReadPos: {fileID: 7451771514192210054}
   flash: {fileID: 7932174586676560344}
   interactRange: 100
   isInteract: 0
@@ -254,6 +256,7 @@ Transform:
   m_Children:
   - {fileID: 4187879287633497892}
   - {fileID: 5304113864198465927}
+  - {fileID: 7451771514192210054}
   m_Father: {fileID: 1103967152555873539}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7564583065393509186
@@ -295,6 +298,37 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 4187879287633497892}
+--- !u!1 &4443602425646831962
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7451771514192210054}
+  m_Layer: 0
+  m_Name: ReadPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7451771514192210054
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4443602425646831962}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3177708005781421308}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8053379876392876861
 GameObject:
   m_ObjectHideFlags: 0

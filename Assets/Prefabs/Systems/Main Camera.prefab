@@ -231,6 +231,9 @@ MonoBehaviour:
   extName: png
   maxCapacity: 0
   albumUI: {fileID: 0}
+  miniAlbumUI: {fileID: 0}
+  ViewFinder: {fileID: 0}
+  sfx: {fileID: 8300000, guid: 5123403ab99cfd74db97b978b2abdb8a, type: 3}
   isTakeScreenshot: 0
 --- !u!114 &6095374085723705511
 MonoBehaviour:

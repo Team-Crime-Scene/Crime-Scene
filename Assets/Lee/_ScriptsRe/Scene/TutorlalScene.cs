@@ -10,7 +10,7 @@ public class TutorlalScene : BaseScene
     [SerializeField] Transform WhiteBoard;
     public override IEnumerator LoadingRoutine()
     {
-        Manager.Game.PlayerFind();
+        Manager.Game.InitGameManager();
         Manager.Data.LoadData();
         yield return null;
         Manager.Data.LoadPictuer();
