@@ -13,7 +13,7 @@ public class Picture : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerEnt
     [SerializeField] Color deleteColor;
     private Color defaultColor;
 
-    [SerializeField][Range(0, 10)] float dragSpeed = 0.65f;
+    [SerializeField][Range(0, 1000)] float dragSpeed;
     float height;
     float width;
 
@@ -35,14 +35,13 @@ public class Picture : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerEnt
     public void OnDrag(PointerEventData eventData)
     {
         Vector3 delta = eventData.delta;
-
-        delta = new Vector3(
-            eventData.delta.x / width, 
-            eventData.delta.y / height, 
+         delta = new Vector3(
+            delta.x / width, 
+            delta.y / height, 
             0f);
         //Vector3.Scale(eventData.delta, new Vector3(1.0f / width, 1.0f / height, 1.0f))°í·Á
 
-        transform.position += delta * Time.deltaTime * dragSpeed * 100;
+        transform.position += delta * Time.deltaTime * dragSpeed;
 
 
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit))
