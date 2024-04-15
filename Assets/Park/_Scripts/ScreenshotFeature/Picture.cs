@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Picture : MonoBehaviour, IDragHandler,IEndDragHandler , IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] Image screenshot;
+    public Image Screenshot { get { return screenshot; } set { screenshot = value; } }
     [SerializeField] Image outLine;
     [SerializeField] TextMeshProUGUI text;
 

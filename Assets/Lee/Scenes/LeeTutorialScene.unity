@@ -746,6 +746,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 6930574641479417984}
   WhiteBoard: {fileID: 8859540405212720299}
+  linePrefab: {fileID: 7176764042580181816, guid: 4bca21d5ab52d1f4783976c0173170c1, type: 3}
 --- !u!1001 &1451370806
 PrefabInstance:
   m_ObjectHideFlags: 0

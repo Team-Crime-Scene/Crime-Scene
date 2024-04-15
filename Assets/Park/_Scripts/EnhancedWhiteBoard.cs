@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class EnhancedWhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerExitHandler, IDragHandler , IInteractable 
+public class EnhancedWhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerExitHandler, IDragHandler, IInteractable
 {
     //선을 그릴 때 마다 새로운 LineRender 객체를 생성하는 버전
 
@@ -32,15 +32,20 @@ public class EnhancedWhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUp
 
     void Awake()
     {
-        raycaster= Camera.main.GetComponent<PhysicsRaycaster>();
-        defaultMask = raycaster.eventMask;
+        raycaster = Camera.main.GetComponent<PhysicsRaycaster>();
+        defaultMask = raycaster.eventMask;  
+    }
+
+    public void AddLine(LineRenderer line )
+    {
+        lines.Add(line);
     }
 
     void OnDisable()
     {
         raycaster.eventMask = defaultMask;
-        Manager.Data.SaveLines( lines);
-       
+        //Manager.Data.SaveLines(lines);
+
     }
 
     /******************************************************
@@ -48,9 +53,9 @@ public class EnhancedWhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUp
      ******************************************************/
     #region Interfaces
 
-    public void OnPointerDown( PointerEventData eventData ) 
+    public void OnPointerDown( PointerEventData eventData )
     {
-        if(isEdit) return;
+        if ( isEdit ) return;
 
         isDrawing = true;
 
@@ -68,7 +73,7 @@ public class EnhancedWhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUp
     }
     public void OnDrag( PointerEventData eventData )
     {
-        if (isEdit ) return;
+        if ( isEdit ) return;
 
 
         if ( isDrawing == false )
@@ -115,6 +120,7 @@ public class EnhancedWhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUp
         interacter.transform.position = playerPrevPos;
         overUICam.SetActive(false);
         vCam.Priority = 0;
+        Manager.Data.SaveLines(lines);
     }
 
 
@@ -157,7 +163,7 @@ public class EnhancedWhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUp
     //모든 선을 지움
     public void EraseAll()
     {
-        for (int i = 0; i < lines.Count; i++)
+        for ( int i = 0; i < lines.Count; i++ )
         {
             Destroy(lines [i].gameObject);
         }
@@ -170,17 +176,17 @@ public class EnhancedWhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUp
         if ( lines.Count <= 0 )
             return;
 
-        Destroy(lines [lines.Count - 1].gameObject); 
+        Destroy(lines [lines.Count - 1].gameObject);
         lines.RemoveAt(lines.Count - 1);
     }
 
-   public void Edit()
+    public void Edit()
     {
         isEdit = true;
         overUICam.SetActive(isEdit);
         raycaster.eventMask = pictureMask;
     }
-    
+
 }
 
 struct PointData

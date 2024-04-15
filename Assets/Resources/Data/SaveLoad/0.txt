@@ -14,18 +14,8 @@
         "PlayerSubAnswers1": [],
         "PlayerMultiAnswer": [],
         "tutorialScore": 0,
-        "Picture": [],
-        "lines": [
-            {
-                "instanceID": -190270
-            },
-            {
-                "instanceID": -190276
-            },
-            {
-                "instanceID": -190282
-            }
-        ]
+        "pictureData": [],
+        "lineDatas": []
     },
     "chapter1Data": {
         "playerPos": {
