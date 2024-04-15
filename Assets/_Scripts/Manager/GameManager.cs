@@ -2,11 +2,11 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-// Ã©ÅÍ ¸¸µé¶§¸¶´Ù ¸¸µéÀÚ
+// ì±•í„° ë§Œë“¤ë•Œë§ˆë‹¤ ë§Œë“¤ì
 public class GameManager : Singleton<GameManager>
 {
-    //»óÈ£ÀÛ¿ë ¿©ºÎ¿¡ µû¶ó ÇÃ·¹ÀÌ¾î Á¶ÀÛ Á¦ÇÑ
-    //È°¼ºÈ­µÈ UI Ã¢¿¡ µû¶ó ÇÃ·¹ÀÌ¾î Á¶ÀÛ Á¦ÇÑ
+    //ìƒí˜¸ì‘ìš© ì—¬ë¶€ì— ë”°ë¼ í”Œë ˆì´ì–´ ì¡°ì‘ ì œí•œ
+    //í™œì„±í™”ëœ UI ì°½ì— ë”°ë¼ í”Œë ˆì´ì–´ ì¡°ì‘ ì œí•œ
     [SerializeField] PlayerController player;
     [SerializeField] ScreenshotSystem screenshotSystem;
     [SerializeField] IInteractable interactObject;
@@ -16,22 +16,15 @@ public class GameManager : Singleton<GameManager>
     public void ChangeIsChatTrue()
     {
         isChating = true;
-        Debug.Log($"ºñÈ°¼ºÈ­ : {isChating}");
+        Debug.Log($"ë¹„í™œì„±í™” : {isChating}");
     }
     public void ChangeIsChatFalse()
     {
         isChating = false;
-        Debug.Log($"È°¼ºÈ­ : {isChating}");
+        Debug.Log($"í™œì„±í™” : {isChating}");
     }
 
-    void Start()
-    {
-        // Å¸ÀÌÆ² ¾À¿¡¼­ ¸øÃ£¾Æ¼­ µû·Î ÇÔ¼ö ¸¸µé¾î¼­ ÇÃ·¹ÀÌ¾î ÀÖÀ»¶§ ºÙ¿©ÁÜ(°ÔÀÓ ¾À¿¡¼­ ½ÇÇè ÇÒ¶§ Àá½Ã ¾¸)
-       /* GameObject gameObject = GameObject.FindGameObjectWithTag("Player");
-        player = gameObject.GetComponent<PlayerController>();
-        screenshotSystem = Camera.main.GetComponent<ScreenshotSystem>();*/
-    }
-    public void PlayerFind()
+    public void InitGameManager()
     {
         GameObject gameObject = GameObject.FindGameObjectWithTag("Player");
         player = gameObject.GetComponent<PlayerController>();
@@ -49,7 +42,7 @@ public class GameManager : Singleton<GameManager>
     public void OnCancel()
     {
         if ( isChating == true) return;
-        if ( Manager.UI.IsPopUpLastOne() ) //¿ø Á¶°Ç palyer.isInteract;
+        if ( Manager.UI.IsPopUpLastOne() ) //ì› ì¡°ê±´ palyer.isInteract;
         {
             Debug.Log("Manager Cancel");
             player.isInteract = false;
@@ -63,7 +56,7 @@ public class GameManager : Singleton<GameManager>
         if ( Manager.UI.IsPopUpLastOne() ) return;
         if ( inputValue.isPressed )
         {
-            // ¿©±â¼­ Pause UI Instantiate
+            // ì—¬ê¸°ì„œ Pause UI Instantiate
         }
     }
 

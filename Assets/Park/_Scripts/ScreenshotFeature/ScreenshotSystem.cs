@@ -22,7 +22,7 @@ public class ScreenshotSystem : MonoBehaviour
     [SerializeField] ScreenshotAlbumUI albumUI;
     [SerializeField] MiniAlbumUI miniAlbumUI;
     [SerializeField] PopUpUI ViewFinder;
-
+    [SerializeField] AudioClip sfx;
 
     public bool isTakeScreenshot;
 
@@ -35,6 +35,7 @@ public class ScreenshotSystem : MonoBehaviour
         get
         {
 #if UNITY_EDITOR
+            //string sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
             return Application.dataPath;
 #elif UNITY_ANDROID
             return $"/storage/emulated/0/DCIM/{Application.productName}/";
@@ -131,7 +132,8 @@ public class ScreenshotSystem : MonoBehaviour
     IEnumerator ScreenshotAnimation()
     {
         Manager.UI.ShowPopUpUI(ViewFinder);
-        yield return new WaitForSeconds(0.2f);
+        Manager.Sound.PlaySFX(sfx);
+        yield return new WaitForSeconds(0.3f);
         Manager.UI.ClosePopUpUI();
     }
 

@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject image_Aim_Interactable;
     [SerializeField] GameObject image_Aim_UnInteractable;
     [SerializeField] public Transform ZoomedPos;
+    [SerializeField] public Transform ReadPos;
     [SerializeField] Light flash;
     [SerializeField] float interactRange = 100;
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -10,6 +11,7 @@ public class RotatableObject : InteractableObject , IDragHandler
     [SerializeField] float smoothSpeed = 0.04f;
     float mouseX;
     float mouseY;
+
 
     bool isInteract=false;
 

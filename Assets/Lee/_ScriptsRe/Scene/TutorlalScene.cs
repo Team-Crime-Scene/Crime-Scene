@@ -11,7 +11,7 @@ public class TutorlalScene : BaseScene
     [SerializeField] LineRenderer linePrefab;
     public override IEnumerator LoadingRoutine()
     {
-        Manager.Game.PlayerFind();
+        Manager.Game.InitGameManager();
         Manager.Data.LoadData();
         yield return null;
             Manager.Data.LoadLines(WhiteBoard, linePrefab);
