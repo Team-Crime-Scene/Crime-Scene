@@ -24,6 +24,12 @@ public class ScreenshotAlbum : MonoBehaviour
 
     public void InitAlbum(string folderPath)
     {
+        if ( Directory.Exists(folderPath) == false )
+        {
+            Directory.CreateDirectory(folderPath);
+            return;
+        }
+
         string [] paths = Directory.GetFiles(folderPath, "*.png", SearchOption.AllDirectories);
         for ( int i = 0; i < paths.Length; i++ )
         {

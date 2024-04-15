@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -48,7 +47,6 @@ public class RotatableObject : InteractableObject , IDragHandler
         isInteract=false;
         mouseX = 0;
         mouseY = 0;
-        Cursor.visible = isInteract;
     }
 }
 
