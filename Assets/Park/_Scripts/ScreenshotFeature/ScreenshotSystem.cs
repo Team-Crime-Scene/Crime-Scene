@@ -35,12 +35,12 @@ public class ScreenshotSystem : MonoBehaviour
         get
         {
 #if UNITY_EDITOR
-            //string sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
             return Application.dataPath;
 #elif UNITY_ANDROID
             return $"/storage/emulated/0/DCIM/{Application.productName}/";
 #else
-    return Application.persistentDataPath;
+    string sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+    return $"{Application.persistentDataPath}/{sceneName}";
 #endif
         }
     }
