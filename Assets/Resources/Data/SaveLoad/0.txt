@@ -11,13 +11,9 @@
             "z": 0.0,
             "w": 0.0
         },
-        "PlayerSubAnswers1": [
-            ""
-        ],
-        "PlayerMultiAnswer": [
-            2
-        ],
-        "tutorialScore": 1,
+        "PlayerSubAnswers1": [],
+        "PlayerMultiAnswer": [],
+        "tutorialScore": 0,
         "lineDatas": []
     },
     "chapter1Data": {
@@ -31,6 +27,17 @@
             "y": 0.0,
             "z": 0.0,
             "w": 0.0
-        }
+        },
+        "PlayerSubAnswers1": "asdas",
+        "PlayerSubAnswers2": [
+            "asdas"
+        ],
+        "PlayerSubAnswers3": "asdas",
+        "PlayerSubAnswers5": "asdasd",
+        "PlayerMultiAnswer": [
+            5
+        ],
+        "Score": 0,
+        "lineDatas": []
     }
 }

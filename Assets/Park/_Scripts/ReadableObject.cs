@@ -30,6 +30,7 @@ public class ReadableObject : InteractableObject , IReadable
         {
              Manager.UI.ShowPopUpUI(readInfoPrefab);
         }
+        if ( readInfo == null ) return;
         Manager.UI.CreatePopUpFromTexture(readInfo);
     }
 
