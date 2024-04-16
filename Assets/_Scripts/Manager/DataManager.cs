@@ -11,17 +11,43 @@ public class DataManager : Singleton<DataManager>
 
     [SerializeField] LineRenderer linePrefab;
 
+
+
 #if UNITY_EDITOR
-    private string path => Path.Combine(Application.dataPath, $"Resources/Data/SaveLoad");
+    private string rootPath => Application.dataPath;
 #else
-    private string path => Path.Combine(Application.persistentDataPath, $"Resources/Data/SaveLoad");
+    private string rootPath => Application.persistentDataPath;
 #endif
+
+    private string path => Path.Combine(rootPath, $"Resources/Data/SaveLoad");
+
 
     public void NewData()
     {
         if ( ExistData() )
         {
             File.Delete($"{path}/0.txt");
+
+#if !UNITY_EDITOR
+            // Resources 폴더 삭제
+            string resourcesPath = Path.Combine(rootPath, "Resources");
+            if ( Directory.Exists(resourcesPath) )
+            {
+                Directory.Delete(resourcesPath, true); // 하위 폴더와 파일 포함 삭제
+            }
+            // TutorialScene 폴더 삭제
+            string tutorialPath = Path.Combine(rootPath, "TutorialScene");
+            if ( Directory.Exists(tutorialPath) )
+            {
+                Directory.Delete(tutorialPath, true); // 하위 폴더와 파일 포함 삭제
+            }
+            /* //Chapter1 폴더 삭제
+            string tutorialPath = Path.Combine(rootPath, "Chapter1");
+            if ( Directory.Exists(tutorialPath) )
+            {
+                Directory.Delete(tutorialPath, true); // 하위 폴더와 파일 포함 삭제
+            }*/
+#endif
         }
         gameData = new GameData();
     }
@@ -92,6 +118,7 @@ public class DataManager : Singleton<DataManager>
     }
     public void SaveLines( List<LineRenderer> lines )
     {
+        GameData.tutorialData.lineDatas.Clear();
         for ( int i = 0; i < lines.Count; i++ )
         {
             LineData data = new LineData();

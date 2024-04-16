@@ -719,7 +719,7 @@ GameObject:
   - component: {fileID: 554100305}
   - component: {fileID: 554100304}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: BTN_Mute
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -787,7 +787,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 554100305}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1743401174}
+        m_TargetAssemblyTypeName: TitleScene, Assembly-CSharp
+        m_MethodName: ButtonMute
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &554100305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -914,7 +926,7 @@ GameObject:
   - component: {fileID: 1176754182}
   - component: {fileID: 1176754181}
   m_Layer: 5
-  m_Name: Button
+  m_Name: BTN_SoundOn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -983,13 +995,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1176754182}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 1743401174}
+        m_TargetAssemblyTypeName: TitleScene, Assembly-CSharp
+        m_MethodName: ButtonSoundON
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1395,7 +1407,7 @@ GameObject:
   - component: {fileID: 1743401173}
   - component: {fileID: 1743401174}
   m_Layer: 0
-  m_Name: TitleSceneManger
+  m_Name: TitleScene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1429,6 +1441,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   continueButton: {fileID: 450475655}
+  titleBGM: {fileID: 8300000, guid: c5fcf6352e355ef4f885621e89aa9c4f, type: 3}
 --- !u!1 &1864391915
 GameObject:
   m_ObjectHideFlags: 0
@@ -1511,7 +1524,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1864391918}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1743401174}
+        m_TargetAssemblyTypeName: TitleScene, Assembly-CSharp
+        m_MethodName: ButtonEnd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1864391918
 MonoBehaviour:
   m_ObjectHideFlags: 0

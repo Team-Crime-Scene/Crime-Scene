@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,7 +15,8 @@ public class NewInteractController : MonoBehaviour
         if ( Physics.Raycast(transform.position, Camera.main.transform.forward, out RaycastHit hit, interactRange) )
         {
             IInteractable interactable = hit.transform.gameObject.GetComponent<IInteractable>();
-            if ( interactable == null ){
+            if ( interactable == null )
+            {
                 isInteract = false;
                 return;
             }

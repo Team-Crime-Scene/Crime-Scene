@@ -1,9 +1,7 @@
 using Cinemachine;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class EnhancedWhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerExitHandler, IDragHandler, IInteractable
 {
@@ -27,16 +25,15 @@ public class EnhancedWhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUp
 
     private bool isDrawing;
     private bool isEdit;
-    private Vector3 lineOffset = new Vector3(0, 0, -0.1f);
     private Vector3 playerPrevPos;
 
     void Awake()
     {
         raycaster = Camera.main.GetComponent<PhysicsRaycaster>();
-        defaultMask = raycaster.eventMask;  
+        defaultMask = raycaster.eventMask;
     }
 
-    public void AddLine(LineRenderer line )
+    public void AddLine( LineRenderer line )
     {
         lines.Add(line);
     }

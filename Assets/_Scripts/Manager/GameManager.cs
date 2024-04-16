@@ -10,6 +10,8 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] ScreenshotSystem screenshotSystem;
     [SerializeField] IInteractable interactObject;
 
+    [SerializeField] PopUpUI pauseUI;
+
     bool isChating;
 
     public void ChangeIsChatTrue()
@@ -49,10 +51,12 @@ public class GameManager : Singleton<GameManager>
 
     void OnPause( InputValue inputValue )
     {
-        if ( Manager.UI.IsPopUpLastOne() ) return;
+        if ( player == null ) return;
+        if ( !Manager.UI.IsPopUpZero() ) return;
+
         if ( inputValue.isPressed )
         {
-            // 여기서 Pause UI Instantiate
+            Manager.UI.ShowPopUpUI(pauseUI); 
         }
     }
 

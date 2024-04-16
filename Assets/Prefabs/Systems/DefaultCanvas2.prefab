@@ -1044,7 +1044,7 @@ MonoBehaviour:
   m_text: "\uC568\uBC94"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dfdbf3341716d6542822a4b9a9f6d4f9, type: 2}
-  m_sharedMaterial: {fileID: 8878401369126454430, guid: c6c3a743a3524ac4591236d9c67610a7, type: 2}
+  m_sharedMaterial: {fileID: -515055757777326188, guid: dfdbf3341716d6542822a4b9a9f6d4f9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

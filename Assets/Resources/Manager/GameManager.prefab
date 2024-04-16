@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  interactObject: {fileID: 0}
   screenshotSystem: {fileID: 0}
+  pauseUI: {fileID: 4394104351417905779, guid: 31510aad89a93db41a0fe86aa46207f2, type: 3}
 --- !u!114 &906546860551482913
 MonoBehaviour:
   m_ObjectHideFlags: 0

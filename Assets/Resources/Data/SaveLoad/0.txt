@@ -14,7 +14,7 @@
         "PlayerSubAnswers1": [],
         "PlayerMultiAnswer": [],
         "tutorialScore": 0,
-        "lineDatas": []
+<
     },
     "chapter1Data": {
         "playerPos": {
