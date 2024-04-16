@@ -1,8 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class ScreenshotAlbumUI : PopUpUI
@@ -11,7 +8,7 @@ public class ScreenshotAlbumUI : PopUpUI
     //사용자의 Album UI 조작을 처리하고 ScreenshotAlbum과 상호작용 하는 스크립트
     [SerializeField] Image selectedScreenshotImage; //선택된 스크린샷 이미지
     [SerializeField] ScreenshotSlotUI ScreenshotSlotUIPrefab; //스크린샷 슬롯 UI Prefab
-  
+
     public List<ScreenshotSlotUI> screenshotSlots;
     public ScreenshotSlotUI curSlot;
 
@@ -36,7 +33,7 @@ public class ScreenshotAlbumUI : PopUpUI
     }
 
 
-  
+
     /***********************************************************************
     *                              Methods
     ***********************************************************************/
@@ -51,8 +48,8 @@ public class ScreenshotAlbumUI : PopUpUI
         {
             ScreenshotSlotUI slot = Instantiate(ScreenshotSlotUIPrefab);
             RectTransform rect = slot.GetComponent<RectTransform>();
-            slot.Screenshot = ScreenshotAlbum.Instance.Screenshots[i];
-            slot.albumUI = this;    
+            slot.Screenshot = ScreenshotAlbum.Instance.Screenshots [i];
+            slot.albumUI = this;
             rect.SetParent(albumGrid);
             rect.localScale = Vector3.one;
             screenshotSlots.Add(slot);
@@ -77,9 +74,9 @@ public class ScreenshotAlbumUI : PopUpUI
         SetGridSize(count);
     }
 
-    private void SetGridSize(int count )
+    private void SetGridSize( int count )
     {
-        height = (count / 3) * 110 + 100;
+        height = ( count / 3 ) * 110 + 100;
         albumGrid.sizeDelta = new Vector2(albumGrid.sizeDelta.x, height);
     }
 
@@ -90,11 +87,13 @@ public class ScreenshotAlbumUI : PopUpUI
 
     private void DeleteFromAlbum()
     {
-       screenshotSlots.Remove(curSlot);
-       curSlot.Delete();
-       SetGridSize(screenshotSlots.Count);
-       curSlot = screenshotSlots [screenshotSlots.Count - 1];
-       UpdateSelectedImage();
+        screenshotSlots.Remove(curSlot);
+        curSlot.Delete();
+        int cnt = screenshotSlots.Count;
+        SetGridSize(cnt);
+        if ( cnt == 0 ) return;
+        curSlot = screenshotSlots [cnt - 1];
+        UpdateSelectedImage();
     }
 
     public void Active()
@@ -105,7 +104,7 @@ public class ScreenshotAlbumUI : PopUpUI
         if ( !isInit ) // 최초 실행시에만 초기화
         {
             InitAlbumUISlots();
-        }    
+        }
     }
 
     public bool IsActive()
@@ -121,7 +120,7 @@ public class ScreenshotAlbumUI : PopUpUI
     /***********************************************************************
     *                              OnClick Events
     ***********************************************************************/
-    
+
     public void ButtonDelete()
     {
         //확인팝업 묻는거 추가해야함
