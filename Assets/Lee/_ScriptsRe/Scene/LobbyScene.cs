@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class LobbyScene : BaseScene
 {
@@ -10,7 +9,7 @@ public class LobbyScene : BaseScene
     [SerializeField] TextMeshProUGUI tutorialScore;
     [SerializeField] GameObject unlockChampter1;
     [SerializeField] GameObject notExam1;
-    [SerializeField]  GameObject image1;
+    [SerializeField] GameObject image1;
     [SerializeField] List<GameObject> activate1;
 
     [SerializeField] AudioClip LobbyBGM;
@@ -21,12 +20,16 @@ public class LobbyScene : BaseScene
         TutorialRnak(Manager.Data.GameData.tutorialData.tutorialScore);
         Manager.Sound.PlayBGM(LobbyBGM);
         yield return null;
-        
+
     }
 
     public void TutorialRnak( int score )
     {
-        if ( score < 2 )
+        if(score < 1 )
+        {
+            tutorialRank.text = "D";
+        }
+        else if ( score < 2 )
         {
             tutorialRank.text = "C";
         }
@@ -44,7 +47,7 @@ public class LobbyScene : BaseScene
             unlockChampter1.SetActive(false);
             notExam1.SetActive(false);
             image1.SetActive(false);
-            for (int i = 0; i <activate1.Count; i++)
+            for ( int i = 0; i < activate1.Count; i++ )
             {
                 activate1 [i].SetActive(true);
             }

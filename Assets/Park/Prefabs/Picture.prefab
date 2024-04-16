@@ -381,7 +381,7 @@ MonoBehaviour:
   text: {fileID: 5234364089892923309}
   selectedColor: {r: 0, g: 0, b: 1, a: 1}
   deleteColor: {r: 1, g: 0, b: 0, a: 1}
-  dragSpeed: 165
+  dragSpeed: 225
 --- !u!1 &4944349330200062258
 GameObject:
   m_ObjectHideFlags: 0
