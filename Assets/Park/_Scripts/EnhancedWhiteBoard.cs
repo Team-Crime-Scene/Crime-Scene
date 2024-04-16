@@ -1,9 +1,7 @@
 using Cinemachine;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class EnhancedWhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerExitHandler, IDragHandler, IInteractable
 {
@@ -32,10 +30,10 @@ public class EnhancedWhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUp
     void Awake()
     {
         raycaster = Camera.main.GetComponent<PhysicsRaycaster>();
-        defaultMask = raycaster.eventMask;  
+        defaultMask = raycaster.eventMask;
     }
 
-    public void AddLine(LineRenderer line )
+    public void AddLine( LineRenderer line )
     {
         lines.Add(line);
     }

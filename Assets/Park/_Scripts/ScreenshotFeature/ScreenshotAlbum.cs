@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ScreenshotAlbum : MonoBehaviour
 {
@@ -22,7 +21,7 @@ public class ScreenshotAlbum : MonoBehaviour
         }
     }
 
-    public void InitAlbum(string folderPath)
+    public void InitAlbum( string folderPath )
     {
         if ( Directory.Exists(folderPath) == false )
         {
@@ -38,9 +37,9 @@ public class ScreenshotAlbum : MonoBehaviour
         }
     }
 
-    public void Add(Screenshot screenshot )
+    public void Add( Screenshot screenshot )
     {
-        Screenshots.Add( screenshot );
+        Screenshots.Add(screenshot);
     }
 
     public event Action<Screenshot> OnScreenshotDeleted;

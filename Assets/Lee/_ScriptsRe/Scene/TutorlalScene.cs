@@ -1,6 +1,4 @@
-using NUnit.Framework;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TutorlalScene : BaseScene
@@ -14,7 +12,7 @@ public class TutorlalScene : BaseScene
 
     private void Start()
     {
-        StartCoroutine(LoadingRoutine());//forDebug 
+        // StartCoroutine(LoadingRoutine());//forDebug 
     }
 
     public override IEnumerator LoadingRoutine()
@@ -27,7 +25,7 @@ public class TutorlalScene : BaseScene
         Manager.Data.LoadLines(WhiteBoard);
         Manager.Sound.PlayBGM(TutorialBGM);
         Vector3 playerPos = Manager.Data.GameData.tutorialData.playerPos;
-        if(playerPos == Vector3.zero )
+        if ( playerPos == Vector3.zero )
         {
             playerPos = new Vector3();
         }
