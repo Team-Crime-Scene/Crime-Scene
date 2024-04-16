@@ -12,7 +12,7 @@ public class TutorlalScene : BaseScene
 
     private void Start()
     {
-        //StartCoroutine(LoadingRoutine());//forDebug 
+        StartCoroutine(LoadingRoutine());//forDebug 
     }
 
     public override IEnumerator LoadingRoutine()

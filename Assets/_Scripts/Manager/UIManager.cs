@@ -128,6 +128,11 @@ public class UIManager : Singleton<UIManager>
         return ( popUpStack.Count==1 );
     }
 
+    public bool IsPopUpZero()
+    {
+        return ( popUpStack.Count == 0 );
+    }
+
     public void ClearPopUpUI()
     {
         while ( popUpStack.Count > 0 )
