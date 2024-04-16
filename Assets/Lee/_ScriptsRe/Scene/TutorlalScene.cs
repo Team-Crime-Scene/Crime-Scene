@@ -12,7 +12,9 @@ public class TutorlalScene : BaseScene
 
     private void Start()
     {
-        StartCoroutine(LoadingRoutine());//forDebug 
+#if UNITY_EDITOR
+        StartCoroutine(LoadingRoutine());//for Debuging at this Scene
+#endif
     }
 
     public override IEnumerator LoadingRoutine()
