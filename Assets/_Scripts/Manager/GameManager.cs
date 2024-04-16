@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 // 챕터 만들때마다 만들자
 public class GameManager : Singleton<GameManager>
@@ -41,7 +40,7 @@ public class GameManager : Singleton<GameManager>
 
     public void OnCancel()
     {
-        if ( isChating == true) return;
+        if ( isChating == true ) return;
         if ( Manager.UI.IsPopUpLastOne() ) //원 조건 palyer.isInteract;
         {
             player.isInteract = false;

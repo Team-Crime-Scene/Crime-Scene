@@ -23,6 +23,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Lee/Scenes/Refatoring.unity
     guid: 59cf9c69142dd7a4686b8ef38568b3e9
+  - enabled: 1
+    path: Assets/Scenes/Chapter1.unity
+    guid: 197b24d3dd35ac54ba2e981f8bef5dda
   m_configObjects:
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 2e59295285f711a448c186c2c1103dd9, type: 2}
   m_UseUCBPForAssetBundles: 0

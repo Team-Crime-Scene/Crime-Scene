@@ -6,6 +6,7 @@ public class ComputerChapter1UI : PopUpUI
 {
     [SerializeField] RectTransform ComputerContent;
     Vector2 CreatePoint;
+    [SerializeField] GameObject Grading;
     // 점수
     int score = 0;
     int backgound = 1;
@@ -19,6 +20,7 @@ public class ComputerChapter1UI : PopUpUI
     [SerializeField] string subjecttiveAnswer1;
     [SerializeField] List<string> subjecttiveAnswers2;
     [SerializeField] string subjecttiveAnswer3;
+    [SerializeField] string subjecttiveAnswer5;
     [SerializeField] List<string> multipleChoiceAnswer;
 
     // 플레이어 답안지
@@ -28,6 +30,7 @@ public class ComputerChapter1UI : PopUpUI
     // 얘는 걍 이대로 쓰면됨
     [SerializeField] List<TMP_InputField> PlayerSubAnswers2 = new List<TMP_InputField>();
     [SerializeField] TMP_InputField PlayerSubAnswers3;
+    [SerializeField] TMP_InputField PlayerSubAnswers5;
 
     // 문제당 하나씩 밖에 없으니 혼자 관리 하면될거같다
     [SerializeField] List<TextMeshProUGUI> PlayerMultiAnswer = new List<TextMeshProUGUI>();
@@ -36,7 +39,7 @@ public class ComputerChapter1UI : PopUpUI
     protected override void Awake()
     {
         Manager.Data.LoadData();
-        for ( int i = 0; i < Manager.Data.GameData.tutorialData.PlayerSubAnswers1.Count; i++ )
+        for ( int i = 0; i < Manager.Data.GameData.chapter1Data.PlayerSubAnswers2.Count; i++ )
         {
             if ( i > 0 )
             {
@@ -52,11 +55,11 @@ public class ComputerChapter1UI : PopUpUI
             }
         }
         base.Awake();
-        //GetUI<TMP_InputField>("Subjecttive 1").text = "UI Binding Test";
     }
     private void Start()
     {
-        Manager.Data.LoadAnswer(PlayerSubAnswers2, PlayerMultiAnswer);
+        Manager.Data.LoadAnswer1(PlayerSubAnswers1, PlayerSubAnswers2, PlayerSubAnswers3,
+            PlayerMultiAnswer, PlayerSubAnswers5);
     }
     public void CreateAnswerSheet()
     {
@@ -111,6 +114,10 @@ public class ComputerChapter1UI : PopUpUI
         answer = answer.Replace(" ", string.Empty);
         if ( subjecttiveAnswer3 == answer )
             score++;
+        answer = PlayerSubAnswers5.text;
+        answer = answer.Replace(" ", string.Empty);
+        if ( subjecttiveAnswer5 == answer )
+            score++;
 
         // 객관식 답 체크
         for ( int i = 0; i < PlayerMultiAnswer.Count; i++ )
@@ -121,13 +128,15 @@ public class ComputerChapter1UI : PopUpUI
             }
         }
         // 여기 끝날때 씬을 변화해주면될듯 (저장, 씬 이동)
-        //Manager.Data.SaveAnswer(PlayerSubAnswers2, PlayerMultiAnswer, score);
-        Debug.Log($"점수는 {score}");
+        Manager.Data.SaveAnswer1(PlayerSubAnswers1, PlayerSubAnswers2, PlayerSubAnswers3,
+            PlayerMultiAnswer, PlayerSubAnswers5, score);
+        Grading.SetActive(true);
 
     }
     private void OnDisable()
     {
-        //Manager.Data.SaveAnswer(PlayerSubAnswers2, PlayerMultiAnswer, score);
+        Manager.Data.SaveAnswer1(PlayerSubAnswers1, PlayerSubAnswers2, PlayerSubAnswers3,
+            PlayerMultiAnswer, PlayerSubAnswers5, score);
     }
 
     public void ActivateInputField()
