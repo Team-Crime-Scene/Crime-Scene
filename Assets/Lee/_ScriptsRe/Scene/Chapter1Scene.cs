@@ -8,9 +8,14 @@ public class Chapter1Scene : BaseScene
     float AutoSaveGameTime = 300;
     [SerializeField] EnhancedWhiteBoard WhiteBoard;
     [SerializeField] LineRenderer linePrefab;
+
+    [SerializeField] AudioClip TutorialBGM;
+
     private void Start()
     {
-        Manager.Game.InitGameManager();
+#if UNITY_EDITOR
+        StartCoroutine(LoadingRoutine());//for Debuging at this Scene
+#endif
     }
     public override IEnumerator LoadingRoutine()
     {
@@ -19,9 +24,10 @@ public class Chapter1Scene : BaseScene
         yield return null;
         player = GameObject.FindGameObjectWithTag("Player");
         WhiteBoard = FindAnyObjectByType<EnhancedWhiteBoard>();
+        Manager.Sound.PlayBGM(TutorialBGM);
         Manager.Data.LoadLines(WhiteBoard);
-        player.transform.position = Manager.Data.GameData.chapter1Data.playerPos;
-        player.transform.rotation = Manager.Data.GameData.chapter1Data.playerRot;
+        //player.transform.position = Manager.Data.GameData.chapter1Data.playerPos;
+        //.transform.rotation = Manager.Data.GameData.chapter1Data.playerRot;
         StartCoroutine(AutoSaveRutine());
     }
     IEnumerator AutoSaveRutine()
