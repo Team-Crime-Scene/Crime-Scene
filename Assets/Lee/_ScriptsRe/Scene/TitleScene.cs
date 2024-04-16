@@ -39,4 +39,13 @@ public class TitleScene : BaseScene
     {
         Manager.Sound.BGMVolme = defaultVolume;
     }
+
+    public void ButtonEnd()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
 }
