@@ -12,7 +12,7 @@ public class TutorlalScene : BaseScene
 
     private void Start()
     {
-        // StartCoroutine(LoadingRoutine());//forDebug 
+        //StartCoroutine(LoadingRoutine());//forDebug 
     }
 
     public override IEnumerator LoadingRoutine()
@@ -27,7 +27,7 @@ public class TutorlalScene : BaseScene
         Vector3 playerPos = Manager.Data.GameData.tutorialData.playerPos;
         if ( playerPos == Vector3.zero )
         {
-            playerPos = new Vector3();
+            playerPos = new Vector3(0, 1, 0);
         }
         player.transform.position = playerPos;
         player.transform.rotation = Manager.Data.GameData.tutorialData.playerRot;

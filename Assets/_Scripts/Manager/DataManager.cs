@@ -93,6 +93,7 @@ public class DataManager : Singleton<DataManager>
     }
     public void SaveLines( List<LineRenderer> lines )
     {
+        GameData.tutorialData.lineDatas.Clear();
         for ( int i = 0; i < lines.Count; i++ )
         {
             LineData data = new LineData();

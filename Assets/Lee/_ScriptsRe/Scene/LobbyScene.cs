@@ -25,7 +25,11 @@ public class LobbyScene : BaseScene
 
     public void TutorialRnak( int score )
     {
-        if ( score < 2 )
+        if(score < 1 )
+        {
+            tutorialRank.text = "D";
+        }
+        else if ( score < 2 )
         {
             tutorialRank.text = "C";
         }

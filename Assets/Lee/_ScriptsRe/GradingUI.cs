@@ -35,13 +35,6 @@ public class GradingUI : MonoBehaviour
     }
     public void OKButton()
     {
-        if ( Manager.Data.GameData.tutorialData.tutorialScore  == 0 )
-        {
             Manager.Scene.LoadScene("LobbyScene");
-        }
-        else
-        {
-            Manager.Scene.LoadScene("Chapter1");
-        }
     }
 }

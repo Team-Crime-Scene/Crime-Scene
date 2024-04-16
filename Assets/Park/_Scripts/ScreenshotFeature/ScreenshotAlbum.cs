@@ -13,7 +13,7 @@ public class ScreenshotAlbum : MonoBehaviour
         {
             Instance = this;
             Screenshots = new List<Screenshot>();
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else
         {
