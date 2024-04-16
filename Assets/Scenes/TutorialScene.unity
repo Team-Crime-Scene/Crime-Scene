@@ -489,6 +489,7 @@ MonoBehaviour:
   player: {fileID: 0}
   WhiteBoard: {fileID: 0}
   linePrefab: {fileID: 0}
+  TutorialBGM: {fileID: 8300000, guid: e8ae4c55b459cdc40a4b0b2171e2bc08, type: 3}
 --- !u!114 &1248959375 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2660723903889650153, guid: ed93a6ef089d81f408168083397d5684, type: 3}

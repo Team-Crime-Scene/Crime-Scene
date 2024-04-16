@@ -10,9 +10,11 @@ public class TutorlalScene : BaseScene
     [SerializeField] EnhancedWhiteBoard WhiteBoard;
     [SerializeField] LineRenderer linePrefab;
 
+    [SerializeField] AudioClip TutorialBGM;
+
     private void Start()
     {
-        //StartCoroutine(LoadingRoutine());//forDebug 
+        StartCoroutine(LoadingRoutine());//forDebug 
     }
 
     public override IEnumerator LoadingRoutine()
@@ -23,10 +25,15 @@ public class TutorlalScene : BaseScene
         player = GameObject.FindGameObjectWithTag("Player");
         WhiteBoard = FindAnyObjectByType<EnhancedWhiteBoard>();
         Manager.Data.LoadLines(WhiteBoard);
-        player.transform.position = Manager.Data.GameData.tutorialData.playerPos;
+        Manager.Sound.PlayBGM(TutorialBGM);
+        Vector3 playerPos = Manager.Data.GameData.tutorialData.playerPos;
+        if(playerPos == Vector3.zero )
+        {
+            playerPos = new Vector3();
+        }
+        player.transform.position = playerPos;
         player.transform.rotation = Manager.Data.GameData.tutorialData.playerRot;
         StartCoroutine(AutoSaveRutine());
-
     }
     IEnumerator AutoSaveRutine()
     {

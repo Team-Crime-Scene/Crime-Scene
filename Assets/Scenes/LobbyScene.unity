@@ -8092,6 +8092,7 @@ MonoBehaviour:
   - {fileID: 120279316}
   - {fileID: 45274756}
   - {fileID: 607156044}
+  LobbyBGM: {fileID: 8300000, guid: 3fc32e68db2bf04468d1176d961520ae, type: 3}
 --- !u!1 &1596754256
 GameObject:
   m_ObjectHideFlags: 0
