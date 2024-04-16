@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using TMPro;
-using UnityEditor.SceneManagement;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
-using UnityEngine.UI;
 
 public class DataManager : Singleton<DataManager>
 {

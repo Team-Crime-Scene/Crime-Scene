@@ -1,23 +1,23 @@
 {
     "tutorialData": {
         "playerPos": {
-            "x": 0.0,
-            "y": 0.0,
-            "z": 0.0
+            "x": 0.18255002796649934,
+            "y": 1.0900001525878907,
+            "z": 2.6676127910614015
         },
         "playerRot": {
             "x": 0.0,
-            "y": 0.0,
+            "y": -0.39877668023109438,
             "z": 0.0,
-            "w": 0.0
+            "w": 0.9170480966567993
         },
         "PlayerSubAnswers1": [
             ""
         ],
         "PlayerMultiAnswer": [
-            2
+            0
         ],
-        "tutorialScore": 1,
+        "tutorialScore": 0,
         "lineDatas": []
     },
     "chapter1Data": {

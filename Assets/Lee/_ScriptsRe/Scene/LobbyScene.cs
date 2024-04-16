@@ -12,12 +12,16 @@ public class LobbyScene : BaseScene
     [SerializeField] GameObject notExam1;
     [SerializeField]  GameObject image1;
     [SerializeField] List<GameObject> activate1;
+
+    [SerializeField] AudioClip LobbyBGM;
     public override IEnumerator LoadingRoutine()
     {
         Manager.Data.LoadData();
         tutorialScore.text = $"{Manager.Data.GameData.tutorialData.tutorialScore}/3 ";
         TutorialRnak(Manager.Data.GameData.tutorialData.tutorialScore);
+        Manager.Sound.PlayBGM(LobbyBGM);
         yield return null;
+        
     }
 
     public void TutorialRnak( int score )
