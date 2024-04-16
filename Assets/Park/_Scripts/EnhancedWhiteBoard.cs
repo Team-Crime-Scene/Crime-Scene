@@ -27,7 +27,6 @@ public class EnhancedWhiteBoard : MonoBehaviour, IPointerDownHandler, IPointerUp
 
     private bool isDrawing;
     private bool isEdit;
-    private Vector3 lineOffset = new Vector3(0, 0, -0.1f);
     private Vector3 playerPrevPos;
 
     void Awake()
